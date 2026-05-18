@@ -522,12 +522,13 @@ function calc(){
       const p=BLP[s];
       lk+=wBell*(bell*Math.log(p)+(total-bell)*Math.log(Math.max(1-p,1e-10)));
     }
-    // ボイス（No3・ボイスなしは確定示唆で1.0、景之中強は0.5、それ以外はwVoice）
+    // ボイス（No3・ボイスなしは確定示唆で1.0、景之中強は0.5、景之弱は0.3、それ以外はwVoice）
     if(tv>0)Object.keys(VSEL).forEach(cat=>{
       let w;
       if(cat==='nana3'||cat==='vnone') w=1.0;        // 確定示唆
       else if(cat==='kage18'||cat==='kage19') w=0.5; // 景之中・強
-      else w=wVoice;                                  // 景之弱・男女はサンプル依存
+      else if(cat==='kage17') w=0.3;                 // 景之弱
+      else w=wVoice;                                  // 男女はサンプル依存
       const c=vc[cat];if(c>0)lk+=w*c*Math.log(Math.max(VSEL[cat][s-1],1e-9));
     });
     // キャラ紹介（美馬は常に1.0）
