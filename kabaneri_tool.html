@@ -499,7 +499,7 @@ function calc(){
   const wBell   = Math.min(bell  / 50, 1) * 0.3;   // 下段ベル: 50回飽和
   const wVoice  = Math.min(tv    / 100, 1) * 0.5;  // ボイス: 100回飽和
   const wChara  = Math.min(tk    / 20, 1) * 0.5;   // キャラ紹介: 20回飽和
-  const wEp     = Math.min(epTotal/10, 1) * 0.4;   // エピソード: 10回飽和
+  const wEp     = Math.min(epTotal/20, 1) * 0.3;   // エピソード: 20回飽和
   const wCycle1 = Math.min(p1a   / 20, 1) * 0.5;   // 1周期: 20回飽和
   const wCycle2 = Math.min(p2a   / 20, 1) * 0.5;   // 2周期: 20回飽和
   const wCycle3 = Math.min(p3a   / 20, 1) * 0.5;   // 3周期: 20回飽和
