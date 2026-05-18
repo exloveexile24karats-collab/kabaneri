@@ -459,7 +459,7 @@ const VSEL={
   male:  [0.610,0.440,0.410,0.350,0.460,0.310],
   // 景之弱(No17)
   // 合算: S1=3% S2=6% S3=14% S4=15% S5=17% S6=20%
-  kage17:[0.030,0.060,0.140,0.150,0.170,0.200],
+  kage17:[0.030,0.060,0.120,0.150,0.170,0.200],
   // 景之中(No18): S6=2.4% 他は極小
   kage18:[0.003,0.003,0.003,0.005,0.008,0.024],
   // 景之強(No19): S6=1% 他は極小
@@ -497,7 +497,7 @@ function calc(){
   const wBonus  = Math.min(bonus / 20, 1) * 0.3;   // ボーナス: 20回飽和
   const wST     = Math.min(st    / 15, 1) * 0.3;   // ST: 15回飽和
   const wBell   = Math.min(bell  / 50, 1) * 0.3;   // 下段ベル: 50回飽和
-  const wVoice  = Math.min(tv    / 100, 1) * 0.5;  // ボイス: 100回飽和
+  const wVoice  = Math.min(tv    / 150, 1) * 0.5;  // ボイス: 150回飽和
   const wChara  = Math.min(tk    / 20, 1) * 0.5;   // キャラ紹介: 20回飽和
   const wEp     = Math.min(epTotal/20, 1) * 0.1;   // エピソード: 20回飽和
   const wCycle1 = Math.min(p1a   / 20, 1) * 0.5;   // 1周期: 20回飽和
