@@ -492,17 +492,20 @@ function calc(){
   const kf=S.kf||0,km=S.km||0,kuma=S.kuma||0,tk=kf+km+kuma;
   const t=S.total;const zk=t>7000&&t<=8000?'z2':t>5000&&t<=7000?'z1':'z0';const KS=KSEL[zk];
 
+  // ====== 総回転数スケール（1000G以下はほぼ均等、5000Gでフル稼働）======
+  const rotScale = Math.max(0, Math.min((total - 1000) / 4000, 1));
+
   // ====== サンプル数に応じた重みスケーリング ======
-  // 各要素の飽和ライン（この回数でフルの重みになる）
-  const wBonus  = Math.min(bonus / 20, 1) * 0.3;   // ボーナス: 20回飽和
-  const wST     = Math.min(st    / 15, 1) * 0.3;   // ST: 15回飽和
-  const wBell   = Math.min(bell  / 50, 1) * 0.3;   // 下段ベル: 50回飽和
-  const wVoice  = Math.min(tv    / 150, 1) * 0.5;  // ボイス: 150回飽和
-  const wChara  = Math.min(tk    / 20, 1) * 0.5;   // キャラ紹介: 20回飽和
-  const wEp     = Math.min(epTotal/20, 1) * 0.1;   // エピソード: 20回飽和
-  const wCycle1 = Math.min(p1a   / 20, 1) * 0.5;   // 1周期: 20回飽和
-  const wCycle2 = Math.min(p2a   / 20, 1) * 0.5;   // 2周期: 20回飽和
-  const wCycle3 = Math.min(p3a   / 20, 1) * 0.5;   // 3周期: 20回飽和
+  // 各要素の飽和ライン × 総回転数スケール
+  const wBonus  = Math.min(bonus / 20, 1) * 0.3  * rotScale;  // ボーナス: 20回飽和
+  const wST     = Math.min(st    / 15, 1) * 0.3  * rotScale;  // ST: 15回飽和
+  const wBell   = Math.min(bell  / 50, 1) * 0.3  * rotScale;  // 下段ベル: 50回飽和
+  const wVoice  = Math.min(tv    / 150, 1) * 0.5 * rotScale;  // ボイス: 150回飽和
+  const wChara  = Math.min(tk    / 20, 1) * 0.5  * rotScale;  // キャラ紹介: 20回飽和
+  const wEp     = Math.min(epTotal/20, 1) * 0.1  * rotScale;  // エピソード: 20回飽和
+  const wCycle1 = Math.min(p1a   / 20, 1) * 0.5  * rotScale;  // 1周期: 20回飽和
+  const wCycle2 = Math.min(p2a   / 20, 1) * 0.5  * rotScale;  // 2周期: 20回飽和
+  const wCycle3 = Math.min(p3a   / 20, 1) * 0.5  * rotScale;  // 3周期: 20回飽和
 
   const sc={};
   for(let s=1;s<=6;s++){
@@ -554,10 +557,10 @@ function calc(){
   for(let s=1;s<=6;s++){ex[s]=Math.exp(sc[s]-mx);se+=ex[s];}
   const pr={};for(let s=1;s<=6;s++)pr[s]=ex[s]/se;
 
-  // 信頼度（全要素の重みの平均で算出）
+  // 信頼度（回転数スケール×各要素の重み平均）
   const allWeights=[wBonus,wST,wBell,wVoice,wChara,wEp,wCycle1,wCycle2,wCycle3];
   const activeWeights=allWeights.filter(w=>w>0);
-  const trustScore = activeWeights.length>0 ? Math.min(activeWeights.reduce((a,b)=>a+b,0)/activeWeights.length/0.5,1) : 0;
+  const trustScore = rotScale * (activeWeights.length>0 ? Math.min(activeWeights.reduce((a,b)=>a+b,0)/activeWeights.length/0.5,1) : 0);
   const trustPct=Math.round(trustScore*100);
   let trustLabel,trustColor;
   if(trustPct<25)     {trustLabel='⚠️ 参考程度（サンプル不足）';trustColor='#e24b4a';}
