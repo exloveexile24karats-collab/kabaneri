@@ -492,8 +492,8 @@ function calc(){
   const kf=S.kf||0,km=S.km||0,kuma=S.kuma||0,tk=kf+km+kuma;
   const t=S.total;const zk=t>7000&&t<=8000?'z2':t>5000&&t<=7000?'z1':'z0';const KS=KSEL[zk];
 
-  // ====== 総回転数スケール（1000G以下はほぼ均等、5000Gでフル稼働）======
-  const rotScale = Math.max(0, Math.min((total - 1000) / 4000, 1));
+  // ====== 総回転数スケール（500G以下は10%、5000Gでフル稼働）======
+  const rotScale = Math.max(0.1, Math.min((total - 500) / 4500, 1));
 
   // ====== サンプル数に応じた重みスケーリング ======
   // 各要素の飽和ライン × 総回転数スケール
