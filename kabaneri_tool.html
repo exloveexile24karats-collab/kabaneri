@@ -157,8 +157,9 @@ body{padding-bottom:150px;}
 .bb-stat{flex:1;min-width:0;}
 .bb-label{font-size:9px;color:#666;text-transform:uppercase;letter-spacing:.05em;}
 .bb-val{font-size:14px;font-weight:800;color:#f0eee8;}
-.bb-addbtn{width:46px;height:46px;border-radius:50%;background:var(--accent);color:#0a0a0a;font-size:24px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer;touch-action:manipulation;}
+.bb-addbtn{width:46px;height:46px;border-radius:50%;background:var(--accent);color:#0a0a0a;font-size:22px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer;touch-action:manipulation;position:relative;}
 .bb-addbtn:active{opacity:.8;}
+.bb-bell-badge{position:absolute;top:-4px;right:-4px;background:#e24b4a;color:#fff;font-size:10px;font-weight:800;min-width:16px;height:16px;border-radius:8px;display:flex;align-items:center;justify-content:center;padding:0 3px;}
 .thumb{width:30px;height:30px;border-radius:8px;background:#1c1c1c;border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;margin-right:2px;}
 
 /* CZポイントトラッカー */
@@ -172,6 +173,8 @@ body{padding-bottom:150px;}
 .ptbtn{flex:1;min-width:56px;background:#1c1c1c;border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:11px 4px;text-align:center;font-size:11px;font-weight:700;color:#ccc;cursor:pointer;touch-action:manipulation;}
 .ptbtn:active{background:rgba(201,168,76,0.3);}
 .ptenter{background:var(--accent);color:#0a0a0a;font-weight:800;border:none;}
+.ptbanner{display:block;width:100%;height:56px;border-radius:14px 14px 0 0;}
+.icon-svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;}
 
 /* 下部ナビ（戻る/進む/遊技データ/＋） */
 .navbtn{width:44px;height:44px;border-radius:50%;background:#1c1c1c;border:1px solid rgba(255,255,255,0.1);color:#aaa;font-size:18px;display:flex;align-items:center;justify-content:center;cursor:pointer;touch-action:manipulation;flex-shrink:0;}
@@ -228,6 +231,13 @@ body{padding-bottom:150px;}
 
   <div id="n-czpt" class="subpage on">
     <div class="pttrack" style="border-color:rgba(224,64,64,0.35);">
+      <svg class="ptbanner" viewBox="0 0 300 60" preserveAspectRatio="none">
+        <defs><radialGradient id="gradM" cx="50%" cy="50%" r="70%"><stop offset="0%" stop-color="#3a1010"/><stop offset="100%" stop-color="#1a0808"/></radialGradient></defs>
+        <rect width="300" height="60" fill="url(#gradM)"/>
+        <circle cx="150" cy="30" r="26" fill="none" stroke="#c0392b" stroke-width="1.5" opacity="0.6"/>
+        <circle cx="150" cy="30" r="18" fill="none" stroke="#e0a0a0" stroke-width="1" opacity="0.5"/>
+        <text x="150" y="37" text-anchor="middle" font-size="22" font-weight="800" fill="#e0a0a0" font-family="sans-serif" letter-spacing="4">無名</text>
+      </svg>
       <div class="pthead">
         <div class="ptname" style="color:#e0a0a0;">🕶️ 無名 CZポイント</div>
         <div style="display:flex;align-items:center;gap:6px;"><span style="font-size:11px;color:#888;">高確中</span><div class="toggle" id="tg-koukaku-mumei" onclick="toggleKoukaku('mumei')"><div class="knob"></div></div></div>
@@ -235,10 +245,18 @@ body{padding-bottom:150px;}
       <div class="ptval" id="ptval-mumei">0<span style="font-size:12px;color:#666;"> pt</span></div>
       <div class="ptbar-track"><div class="ptbar-fill" id="ptbar-mumei" style="width:0%;background:#c0392b;"></div></div>
       <div class="ptbtns" id="ptbtns-mumei"></div>
+      <div style="padding:0 14px 10px;font-size:11px;color:#999;">発光率 <span id="hikari-mumei" style="color:#e0a0a0;font-weight:700;">―</span></div>
       <div class="ptbtns"><div class="ptbtn ptenter" onclick="czEnter('mumei')">無名 CZ突入</div></div>
     </div>
 
     <div class="pttrack" style="border-color:rgba(46,125,79,0.35);">
+      <svg class="ptbanner" viewBox="0 0 300 60" preserveAspectRatio="none">
+        <defs><radialGradient id="gradI" cx="50%" cy="50%" r="70%"><stop offset="0%" stop-color="#0f2a18"/><stop offset="100%" stop-color="#081a0e"/></radialGradient></defs>
+        <rect width="300" height="60" fill="url(#gradI)"/>
+        <circle cx="150" cy="30" r="26" fill="none" stroke="#2e7d4f" stroke-width="1.5" opacity="0.6"/>
+        <circle cx="150" cy="30" r="18" fill="none" stroke="#8fd6ac" stroke-width="1" opacity="0.5"/>
+        <text x="150" y="37" text-anchor="middle" font-size="22" font-weight="800" fill="#8fd6ac" font-family="sans-serif" letter-spacing="4">生駒</text>
+      </svg>
       <div class="pthead">
         <div class="ptname" style="color:#8fd6ac;">🎋 生駒 CZポイント</div>
         <div style="display:flex;align-items:center;gap:6px;"><span style="font-size:11px;color:#888;">高確中</span><div class="toggle" id="tg-koukaku-ikoma" onclick="toggleKoukaku('ikoma')"><div class="knob"></div></div></div>
@@ -246,10 +264,18 @@ body{padding-bottom:150px;}
       <div class="ptval" id="ptval-ikoma">0<span style="font-size:12px;color:#666;"> pt</span></div>
       <div class="ptbar-track"><div class="ptbar-fill" id="ptbar-ikoma" style="width:0%;background:#2e7d4f;"></div></div>
       <div class="ptbtns" id="ptbtns-ikoma"></div>
+      <div style="padding:0 14px 10px;font-size:11px;color:#999;">発光率 <span id="hikari-ikoma" style="color:#8fd6ac;font-weight:700;">―</span></div>
       <div class="ptbtns"><div class="ptbtn ptenter" onclick="czEnter('ikoma')">生駒 CZ突入</div></div>
     </div>
 
     <div class="card">
+      <svg class="ptbanner" viewBox="0 0 300 60" preserveAspectRatio="none" style="margin:0;border-radius:14px 14px 0 0;">
+        <defs><radialGradient id="gradD" cx="50%" cy="50%" r="70%"><stop offset="0%" stop-color="#2a1040"/><stop offset="100%" stop-color="#150822"/></radialGradient></defs>
+        <rect width="300" height="60" fill="url(#gradD)"/>
+        <circle cx="150" cy="30" r="26" fill="none" stroke="#9b6fd6" stroke-width="1.5" opacity="0.6"/>
+        <circle cx="150" cy="30" r="18" fill="none" stroke="#d0b8ee" stroke-width="1" opacity="0.5"/>
+        <text x="150" y="37" text-anchor="middle" font-size="20" font-weight="800" fill="#d0b8ee" font-family="sans-serif" letter-spacing="3">VS 銅藍</text>
+      </svg>
       <div class="ctitle">銅藍CZ突入<span style="text-transform:none;color:#666;">（経由元を選択）</span></div>
       <div class="ptbtns" style="padding:12px 14px;">
         <div class="ptbtn" style="background:rgba(192,57,43,0.25);" onclick="czEnter('dourin','mumei')">無名CZ経由</div>
@@ -262,34 +288,34 @@ body{padding-bottom:150px;}
   <div id="n-item" class="subpage">
     <div class="card">
       <div class="ctitle">アイテムくじ記録</div>
-      <div class="irow"><div class="thumb">🏹</div><div class="ilabel">菖蒲の弓<small>設定差が最大級（重み高）</small></div>
+      <div class="irow"><div class="thumb" style="color:#e0c274;"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M6 2 Q1 12 6 22"/><line x1="6" y1="2" x2="6" y2="22" stroke-dasharray="1.5 2"/></svg></div><div class="ilabel">菖蒲の弓<small>設定差が最大級（重み高）</small></div>
         <div class="stepper"><div class="sbtn" data-key="item_shobuyumi" data-d="-1">－</div><div class="sval" id="sv-item_shobuyumi">0</div><div class="sbtn" data-key="item_shobuyumi" data-d="1">＋</div></div>
       </div>
-      <div class="irow"><div class="thumb">🦋</div><div class="ilabel">ミヤマカラスアゲハ<small>高設定示唆（強）</small></div>
+      <div class="irow"><div class="thumb" style="color:#8fd6ac;"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M12 5 C9 2 3 3 3 8 C3 12 8 12 12 9 C16 12 21 12 21 8 C21 3 15 2 12 5 Z"/><line x1="12" y1="5" x2="12" y2="19"/></svg></div><div class="ilabel">ミヤマカラスアゲハ<small>高設定示唆（強）</small></div>
         <div class="stepper"><div class="sbtn" data-key="item_miyama" data-d="-1">－</div><div class="sval" id="sv-item_miyama">0</div><div class="sbtn" data-key="item_miyama" data-d="1">＋</div></div>
       </div>
-      <div class="irow"><div class="thumb">🎐</div><div class="ilabel">小吉<small>設定2以上濃厚</small></div>
+      <div class="irow"><div class="thumb" style="color:#cd7f32;"><svg class="icon-svg" viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="1"/><line x1="8" y1="8" x2="16" y2="8"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="8" y1="16" x2="14" y2="16"/></svg></div><div class="ilabel">小吉<small>設定2以上濃厚</small></div>
         <div class="stepper"><div class="sbtn" data-key="item_kokichi" data-d="-1">－</div><div class="sval" id="sv-item_kokichi">0</div><div class="sbtn" data-key="item_kokichi" data-d="1">＋</div></div>
       </div>
-      <div class="irow"><div class="ilabel">中吉<small>設定4以上確定</small></div>
+      <div class="irow"><div class="thumb" style="color:#bfc6cc;"><svg class="icon-svg" viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="1"/><line x1="8" y1="8" x2="16" y2="8"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="8" y1="16" x2="14" y2="16"/></svg></div><div class="ilabel">中吉<small>設定4以上確定</small></div>
         <div class="stepper"><div class="sbtn" data-key="item_chukichi" data-d="-1">－</div><div class="sval" id="sv-item_chukichi">0</div><div class="sbtn" data-key="item_chukichi" data-d="1">＋</div></div>
       </div>
-      <div class="irow"><div class="ilabel">大吉<small>設定6確定</small></div>
+      <div class="irow"><div class="thumb" style="color:#f5c542;"><svg class="icon-svg" viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="1"/><line x1="8" y1="8" x2="16" y2="8"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="8" y1="16" x2="14" y2="16"/></svg></div><div class="ilabel">大吉<small>設定6確定</small></div>
         <div class="stepper"><div class="sbtn" data-key="item_daikichi" data-d="-1">－</div><div class="sval" id="sv-item_daikichi">0</div><div class="sbtn" data-key="item_daikichi" data-d="1">＋</div></div>
       </div>
-      <div class="irow"><div class="thumb">🥋</div><div class="ilabel">ツラヌキ筒<small>設定4で出にくい</small></div>
+      <div class="irow"><div class="thumb"><svg class="icon-svg" viewBox="0 0 24 24"><rect x="8" y="3" width="8" height="18" rx="2"/><line x1="8" y1="9" x2="16" y2="9"/><line x1="8" y1="15" x2="16" y2="15"/></svg></div><div class="ilabel">ツラヌキ筒<small>設定4で出にくい</small></div>
         <div class="stepper"><div class="sbtn" data-key="item_tsuranuki" data-d="-1">－</div><div class="sval" id="sv-item_tsuranuki">0</div><div class="sbtn" data-key="item_tsuranuki" data-d="1">＋</div></div>
       </div>
-      <div class="irow"><div class="thumb">🔫</div><div class="ilabel">無名の短銃<small>設定3で出にくい</small></div>
+      <div class="irow"><div class="thumb"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M3 15h8l2-3h6v3h-2v3h-4v-3H9l-2 3H3z"/></svg></div><div class="ilabel">無名の短銃<small>設定3で出にくい</small></div>
         <div class="stepper"><div class="sbtn" data-key="item_mumeitanju" data-d="-1">－</div><div class="sval" id="sv-item_mumeitanju">0</div><div class="sbtn" data-key="item_mumeitanju" data-d="1">＋</div></div>
       </div>
-      <div class="irow"><div class="thumb">🎒</div><div class="ilabel">自決袋<small>設定1で出にくい</small></div>
+      <div class="irow"><div class="thumb"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M7 9 Q7 4 12 4 Q17 4 17 9 L18 20 Q18 22 16 22 L8 22 Q6 22 6 20 Z"/></svg></div><div class="ilabel">自決袋<small>設定1で出にくい</small></div>
         <div class="stepper"><div class="sbtn" data-key="item_jiketsu" data-d="-1">－</div><div class="sval" id="sv-item_jiketsu">0</div><div class="sbtn" data-key="item_jiketsu" data-d="1">＋</div></div>
       </div>
-      <div class="irow"><div class="thumb">🗡️</div><div class="ilabel">来栖の刀<small>判別価値ほぼ無し（重み最小）</small></div>
+      <div class="irow"><div class="thumb"><svg class="icon-svg" viewBox="0 0 24 24"><line x1="4" y1="21" x2="19" y2="6"/><line x1="16" y1="4" x2="20" y2="8"/><line x1="3" y1="20" x2="6" y2="20"/></svg></div><div class="ilabel">来栖の刀<small>判別価値ほぼ無し（重み最小）</small></div>
         <div class="stepper"><div class="sbtn" data-key="item_kurusukatana" data-d="-1">－</div><div class="sval" id="sv-item_kurusukatana">0</div><div class="sbtn" data-key="item_kurusukatana" data-d="1">＋</div></div>
       </div>
-      <div class="irow"><div class="thumb">🪀</div><div class="ilabel">無名のけん玉<small>判別価値ほぼ無し（重み最小）</small></div>
+      <div class="irow"><div class="thumb"><svg class="icon-svg" viewBox="0 0 24 24"><circle cx="12" cy="6" r="3"/><line x1="12" y1="9" x2="12" y2="15"/><path d="M6 15 Q12 21 18 15"/></svg></div><div class="ilabel">無名のけん玉<small>判別価値ほぼ無し（重み最小）</small></div>
         <div class="stepper"><div class="sbtn" data-key="item_mumeikendama" data-d="-1">－</div><div class="sval" id="sv-item_mumeikendama">0</div><div class="sbtn" data-key="item_mumeikendama" data-d="1">＋</div></div>
       </div>
     </div>
@@ -351,9 +377,9 @@ body{padding-bottom:150px;}
   <div id="s-chara" class="subpage">
     <div class="card">
       <div class="ctitle">キャラ紹介（rotScaleなし・序盤から有効）</div>
-      <div class="vrow"><div class="vinfo"><div class="vno">女性キャラ</div><div class="vtxt">1〜3合計</div><span class="badge b-ref">設定6で出やすい傾向</span></div><div class="stepper"><div class="sbtn" data-key="ch_female" data-d="-1">－</div><div class="sval" id="sv-ch_female">0</div><div class="sbtn" data-key="ch_female" data-d="1">＋</div></div></div>
-      <div class="vrow"><div class="vinfo"><div class="vno">男性キャラ</div><div class="vtxt">4〜6合計</div><span class="badge b-ref">設定5で出やすい傾向</span></div><div class="stepper"><div class="sbtn" data-key="ch_male" data-d="-1">－</div><div class="sval" id="sv-ch_male">0</div><div class="sbtn" data-key="ch_male" data-d="1">＋</div></div></div>
-      <div class="vrow"><div class="vinfo"><div class="vno">美馬</div><div class="vtxt">低設定では未確認</div><span class="badge b-high">高設定示唆</span></div><div class="stepper"><div class="sbtn" data-key="ch_mibu" data-d="-1">－</div><div class="sval" id="sv-ch_mibu">0</div><div class="sbtn" data-key="ch_mibu" data-d="1">＋</div></div></div>
+      <div class="vrow"><div class="thumb" style="color:#e0a0a0;"><svg class="icon-svg" viewBox="0 0 24 24"><circle cx="12" cy="6" r="3.2"/><path d="M6 21 Q6 13 12 13 Q18 13 18 21"/></svg></div><div class="vinfo"><div class="vno">女性キャラ</div><div class="vtxt">1〜3合計</div><span class="badge b-ref">設定6で出やすい傾向</span></div><div class="stepper"><div class="sbtn" data-key="ch_female" data-d="-1">－</div><div class="sval" id="sv-ch_female">0</div><div class="sbtn" data-key="ch_female" data-d="1">＋</div></div></div>
+      <div class="vrow"><div class="thumb" style="color:#8fbfe0;"><svg class="icon-svg" viewBox="0 0 24 24"><circle cx="12" cy="6" r="3.2"/><path d="M6 21 Q6 13 12 13 Q18 13 18 21"/></svg></div><div class="vinfo"><div class="vno">男性キャラ</div><div class="vtxt">4〜6合計</div><span class="badge b-ref">設定5で出やすい傾向</span></div><div class="stepper"><div class="sbtn" data-key="ch_male" data-d="-1">－</div><div class="sval" id="sv-ch_male">0</div><div class="sbtn" data-key="ch_male" data-d="1">＋</div></div></div>
+      <div class="vrow"><div class="thumb" style="color:#e0c274;"><svg class="icon-svg" viewBox="0 0 24 24"><circle cx="12" cy="6" r="3.2"/><path d="M6 21 Q6 13 12 13 Q18 13 18 21"/><path d="M5 5 Q12 -1 19 5" opacity="0.6"/></svg></div><div class="vinfo"><div class="vno">美馬</div><div class="vtxt">低設定では未確認</div><span class="badge b-high">高設定示唆</span></div><div class="stepper"><div class="sbtn" data-key="ch_mibu" data-d="-1">－</div><div class="sval" id="sv-ch_mibu">0</div><div class="sbtn" data-key="ch_mibu" data-d="1">＋</div></div></div>
     </div>
     <button class="calcbtn" data-action="calc">計算して結果を見る →</button>
   </div>
@@ -361,9 +387,9 @@ body{padding-bottom:150px;}
   <div id="s-end" class="subpage">
     <div class="card">
       <div class="ctitle">ST終了画面</div>
-      <div class="vrow"><div class="vinfo"><div class="vno">鉄下駄</div><div class="vtxt">実戦値未公表・参考値のみ</div><span class="badge b-ref">判別未使用</span></div><div class="stepper"><div class="sbtn" data-key="end_tekkageta" data-d="-1">－</div><div class="sval" id="sv-end_tekkageta">0</div><div class="sbtn" data-key="end_tekkageta" data-d="1">＋</div></div></div>
-      <div class="vrow"><div class="vinfo"><div class="vno">集合</div><div class="vtxt">設定6で出やすい</div><span class="badge b-high">高設定示唆</span></div><div class="stepper"><div class="sbtn" data-key="end_shugo" data-d="-1">－</div><div class="sval" id="sv-end_shugo">0</div><div class="sbtn" data-key="end_shugo" data-d="1">＋</div></div></div>
-      <div class="vrow"><div class="vinfo"><div class="vno">水着</div><div class="vtxt">設定6のみ確認例あり</div><span class="badge b-kakutei">設定6濃厚</span></div><div class="stepper"><div class="sbtn" data-key="end_mizugi" data-d="-1">－</div><div class="sval" id="sv-end_mizugi">0</div><div class="sbtn" data-key="end_mizugi" data-d="1">＋</div></div></div>
+      <div class="vrow"><div class="thumb"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M4 18 Q4 12 9 11 L15 9 Q19 8 20 12 L20 16 Q20 18 18 18 Z"/></svg></div><div class="vinfo"><div class="vno">鉄下駄</div><div class="vtxt">実戦値未公表・参考値のみ</div><span class="badge b-ref">判別未使用</span></div><div class="stepper"><div class="sbtn" data-key="end_tekkageta" data-d="-1">－</div><div class="sval" id="sv-end_tekkageta">0</div><div class="sbtn" data-key="end_tekkageta" data-d="1">＋</div></div></div>
+      <div class="vrow"><div class="thumb" style="color:#ba7517;"><svg class="icon-svg" viewBox="0 0 24 24"><circle cx="7" cy="8" r="2.2"/><circle cx="12" cy="7" r="2.2"/><circle cx="17" cy="8" r="2.2"/><path d="M3 20 Q3 14 7 14 Q9 14 9 17"/><path d="M9 20 Q9 13 12 13 Q15 13 15 20"/><path d="M15 17 Q15 14 17 14 Q21 14 21 20"/></svg></div><div class="vinfo"><div class="vno">集合</div><div class="vtxt">設定6で出やすい</div><span class="badge b-high">高設定示唆</span></div><div class="stepper"><div class="sbtn" data-key="end_shugo" data-d="-1">－</div><div class="sval" id="sv-end_shugo">0</div><div class="sbtn" data-key="end_shugo" data-d="1">＋</div></div></div>
+      <div class="vrow"><div class="thumb" style="color:#e04040;"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M2 12 Q6 8 10 12 Q14 16 18 12 Q20 10 22 12"/><path d="M2 17 Q6 13 10 17 Q14 21 18 17 Q20 15 22 17"/></svg></div><div class="vinfo"><div class="vno">水着</div><div class="vtxt">設定6のみ確認例あり</div><span class="badge b-kakutei">設定6濃厚</span></div><div class="stepper"><div class="sbtn" data-key="end_mizugi" data-d="-1">－</div><div class="sval" id="sv-end_mizugi">0</div><div class="sbtn" data-key="end_mizugi" data-d="1">＋</div></div></div>
     </div>
     <button class="calcbtn" data-action="calc">計算して結果を見る →</button>
   </div>
@@ -441,7 +467,7 @@ body{padding-bottom:150px;}
   <div class="navbtn" id="btn-undo" onclick="doUndo()">↩︎</div>
   <div class="navbtn" id="btn-redo" onclick="doRedo()">↪︎</div>
   <div class="gamedatabtn" onclick="openGameData()">📋 遊技データ</div>
-  <div class="bb-addbtn" id="bb-add" onclick="bottomBarAdd()">＋</div>
+  <div class="bb-addbtn" id="bb-add" onclick="bump('bell',1)">🔔<span class="bb-bell-badge" id="bb-bell-count">0</span></div>
 </div>
 
 <div class="sheet-overlay" id="gd-overlay" onclick="closeGameData()"></div>
@@ -596,7 +622,12 @@ function applyValueAction(key,val){
   const el=document.getElementById('sv-'+key);
   if(el)el.textContent=S[key];
   if(key.startsWith('cz_pt_'))refreshPtDisplay(key.replace('cz_pt_',''));
-  if(key==='bell'||key==='bonusAdj'||key==='stAdj'||key==='czAdj')refreshGameDataPanel();
+  if(key==='bell'){
+    refreshGameDataPanel();
+    const badge=document.getElementById('bb-bell-count');
+    if(badge)badge.textContent=S.bell;
+  }
+  if(key==='bonusAdj'||key==='stAdj'||key==='czAdj')refreshGameDataPanel();
   saveState();
 }
 function doUndo(){
@@ -674,8 +705,16 @@ function bumpPt(who,amt,tapType){
     if(tapType==='hikari')S[who+'_hikari']=(S[who+'_hikari']||0)+1;
   }
   refreshPtDisplay(who);
+  refreshHikariDisplay(who);
   pushUndo({type:'value',key,prev,next});
   saveState();
+}
+function refreshHikariDisplay(who){
+  const el=document.getElementById('hikari-'+who);
+  if(!el)return;
+  const normal=S[who+'_normal']||0, hikari=S[who+'_hikari']||0;
+  const tot=normal+hikari;
+  el.textContent = tot>0 ? Math.round(hikari/tot*100)+'%（'+hikari+'/'+tot+'）' : '―';
 }
 // CZ突入（who: 'mumei'|'ikoma'|'dourin', viaSource: 銅藍格上げ時の経由元）
 function czEnter(who,viaSource){
@@ -1449,8 +1488,11 @@ renderPtButtons('mumei');
 renderPtButtons('ikoma');
 refreshPtDisplay('mumei');
 refreshPtDisplay('ikoma');
+refreshHikariDisplay('mumei');
+refreshHikariDisplay('ikoma');
 if(S.cz_koukaku_mumei)document.getElementById('tg-koukaku-mumei').classList.add('on');
 if(S.cz_koukaku_ikoma)document.getElementById('tg-koukaku-ikoma').classList.add('on');
+document.getElementById('bb-bell-count').textContent=S.bell;
 renderWizard();
 renderHistory();
 updateBottomBar();
