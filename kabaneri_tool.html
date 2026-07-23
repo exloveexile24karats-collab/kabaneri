@@ -160,7 +160,8 @@ body{padding-bottom:150px;}
 .bb-addbtn{width:46px;height:46px;border-radius:50%;background:var(--accent);color:#0a0a0a;font-size:22px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer;touch-action:manipulation;position:relative;}
 .bb-addbtn:active{opacity:.8;}
 .bb-bell-badge{position:absolute;top:-4px;right:-4px;background:#e24b4a;color:#fff;font-size:10px;font-weight:800;min-width:16px;height:16px;border-radius:8px;display:flex;align-items:center;justify-content:center;padding:0 3px;}
-.thumb{width:30px;height:30px;border-radius:8px;background:#1c1c1c;border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;margin-right:2px;}
+.thumb{width:30px;height:30px;border-radius:8px;background:#1c1c1c;border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;margin-right:2px;position:relative;overflow:hidden;}
+.thumb img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;}
 
 /* CZポイントトラッカー */
 .pttrack{background:#161616;border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,0.1);margin:12px 12px 0;}
@@ -231,13 +232,16 @@ body{padding-bottom:150px;}
 
   <div id="n-czpt" class="subpage on">
     <div class="pttrack" style="border-color:rgba(224,64,64,0.35);">
-      <svg class="ptbanner" viewBox="0 0 300 60" preserveAspectRatio="none">
-        <defs><radialGradient id="gradM" cx="50%" cy="50%" r="70%"><stop offset="0%" stop-color="#3a1010"/><stop offset="100%" stop-color="#1a0808"/></radialGradient></defs>
-        <rect width="300" height="60" fill="url(#gradM)"/>
-        <circle cx="150" cy="30" r="26" fill="none" stroke="#c0392b" stroke-width="1.5" opacity="0.6"/>
-        <circle cx="150" cy="30" r="18" fill="none" stroke="#e0a0a0" stroke-width="1" opacity="0.5"/>
-        <text x="150" y="37" text-anchor="middle" font-size="22" font-weight="800" fill="#e0a0a0" font-family="sans-serif" letter-spacing="4">無名</text>
-      </svg>
+      <div style="position:relative;">
+        <svg class="ptbanner" viewBox="0 0 300 60" preserveAspectRatio="none">
+          <defs><radialGradient id="gradM" cx="50%" cy="50%" r="70%"><stop offset="0%" stop-color="#3a1010"/><stop offset="100%" stop-color="#1a0808"/></radialGradient></defs>
+          <rect width="300" height="60" fill="url(#gradM)"/>
+          <circle cx="150" cy="30" r="26" fill="none" stroke="#c0392b" stroke-width="1.5" opacity="0.6"/>
+          <circle cx="150" cy="30" r="18" fill="none" stroke="#e0a0a0" stroke-width="1" opacity="0.5"/>
+          <text x="150" y="37" text-anchor="middle" font-size="22" font-weight="800" fill="#e0a0a0" font-family="sans-serif" letter-spacing="4">無名</text>
+        </svg>
+        <img src="img/mumei_cz.png" alt="無名CZ" class="ptbanner" style="position:absolute;top:0;left:0;object-fit:cover;" onerror="this.style.display='none'">
+      </div>
       <div class="pthead">
         <div class="ptname" style="color:#e0a0a0;">🕶️ 無名 CZポイント</div>
         <div style="display:flex;align-items:center;gap:6px;"><span style="font-size:11px;color:#888;">高確中</span><div class="toggle" id="tg-koukaku-mumei" onclick="toggleKoukaku('mumei')"><div class="knob"></div></div></div>
@@ -250,13 +254,16 @@ body{padding-bottom:150px;}
     </div>
 
     <div class="pttrack" style="border-color:rgba(46,125,79,0.35);">
-      <svg class="ptbanner" viewBox="0 0 300 60" preserveAspectRatio="none">
-        <defs><radialGradient id="gradI" cx="50%" cy="50%" r="70%"><stop offset="0%" stop-color="#0f2a18"/><stop offset="100%" stop-color="#081a0e"/></radialGradient></defs>
-        <rect width="300" height="60" fill="url(#gradI)"/>
-        <circle cx="150" cy="30" r="26" fill="none" stroke="#2e7d4f" stroke-width="1.5" opacity="0.6"/>
-        <circle cx="150" cy="30" r="18" fill="none" stroke="#8fd6ac" stroke-width="1" opacity="0.5"/>
-        <text x="150" y="37" text-anchor="middle" font-size="22" font-weight="800" fill="#8fd6ac" font-family="sans-serif" letter-spacing="4">生駒</text>
-      </svg>
+      <div style="position:relative;">
+        <svg class="ptbanner" viewBox="0 0 300 60" preserveAspectRatio="none">
+          <defs><radialGradient id="gradI" cx="50%" cy="50%" r="70%"><stop offset="0%" stop-color="#0f2a18"/><stop offset="100%" stop-color="#081a0e"/></radialGradient></defs>
+          <rect width="300" height="60" fill="url(#gradI)"/>
+          <circle cx="150" cy="30" r="26" fill="none" stroke="#2e7d4f" stroke-width="1.5" opacity="0.6"/>
+          <circle cx="150" cy="30" r="18" fill="none" stroke="#8fd6ac" stroke-width="1" opacity="0.5"/>
+          <text x="150" y="37" text-anchor="middle" font-size="22" font-weight="800" fill="#8fd6ac" font-family="sans-serif" letter-spacing="4">生駒</text>
+        </svg>
+        <img src="img/ikoma_cz.png" alt="生駒CZ" class="ptbanner" style="position:absolute;top:0;left:0;object-fit:cover;" onerror="this.style.display='none'">
+      </div>
       <div class="pthead">
         <div class="ptname" style="color:#8fd6ac;">🎋 生駒 CZポイント</div>
         <div style="display:flex;align-items:center;gap:6px;"><span style="font-size:11px;color:#888;">高確中</span><div class="toggle" id="tg-koukaku-ikoma" onclick="toggleKoukaku('ikoma')"><div class="knob"></div></div></div>
@@ -269,13 +276,16 @@ body{padding-bottom:150px;}
     </div>
 
     <div class="card">
-      <svg class="ptbanner" viewBox="0 0 300 60" preserveAspectRatio="none" style="margin:0;border-radius:14px 14px 0 0;">
-        <defs><radialGradient id="gradD" cx="50%" cy="50%" r="70%"><stop offset="0%" stop-color="#2a1040"/><stop offset="100%" stop-color="#150822"/></radialGradient></defs>
-        <rect width="300" height="60" fill="url(#gradD)"/>
-        <circle cx="150" cy="30" r="26" fill="none" stroke="#9b6fd6" stroke-width="1.5" opacity="0.6"/>
-        <circle cx="150" cy="30" r="18" fill="none" stroke="#d0b8ee" stroke-width="1" opacity="0.5"/>
-        <text x="150" y="37" text-anchor="middle" font-size="20" font-weight="800" fill="#d0b8ee" font-family="sans-serif" letter-spacing="3">VS 銅藍</text>
-      </svg>
+      <div style="position:relative;">
+        <svg class="ptbanner" viewBox="0 0 300 60" preserveAspectRatio="none" style="margin:0;border-radius:14px 14px 0 0;">
+          <defs><radialGradient id="gradD" cx="50%" cy="50%" r="70%"><stop offset="0%" stop-color="#2a1040"/><stop offset="100%" stop-color="#150822"/></radialGradient></defs>
+          <rect width="300" height="60" fill="url(#gradD)"/>
+          <circle cx="150" cy="30" r="26" fill="none" stroke="#9b6fd6" stroke-width="1.5" opacity="0.6"/>
+          <circle cx="150" cy="30" r="18" fill="none" stroke="#d0b8ee" stroke-width="1" opacity="0.5"/>
+          <text x="150" y="37" text-anchor="middle" font-size="20" font-weight="800" fill="#d0b8ee" font-family="sans-serif" letter-spacing="3">VS 銅藍</text>
+        </svg>
+        <img src="img/dourin_cz.png" alt="VS銅藍CZ" class="ptbanner" style="position:absolute;top:0;left:0;margin:0;border-radius:14px 14px 0 0;object-fit:cover;" onerror="this.style.display='none'">
+      </div>
       <div class="ctitle">銅藍CZ突入<span style="text-transform:none;color:#666;">（経由元を選択）</span></div>
       <div class="ptbtns" style="padding:12px 14px;">
         <div class="ptbtn" style="background:rgba(192,57,43,0.25);" onclick="czEnter('dourin','mumei')">無名CZ経由</div>
@@ -288,31 +298,31 @@ body{padding-bottom:150px;}
   <div id="n-item" class="subpage">
     <div class="card">
       <div class="ctitle">アイテムくじ記録</div>
-      <div class="irow"><div class="thumb" style="color:#e0c274;"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M6 2 Q1 12 6 22"/><line x1="6" y1="2" x2="6" y2="22" stroke-dasharray="1.5 2"/></svg></div><div class="ilabel">菖蒲の弓<small>設定差が最大級（重み高）</small></div>
+      <div class="irow"><div class="thumb" style="color:#e0c274;"><img src="img/item_shobuyumi.png" alt="" onerror="this.remove()"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M6 2 Q1 12 6 22"/><line x1="6" y1="2" x2="6" y2="22" stroke-dasharray="1.5 2"/></svg></div><div class="ilabel">菖蒲の弓<small>設定差が最大級（重み高）</small></div>
         <div class="stepper"><div class="sbtn" data-key="item_shobuyumi" data-d="-1">－</div><div class="sval" id="sv-item_shobuyumi">0</div><div class="sbtn" data-key="item_shobuyumi" data-d="1">＋</div></div>
       </div>
-      <div class="irow"><div class="thumb" style="color:#8fd6ac;"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M12 5 C9 2 3 3 3 8 C3 12 8 12 12 9 C16 12 21 12 21 8 C21 3 15 2 12 5 Z"/><line x1="12" y1="5" x2="12" y2="19"/></svg></div><div class="ilabel">ミヤマカラスアゲハ<small>高設定示唆（強）</small></div>
+      <div class="irow"><div class="thumb" style="color:#8fd6ac;"><img src="img/item_miyama.png" alt="" onerror="this.remove()"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M12 5 C9 2 3 3 3 8 C3 12 8 12 12 9 C16 12 21 12 21 8 C21 3 15 2 12 5 Z"/><line x1="12" y1="5" x2="12" y2="19"/></svg></div><div class="ilabel">ミヤマカラスアゲハ<small>高設定示唆（強）</small></div>
         <div class="stepper"><div class="sbtn" data-key="item_miyama" data-d="-1">－</div><div class="sval" id="sv-item_miyama">0</div><div class="sbtn" data-key="item_miyama" data-d="1">＋</div></div>
       </div>
-      <div class="irow"><div class="thumb" style="color:#cd7f32;"><svg class="icon-svg" viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="1"/><line x1="8" y1="8" x2="16" y2="8"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="8" y1="16" x2="14" y2="16"/></svg></div><div class="ilabel">小吉<small>設定2以上濃厚</small></div>
+      <div class="irow"><div class="thumb" style="color:#cd7f32;"><img src="img/item_kokichi.png" alt="" onerror="this.remove()"><svg class="icon-svg" viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="1"/><line x1="8" y1="8" x2="16" y2="8"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="8" y1="16" x2="14" y2="16"/></svg></div><div class="ilabel">小吉<small>設定2以上濃厚</small></div>
         <div class="stepper"><div class="sbtn" data-key="item_kokichi" data-d="-1">－</div><div class="sval" id="sv-item_kokichi">0</div><div class="sbtn" data-key="item_kokichi" data-d="1">＋</div></div>
       </div>
-      <div class="irow"><div class="thumb" style="color:#bfc6cc;"><svg class="icon-svg" viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="1"/><line x1="8" y1="8" x2="16" y2="8"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="8" y1="16" x2="14" y2="16"/></svg></div><div class="ilabel">中吉<small>設定4以上確定</small></div>
+      <div class="irow"><div class="thumb" style="color:#bfc6cc;"><img src="img/item_chukichi.png" alt="" onerror="this.remove()"><svg class="icon-svg" viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="1"/><line x1="8" y1="8" x2="16" y2="8"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="8" y1="16" x2="14" y2="16"/></svg></div><div class="ilabel">中吉<small>設定4以上確定</small></div>
         <div class="stepper"><div class="sbtn" data-key="item_chukichi" data-d="-1">－</div><div class="sval" id="sv-item_chukichi">0</div><div class="sbtn" data-key="item_chukichi" data-d="1">＋</div></div>
       </div>
-      <div class="irow"><div class="thumb" style="color:#f5c542;"><svg class="icon-svg" viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="1"/><line x1="8" y1="8" x2="16" y2="8"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="8" y1="16" x2="14" y2="16"/></svg></div><div class="ilabel">大吉<small>設定6確定</small></div>
+      <div class="irow"><div class="thumb" style="color:#f5c542;"><img src="img/item_daikichi.png" alt="" onerror="this.remove()"><svg class="icon-svg" viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="1"/><line x1="8" y1="8" x2="16" y2="8"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="8" y1="16" x2="14" y2="16"/></svg></div><div class="ilabel">大吉<small>設定6確定</small></div>
         <div class="stepper"><div class="sbtn" data-key="item_daikichi" data-d="-1">－</div><div class="sval" id="sv-item_daikichi">0</div><div class="sbtn" data-key="item_daikichi" data-d="1">＋</div></div>
       </div>
-      <div class="irow"><div class="thumb"><svg class="icon-svg" viewBox="0 0 24 24"><rect x="8" y="3" width="8" height="18" rx="2"/><line x1="8" y1="9" x2="16" y2="9"/><line x1="8" y1="15" x2="16" y2="15"/></svg></div><div class="ilabel">ツラヌキ筒<small>設定4で出にくい</small></div>
+      <div class="irow"><div class="thumb"><img src="img/item_tsuranuki.png" alt="" onerror="this.remove()"><svg class="icon-svg" viewBox="0 0 24 24"><rect x="8" y="3" width="8" height="18" rx="2"/><line x1="8" y1="9" x2="16" y2="9"/><line x1="8" y1="15" x2="16" y2="15"/></svg></div><div class="ilabel">ツラヌキ筒<small>設定4で出にくい</small></div>
         <div class="stepper"><div class="sbtn" data-key="item_tsuranuki" data-d="-1">－</div><div class="sval" id="sv-item_tsuranuki">0</div><div class="sbtn" data-key="item_tsuranuki" data-d="1">＋</div></div>
       </div>
-      <div class="irow"><div class="thumb"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M3 15h8l2-3h6v3h-2v3h-4v-3H9l-2 3H3z"/></svg></div><div class="ilabel">無名の短銃<small>設定3で出にくい</small></div>
+      <div class="irow"><div class="thumb"><img src="img/item_mumeitanju.png" alt="" onerror="this.remove()"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M3 15h8l2-3h6v3h-2v3h-4v-3H9l-2 3H3z"/></svg></div><div class="ilabel">無名の短銃<small>設定3で出にくい</small></div>
         <div class="stepper"><div class="sbtn" data-key="item_mumeitanju" data-d="-1">－</div><div class="sval" id="sv-item_mumeitanju">0</div><div class="sbtn" data-key="item_mumeitanju" data-d="1">＋</div></div>
       </div>
-      <div class="irow"><div class="thumb"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M7 9 Q7 4 12 4 Q17 4 17 9 L18 20 Q18 22 16 22 L8 22 Q6 22 6 20 Z"/></svg></div><div class="ilabel">自決袋<small>設定1で出にくい</small></div>
+      <div class="irow"><div class="thumb"><img src="img/item_jiketsu.png" alt="" onerror="this.remove()"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M7 9 Q7 4 12 4 Q17 4 17 9 L18 20 Q18 22 16 22 L8 22 Q6 22 6 20 Z"/></svg></div><div class="ilabel">自決袋<small>設定1で出にくい</small></div>
         <div class="stepper"><div class="sbtn" data-key="item_jiketsu" data-d="-1">－</div><div class="sval" id="sv-item_jiketsu">0</div><div class="sbtn" data-key="item_jiketsu" data-d="1">＋</div></div>
       </div>
-      <div class="irow"><div class="thumb"><svg class="icon-svg" viewBox="0 0 24 24"><line x1="4" y1="21" x2="19" y2="6"/><line x1="16" y1="4" x2="20" y2="8"/><line x1="3" y1="20" x2="6" y2="20"/></svg></div><div class="ilabel">来栖の刀<small>判別価値ほぼ無し（重み最小）</small></div>
+      <div class="irow"><div class="thumb"><img src="img/item_kurusukatana.png" alt="" onerror="this.remove()"><svg class="icon-svg" viewBox="0 0 24 24"><line x1="4" y1="21" x2="19" y2="6"/><line x1="16" y1="4" x2="20" y2="8"/><line x1="3" y1="20" x2="6" y2="20"/></svg></div><div class="ilabel">来栖の刀<small>判別価値ほぼ無し（重み最小）</small></div>
         <div class="stepper"><div class="sbtn" data-key="item_kurusukatana" data-d="-1">－</div><div class="sval" id="sv-item_kurusukatana">0</div><div class="sbtn" data-key="item_kurusukatana" data-d="1">＋</div></div>
       </div>
       <div class="irow"><div class="thumb"><svg class="icon-svg" viewBox="0 0 24 24"><circle cx="12" cy="6" r="3"/><line x1="12" y1="9" x2="12" y2="15"/><path d="M6 15 Q12 21 18 15"/></svg></div><div class="ilabel">無名のけん玉<small>判別価値ほぼ無し（重み最小）</small></div>
@@ -337,39 +347,18 @@ body{padding-bottom:150px;}
 
   <div id="s-voice" class="subpage on">
     <div class="card">
-      <div class="vgroup">無名ボイス（偶数示唆）</div>
-      <div class="vrow"><div class="vinfo"><div class="vno">No.1</div><div class="vtxt">無名（偶数）</div><span class="badge b-even">偶数設定示唆</span></div><div class="stepper"><div class="sbtn" data-key="v1" data-d="-1">－</div><div class="sval" id="sv-v1">0</div><div class="sbtn" data-key="v1" data-d="1">＋</div></div></div>
-      <div class="vrow"><div class="vinfo"><div class="vno">No.2</div><div class="vtxt">無名（偶数強）予想</div><span class="badge b-even">偶数強示唆</span></div><div class="stepper"><div class="sbtn" data-key="v2" data-d="-1">－</div><div class="sval" id="sv-v2">0</div><div class="sbtn" data-key="v2" data-d="1">＋</div></div></div>
-      <div class="vrow"><div class="vinfo"><div class="vno">No.3</div><div class="vtxt">無名（設定2以上確定）</div><span class="badge b-kakutei">設定2以上確定</span></div><div class="stepper"><div class="sbtn" data-key="v3" data-d="-1">－</div><div class="sval" id="sv-v3">0</div><div class="sbtn" data-key="v3" data-d="1">＋</div></div></div>
-    </div>
-    <div class="card">
-      <div class="vgroup">菖蒲ボイス（偶数示唆）</div>
-      <div class="vrow"><div class="vinfo"><div class="vno">No.4</div><div class="vtxt">菖蒲（偶数）</div><span class="badge b-even">偶数設定示唆</span></div><div class="stepper"><div class="sbtn" data-key="v4" data-d="-1">－</div><div class="sval" id="sv-v4">0</div><div class="sbtn" data-key="v4" data-d="1">＋</div></div></div>
-      <div class="vrow"><div class="vinfo"><div class="vno">No.5</div><div class="vtxt">菖蒲（偶数）</div><span class="badge b-even">偶数設定示唆</span></div><div class="stepper"><div class="sbtn" data-key="v5" data-d="-1">－</div><div class="sval" id="sv-v5">0</div><div class="sbtn" data-key="v5" data-d="1">＋</div></div></div>
-      <div class="vrow"><div class="vinfo"><div class="vno">No.6</div><div class="vtxt">菖蒲（偶数）</div><span class="badge b-even">偶数設定示唆</span></div><div class="stepper"><div class="sbtn" data-key="v6" data-d="-1">－</div><div class="sval" id="sv-v6">0</div><div class="sbtn" data-key="v6" data-d="1">＋</div></div></div>
-      <div class="vrow"><div class="vinfo"><div class="vno">No.7</div><div class="vtxt">菖蒲（偶数）</div><span class="badge b-even">偶数設定示唆</span></div><div class="stepper"><div class="sbtn" data-key="v7" data-d="-1">－</div><div class="sval" id="sv-v7">0</div><div class="sbtn" data-key="v7" data-d="1">＋</div></div></div>
-      <div class="vrow"><div class="vinfo"><div class="vno">No.8</div><div class="vtxt">菖蒲（偶数強）予想</div><span class="badge b-even">偶数強示唆</span></div><div class="stepper"><div class="sbtn" data-key="v8" data-d="-1">－</div><div class="sval" id="sv-v8">0</div><div class="sbtn" data-key="v8" data-d="1">＋</div></div></div>
-    </div>
-    <div class="card">
-      <div class="vgroup">生駒ボイス（奇数示唆）</div>
-      <div class="vrow"><div class="vinfo"><div class="vno">No.9</div><div class="vtxt">生駒（奇数）</div><span class="badge b-odd">奇数設定示唆</span></div><div class="stepper"><div class="sbtn" data-key="v9" data-d="-1">－</div><div class="sval" id="sv-v9">0</div><div class="sbtn" data-key="v9" data-d="1">＋</div></div></div>
-      <div class="vrow"><div class="vinfo"><div class="vno">No.10</div><div class="vtxt">生駒（奇数）</div><span class="badge b-odd">奇数設定示唆</span></div><div class="stepper"><div class="sbtn" data-key="v10" data-d="-1">－</div><div class="sval" id="sv-v10">0</div><div class="sbtn" data-key="v10" data-d="1">＋</div></div></div>
-      <div class="vrow"><div class="vinfo"><div class="vno">No.11</div><div class="vtxt">生駒（奇数）</div><span class="badge b-odd">奇数設定示唆</span></div><div class="stepper"><div class="sbtn" data-key="v11" data-d="-1">－</div><div class="sval" id="sv-v11">0</div><div class="sbtn" data-key="v11" data-d="1">＋</div></div></div>
-      <div class="vrow"><div class="vinfo"><div class="vno">No.12</div><div class="vtxt">生駒（奇数）</div><span class="badge b-odd">奇数設定示唆</span></div><div class="stepper"><div class="sbtn" data-key="v12" data-d="-1">－</div><div class="sval" id="sv-v12">0</div><div class="sbtn" data-key="v12" data-d="1">＋</div></div></div>
-      <div class="vrow"><div class="vinfo"><div class="vno">No.13</div><div class="vtxt">生駒（奇数強）予想</div><span class="badge b-odd">奇数強示唆</span></div><div class="stepper"><div class="sbtn" data-key="v13" data-d="-1">－</div><div class="sval" id="sv-v13">0</div><div class="sbtn" data-key="v13" data-d="1">＋</div></div></div>
-    </div>
-    <div class="card">
-      <div class="vgroup">来栖ボイス（奇数示唆）</div>
-      <div class="vrow"><div class="vinfo"><div class="vno">No.14</div><div class="vtxt">来栖（奇数）</div><span class="badge b-odd">奇数設定示唆</span></div><div class="stepper"><div class="sbtn" data-key="v14" data-d="-1">－</div><div class="sval" id="sv-v14">0</div><div class="sbtn" data-key="v14" data-d="1">＋</div></div></div>
-      <div class="vrow"><div class="vinfo"><div class="vno">No.15</div><div class="vtxt">来栖（奇数）</div><span class="badge b-odd">奇数設定示唆</span></div><div class="stepper"><div class="sbtn" data-key="v15" data-d="-1">－</div><div class="sval" id="sv-v15">0</div><div class="sbtn" data-key="v15" data-d="1">＋</div></div></div>
-      <div class="vrow"><div class="vinfo"><div class="vno">No.16</div><div class="vtxt">来栖（奇数強）予想</div><span class="badge b-odd">奇数強示唆</span></div><div class="stepper"><div class="sbtn" data-key="v16" data-d="-1">－</div><div class="sval" id="sv-v16">0</div><div class="sbtn" data-key="v16" data-d="1">＋</div></div></div>
-    </div>
-    <div class="card">
-      <div class="vgroup">景之ボイス（高設定示唆・重み中／サンプル依存）</div>
-      <div class="vrow"><div class="vinfo"><div class="vno">No.17</div><div class="vtxt">景之弱</div><span class="badge b-high">高設定示唆(弱)</span></div><div class="stepper"><div class="sbtn" data-key="v17" data-d="-1">－</div><div class="sval" id="sv-v17">0</div><div class="sbtn" data-key="v17" data-d="1">＋</div></div></div>
-      <div class="vrow"><div class="vinfo"><div class="vno">No.18</div><div class="vtxt">景之中</div><span class="badge b-high">高設定示唆(中)</span></div><div class="stepper"><div class="sbtn" data-key="v18" data-d="-1">－</div><div class="sval" id="sv-v18">0</div><div class="sbtn" data-key="v18" data-d="1">＋</div></div></div>
-      <div class="vrow"><div class="vinfo"><div class="vno">No.19</div><div class="vtxt">景之強</div><span class="badge b-high">高設定示唆(強)</span></div><div class="stepper"><div class="sbtn" data-key="v19" data-d="-1">－</div><div class="sval" id="sv-v19">0</div><div class="sbtn" data-key="v19" data-d="1">＋</div></div></div>
-      <div class="vrow"><div class="vinfo"><div class="vno">No.20</div><div class="vtxt">ボイスなし</div><span class="badge b-high">高設定ほど出やすい</span></div><div class="stepper"><div class="sbtn" data-key="v_none" data-d="-1">－</div><div class="sval" id="sv-v_none">0</div><div class="sbtn" data-key="v_none" data-d="1">＋</div></div></div>
+      <div class="vgroup">サンド目停止時のボイス</div>
+      <div class="vrow"><div class="vinfo"><div class="vtxt">下記以外の女性ボイス</div><span class="badge b-even">偶数設定示唆</span></div><div class="stepper"><div class="sbtn" data-key="v_female_even" data-d="-1">－</div><div class="sval" id="sv-v_female_even">0</div><div class="sbtn" data-key="v_female_even" data-d="1">＋</div></div></div>
+      <div class="vrow"><div class="vinfo"><div class="vtxt">下記以外の男性ボイス</div><span class="badge b-odd">設定3・5期待度UP</span></div><div class="stepper"><div class="sbtn" data-key="v_male_odd" data-d="-1">－</div><div class="sval" id="sv-v_male_odd">0</div><div class="sbtn" data-key="v_male_odd" data-d="1">＋</div></div></div>
+      <div class="vrow"><div class="vinfo"><div class="vtxt">無名「シュコンシュコン」</div><span class="badge b-even">偶数設定期待度UP（レアパターン）</span></div><div class="stepper"><div class="sbtn" data-key="v_mumei_shukon" data-d="-1">－</div><div class="sval" id="sv-v_mumei_shukon">0</div><div class="sbtn" data-key="v_mumei_shukon" data-d="1">＋</div></div></div>
+      <div class="vrow"><div class="vinfo"><div class="vtxt">菖蒲「おまんじゅうが食べたいな…」</div><span class="badge b-even">偶数設定期待度UP（レアパターン）</span></div><div class="stepper"><div class="sbtn" data-key="v_shobu_omanju" data-d="-1">－</div><div class="sval" id="sv-v_shobu_omanju">0</div><div class="sbtn" data-key="v_shobu_omanju" data-d="1">＋</div></div></div>
+      <div class="vrow"><div class="vinfo"><div class="vtxt">生駒「俺の誇れる俺になるんだあぁ！」</div><span class="badge b-odd">設定3・5期待度UP（レアパターン）</span></div><div class="stepper"><div class="sbtn" data-key="v_ikoma_ore" data-d="-1">－</div><div class="sval" id="sv-v_ikoma_ore">0</div><div class="sbtn" data-key="v_ikoma_ore" data-d="1">＋</div></div></div>
+      <div class="vrow"><div class="vinfo"><div class="vtxt">来栖「あの世で稽古を受けるといい」</div><span class="badge b-odd">設定3・5期待度UP（レアパターン）</span></div><div class="stepper"><div class="sbtn" data-key="v_kurusu_anoyo" data-d="-1">－</div><div class="sval" id="sv-v_kurusu_anoyo">0</div><div class="sbtn" data-key="v_kurusu_anoyo" data-d="1">＋</div></div></div>
+      <div class="vrow"><div class="vinfo"><div class="vtxt">景之「なぜ言わなかった私をヒトだと!!」</div><span class="badge b-high">高設定期待度UP(弱)</span></div><div class="stepper"><div class="sbtn" data-key="v17" data-d="-1">－</div><div class="sval" id="sv-v17">0</div><div class="sbtn" data-key="v17" data-d="1">＋</div></div></div>
+      <div class="vrow"><div class="vinfo"><div class="vtxt">景之「私は…ヒトか、カバネか!?」</div><span class="badge b-high">高設定期待度UP(中)</span></div><div class="stepper"><div class="sbtn" data-key="v18" data-d="-1">－</div><div class="sval" id="sv-v18">0</div><div class="sbtn" data-key="v18" data-d="1">＋</div></div></div>
+      <div class="vrow"><div class="vinfo"><div class="vtxt">景之「今年は最後かな」</div><span class="badge b-high">高設定期待度UP(強)</span></div><div class="stepper"><div class="sbtn" data-key="v19" data-d="-1">－</div><div class="sval" id="sv-v19">0</div><div class="sbtn" data-key="v19" data-d="1">＋</div></div></div>
+      <div class="vrow"><div class="vinfo"><div class="vtxt">無名「やっぱりこの台普通じゃないね」</div><span class="badge b-kakutei">設定2以上確定</span></div><div class="stepper"><div class="sbtn" data-key="v3" data-d="-1">－</div><div class="sval" id="sv-v3">0</div><div class="sbtn" data-key="v3" data-d="1">＋</div></div></div>
+      <div class="vrow"><div class="vinfo"><div class="vtxt">ボイスなし</div><span class="badge b-kakutei">設定5以上濃厚</span></div><div class="stepper"><div class="sbtn" data-key="v_none" data-d="-1">－</div><div class="sval" id="sv-v_none">0</div><div class="sbtn" data-key="v_none" data-d="1">＋</div></div></div>
     </div>
     <button class="calcbtn" data-action="calc">計算して結果を見る →</button>
   </div>
@@ -377,9 +366,9 @@ body{padding-bottom:150px;}
   <div id="s-chara" class="subpage">
     <div class="card">
       <div class="ctitle">キャラ紹介（rotScaleなし・序盤から有効）</div>
-      <div class="vrow"><div class="thumb" style="color:#e0a0a0;"><svg class="icon-svg" viewBox="0 0 24 24"><circle cx="12" cy="6" r="3.2"/><path d="M6 21 Q6 13 12 13 Q18 13 18 21"/></svg></div><div class="vinfo"><div class="vno">女性キャラ</div><div class="vtxt">1〜3合計</div><span class="badge b-ref">設定6で出やすい傾向</span></div><div class="stepper"><div class="sbtn" data-key="ch_female" data-d="-1">－</div><div class="sval" id="sv-ch_female">0</div><div class="sbtn" data-key="ch_female" data-d="1">＋</div></div></div>
-      <div class="vrow"><div class="thumb" style="color:#8fbfe0;"><svg class="icon-svg" viewBox="0 0 24 24"><circle cx="12" cy="6" r="3.2"/><path d="M6 21 Q6 13 12 13 Q18 13 18 21"/></svg></div><div class="vinfo"><div class="vno">男性キャラ</div><div class="vtxt">4〜6合計</div><span class="badge b-ref">設定5で出やすい傾向</span></div><div class="stepper"><div class="sbtn" data-key="ch_male" data-d="-1">－</div><div class="sval" id="sv-ch_male">0</div><div class="sbtn" data-key="ch_male" data-d="1">＋</div></div></div>
-      <div class="vrow"><div class="thumb" style="color:#e0c274;"><svg class="icon-svg" viewBox="0 0 24 24"><circle cx="12" cy="6" r="3.2"/><path d="M6 21 Q6 13 12 13 Q18 13 18 21"/><path d="M5 5 Q12 -1 19 5" opacity="0.6"/></svg></div><div class="vinfo"><div class="vno">美馬</div><div class="vtxt">低設定では未確認</div><span class="badge b-high">高設定示唆</span></div><div class="stepper"><div class="sbtn" data-key="ch_mibu" data-d="-1">－</div><div class="sval" id="sv-ch_mibu">0</div><div class="sbtn" data-key="ch_mibu" data-d="1">＋</div></div></div>
+      <div class="vrow"><div class="thumb" style="color:#e0a0a0;"><img src="img/ch_female.png" alt="" onerror="this.remove()"><svg class="icon-svg" viewBox="0 0 24 24"><circle cx="12" cy="6" r="3.2"/><path d="M6 21 Q6 13 12 13 Q18 13 18 21"/></svg></div><div class="vinfo"><div class="vno">女性キャラ</div><div class="vtxt">1〜3合計</div><span class="badge b-ref">設定6で出やすい傾向</span></div><div class="stepper"><div class="sbtn" data-key="ch_female" data-d="-1">－</div><div class="sval" id="sv-ch_female">0</div><div class="sbtn" data-key="ch_female" data-d="1">＋</div></div></div>
+      <div class="vrow"><div class="thumb" style="color:#8fbfe0;"><img src="img/ch_male.png" alt="" onerror="this.remove()"><svg class="icon-svg" viewBox="0 0 24 24"><circle cx="12" cy="6" r="3.2"/><path d="M6 21 Q6 13 12 13 Q18 13 18 21"/></svg></div><div class="vinfo"><div class="vno">男性キャラ</div><div class="vtxt">4〜6合計</div><span class="badge b-ref">設定5で出やすい傾向</span></div><div class="stepper"><div class="sbtn" data-key="ch_male" data-d="-1">－</div><div class="sval" id="sv-ch_male">0</div><div class="sbtn" data-key="ch_male" data-d="1">＋</div></div></div>
+      <div class="vrow"><div class="thumb" style="color:#e0c274;"><img src="img/ch_mibu.png" alt="" onerror="this.remove()"><svg class="icon-svg" viewBox="0 0 24 24"><circle cx="12" cy="6" r="3.2"/><path d="M6 21 Q6 13 12 13 Q18 13 18 21"/><path d="M5 5 Q12 -1 19 5" opacity="0.6"/></svg></div><div class="vinfo"><div class="vno">美馬</div><div class="vtxt">低設定では未確認</div><span class="badge b-high">高設定示唆</span></div><div class="stepper"><div class="sbtn" data-key="ch_mibu" data-d="-1">－</div><div class="sval" id="sv-ch_mibu">0</div><div class="sbtn" data-key="ch_mibu" data-d="1">＋</div></div></div>
     </div>
     <button class="calcbtn" data-action="calc">計算して結果を見る →</button>
   </div>
@@ -387,9 +376,9 @@ body{padding-bottom:150px;}
   <div id="s-end" class="subpage">
     <div class="card">
       <div class="ctitle">ST終了画面</div>
-      <div class="vrow"><div class="thumb"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M4 18 Q4 12 9 11 L15 9 Q19 8 20 12 L20 16 Q20 18 18 18 Z"/></svg></div><div class="vinfo"><div class="vno">鉄下駄</div><div class="vtxt">実戦値未公表・参考値のみ</div><span class="badge b-ref">判別未使用</span></div><div class="stepper"><div class="sbtn" data-key="end_tekkageta" data-d="-1">－</div><div class="sval" id="sv-end_tekkageta">0</div><div class="sbtn" data-key="end_tekkageta" data-d="1">＋</div></div></div>
-      <div class="vrow"><div class="thumb" style="color:#ba7517;"><svg class="icon-svg" viewBox="0 0 24 24"><circle cx="7" cy="8" r="2.2"/><circle cx="12" cy="7" r="2.2"/><circle cx="17" cy="8" r="2.2"/><path d="M3 20 Q3 14 7 14 Q9 14 9 17"/><path d="M9 20 Q9 13 12 13 Q15 13 15 20"/><path d="M15 17 Q15 14 17 14 Q21 14 21 20"/></svg></div><div class="vinfo"><div class="vno">集合</div><div class="vtxt">設定6で出やすい</div><span class="badge b-high">高設定示唆</span></div><div class="stepper"><div class="sbtn" data-key="end_shugo" data-d="-1">－</div><div class="sval" id="sv-end_shugo">0</div><div class="sbtn" data-key="end_shugo" data-d="1">＋</div></div></div>
-      <div class="vrow"><div class="thumb" style="color:#e04040;"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M2 12 Q6 8 10 12 Q14 16 18 12 Q20 10 22 12"/><path d="M2 17 Q6 13 10 17 Q14 21 18 17 Q20 15 22 17"/></svg></div><div class="vinfo"><div class="vno">水着</div><div class="vtxt">設定6のみ確認例あり</div><span class="badge b-kakutei">設定6濃厚</span></div><div class="stepper"><div class="sbtn" data-key="end_mizugi" data-d="-1">－</div><div class="sval" id="sv-end_mizugi">0</div><div class="sbtn" data-key="end_mizugi" data-d="1">＋</div></div></div>
+      <div class="vrow"><div class="thumb"><img src="img/end_tekkageta.png" alt="" onerror="this.remove()"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M4 18 Q4 12 9 11 L15 9 Q19 8 20 12 L20 16 Q20 18 18 18 Z"/></svg></div><div class="vinfo"><div class="vno">鉄下駄</div><div class="vtxt">実戦値未公表・参考値のみ</div><span class="badge b-ref">判別未使用</span></div><div class="stepper"><div class="sbtn" data-key="end_tekkageta" data-d="-1">－</div><div class="sval" id="sv-end_tekkageta">0</div><div class="sbtn" data-key="end_tekkageta" data-d="1">＋</div></div></div>
+      <div class="vrow"><div class="thumb" style="color:#ba7517;"><img src="img/end_shugo.png" alt="" onerror="this.remove()"><svg class="icon-svg" viewBox="0 0 24 24"><circle cx="7" cy="8" r="2.2"/><circle cx="12" cy="7" r="2.2"/><circle cx="17" cy="8" r="2.2"/><path d="M3 20 Q3 14 7 14 Q9 14 9 17"/><path d="M9 20 Q9 13 12 13 Q15 13 15 20"/><path d="M15 17 Q15 14 17 14 Q21 14 21 20"/></svg></div><div class="vinfo"><div class="vno">集合</div><div class="vtxt">設定6で出やすい</div><span class="badge b-high">高設定示唆</span></div><div class="stepper"><div class="sbtn" data-key="end_shugo" data-d="-1">－</div><div class="sval" id="sv-end_shugo">0</div><div class="sbtn" data-key="end_shugo" data-d="1">＋</div></div></div>
+      <div class="vrow"><div class="thumb" style="color:#e04040;"><img src="img/end_mizugi.png" alt="" onerror="this.remove()"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M2 12 Q6 8 10 12 Q14 16 18 12 Q20 10 22 12"/><path d="M2 17 Q6 13 10 17 Q14 21 18 17 Q20 15 22 17"/></svg></div><div class="vinfo"><div class="vno">水着</div><div class="vtxt">設定6のみ確認例あり</div><span class="badge b-kakutei">設定6濃厚</span></div><div class="stepper"><div class="sbtn" data-key="end_mizugi" data-d="-1">－</div><div class="sval" id="sv-end_mizugi">0</div><div class="sbtn" data-key="end_mizugi" data-d="1">＋</div></div></div>
     </div>
     <button class="calcbtn" data-action="calc">計算して結果を見る →</button>
   </div>
@@ -536,7 +525,8 @@ const S={
   bell:0,
   item_shobuyumi:0,item_miyama:0,item_kokichi:0,item_chukichi:0,item_daikichi:0,
   item_tsuranuki:0,item_mumeitanju:0,item_jiketsu:0,item_kurusukatana:0,item_mumeikendama:0,
-  v1:0,v2:0,v3:0,v4:0,v5:0,v6:0,v7:0,v8:0,v9:0,v10:0,v11:0,v12:0,v13:0,v14:0,v15:0,v16:0,v17:0,v18:0,v19:0,v_none:0,
+  v3:0,v17:0,v18:0,v19:0,v_none:0,
+  v_female_even:0,v_male_odd:0,v_mumei_shukon:0,v_shobu_omanju:0,v_ikoma_ore:0,v_kurusu_anoyo:0,
   ch_female:0,ch_male:0,ch_mibu:0,
   end_tekkageta:0,end_shugo:0,end_mizugi:0,
   tr_do:0,tr_gin:0,tr_kin:0,tr_kirin:0,tr_niji:0,
@@ -768,7 +758,7 @@ document.body.addEventListener('click',function(e){
     if(act.dataset.action==='reset'){
       ['bell','item_shobuyumi','item_miyama','item_kokichi','item_chukichi','item_daikichi',
        'item_tsuranuki','item_mumeitanju','item_jiketsu','item_kurusukatana','item_mumeikendama',
-       'v1','v2','v3','v4','v5','v6','v7','v8','v9','v10','v11','v12','v13','v14','v15','v16','v17','v18','v19','v_none',
+       'v3','v17','v18','v19','v_none','v_female_even','v_male_odd','v_mumei_shukon','v_shobu_omanju','v_ikoma_ore','v_kurusu_anoyo',
        'ch_female','ch_male','ch_mibu','end_tekkageta','end_shugo','end_mizugi',
        'tr_do','tr_gin','tr_kin','tr_kirin','tr_niji','renda44','renda55','renda66','renda77','win456','win666'
       ].forEach(k=>{S[k]=0;const el=document.getElementById('sv-'+k);if(el)el.textContent='0';});
@@ -1133,15 +1123,9 @@ document.addEventListener('input',function(e){
 //  ※「低設定/設定4/設定5/設定6」等の粗い区分は 1-2-3 / 4 / 5 / 6 に割付（冒頭コメント参照）
 // ================================================================================
 const VSEL={
-  mumei_even:        [0.085,0.100,0.080,0.090,0.075,0.080],
-  mumei_even_strong: [0.010,0.015,0.005,0.015,0.005,0.025],
+  female_even:       [0.085,0.100,0.0725,0.090,0.070,0.080], // 女性ボイス（偶数示唆・無名+菖蒲系の平均値）
   mumei_kakutei2:    [0.000,0.005,0.005,0.005,0.005,0.005],
-  shobu_even:        [0.085,0.100,0.065,0.090,0.065,0.080],
-  shobu_even_strong: [0.010,0.015,0.005,0.020,0.005,0.025],
-  ikoma_odd:         [0.070,0.055,0.080,0.055,0.070,0.055],
-  ikoma_odd_strong:  [0.010,0.010,0.025,0.010,0.025,0.010],
-  kurusu_odd:        [0.070,0.055,0.080,0.055,0.070,0.055],
-  kurusu_odd_strong: [0.010,0.010,0.025,0.010,0.025,0.010],
+  male_odd:          [0.070,0.055,0.080,0.055,0.070,0.055],  // 男性ボイス（設定3・5示唆・生駒+来栖系）
   kageyuki_weak:     [0.100,0.100,0.100,0.130,0.145,0.160],
   kageyuki_mid:      [0.010,0.010,0.010,0.020,0.020,0.020],
   kageyuki_strong:   [0.005,0.005,0.005,0.010,0.010,0.010],
@@ -1165,10 +1149,9 @@ const VSEL={
 };
 function getCat(key){
   const map={
-    v1:'mumei_even',v2:'mumei_even_strong',v3:'mumei_kakutei2',
-    v4:'shobu_even',v5:'shobu_even',v6:'shobu_even',v7:'shobu_even',v8:'shobu_even_strong',
-    v9:'ikoma_odd',v10:'ikoma_odd',v11:'ikoma_odd',v12:'ikoma_odd',v13:'ikoma_odd_strong',
-    v14:'kurusu_odd',v15:'kurusu_odd',v16:'kurusu_odd_strong',
+    v3:'mumei_kakutei2',
+    v_female_even:'female_even',v_mumei_shukon:'female_even',v_shobu_omanju:'female_even',
+    v_male_odd:'male_odd',v_ikoma_ore:'male_odd',v_kurusu_anoyo:'male_odd',
     v17:'kageyuki_weak',v18:'kageyuki_mid',v19:'kageyuki_strong',v_none:'voice_none',
     ch_female:'ch_female',ch_male:'ch_male',ch_mibu:'ch_mibu',
     end_shugo:'end_shugo',end_mizugi:'end_mizugi',
@@ -1180,7 +1163,7 @@ function getCat(key){
   return map[key]||null;
 }
 // no-rotScale カテゴリ（偶奇ボイス・キャラ紹介：サンプル数に関係なく序盤から満額の重み）
-const NO_ROTSCALE_CATS=new Set(['mumei_even','mumei_even_strong','shobu_even','shobu_even_strong','ikoma_odd','ikoma_odd_strong','kurusu_odd','kurusu_odd_strong','ch_female','ch_male','ch_mibu']);
+const NO_ROTSCALE_CATS=new Set(['female_even','male_odd','ch_female','ch_male','ch_mibu']);
 // カテゴリ別の重みティア（アイテムくじの精度差を反映）
 const CAT_WEIGHT_TIER={
   item_shobuyumi:0.7, item_kokichi:0.7,           // 高：設定差が明確
@@ -1188,10 +1171,10 @@ const CAT_WEIGHT_TIER={
   item_kurusukatana:0.08, item_mumeikendama:0.08, // 最小：判別価値ほぼ無し
 };
 // 確定示唆系（VSELの数値も併用。常にフル・rotScaleなし）
-const KAKUTEI_CATS=new Set(['mumei_kakutei2','end_mizugi','item_chukichi','item_daikichi']);
+const KAKUTEI_CATS=new Set(['mumei_kakutei2','voice_none','end_mizugi','item_chukichi','item_daikichi']);
 // ハードクリップ（Sキー直指定・数値データの有無に関わらず、しきい値未満の設定を強制除外）
 const HARD_CLIP_RULES=[
-  ['v3',2],['end_mizugi',6],['item_kokichi',2],['item_chukichi',4],['item_daikichi',6],
+  ['v3',2],['v_none',5],['end_mizugi',6],['item_kokichi',2],['item_chukichi',4],['item_daikichi',6],
   ['tr_do',2],['tr_gin',3],['tr_kin',4],['tr_kirin',5],['tr_niji',6],
   ['renda44',4],['renda55',5],['renda66',6],['renda77',6],
   ['win456',4],['win666',6],
@@ -1423,7 +1406,7 @@ function calc(){
 
   // アラート（ハードクリップ系が出た項目を自動表示）
   const CLIP_LABEL={
-    v3:'無名ボイス「設定2以上確定」', end_mizugi:'ST終了画面「水着」',
+    v3:'無名ボイス「設定2以上確定」', v_none:'ボイスなし', end_mizugi:'ST終了画面「水着」',
     item_kokichi:'アイテムくじ「小吉」', item_chukichi:'アイテムくじ「中吉」', item_daikichi:'アイテムくじ「大吉」',
     tr_do:'銅トロフィー', tr_gin:'銀トロフィー', tr_kin:'金トロフィー', tr_kirin:'キリン柄トロフィー', tr_niji:'虹トロフィー',
     renda44:'連打+44', renda55:'連打+55', renda66:'連打+66', renda77:'連打+77',
