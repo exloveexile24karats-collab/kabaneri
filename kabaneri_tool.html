@@ -5,250 +5,418 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="カバネリ判別">
-<meta name="theme-color" content="#0f0f14">
-<link rel="apple-touch-icon" href="data:image/jpeg;base64,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">
-<title>カバネリ海門決戦 設定判別</title>
+<meta name="apple-mobile-web-app-title" content="海門決戦 設定判別">
+<meta name="theme-color" content="#0a0a0a">
+<title>甲鉄城のカバネリ 海門決戦 設定判別</title>
+
+<!--
+================================================================================
+  カバネリ海門決戦 設定判別アプリ（リニューアル版 v7）
+================================================================================
+  引き継ぎ指示書に基づき、汎用テンプレートをベースに全面リニューアル。
+
+  【このファイルで採用した前提・簡略化について】
+  引き継ぎ資料の実戦値テーブルの一部は「低設定／設定4／設定5／設定6」
+  「低設定／設定4以上／設定5以上／設定6」という粗い区分でしか与えられて
+  いません。設定1〜6全てで個別の値が必要なベイズ計算のため、以下のルールで
+  6段階に割り付けています（実データが手に入り次第、VSEL/各種テーブルの
+  数値を書き換えてください）。
+    ・「低設定」表記 → 設定1・2・3に同じ値を適用
+    ・「設定4以上」→ 設定4に適用／「設定5以上」→ 設定5に適用／「設定6」→設定6
+  トロフィー（銅・銀・金・キリン・虹）、連打枚数（+44〜+77）、獲得枚数
+  （456枚・666枚OVER）、鉄下駄画面、下段ベル確率は実戦値の公表元が
+  無かったため、カウンターとしては実装しましたが判別計算には未使用です
+  （虹トロフィーのみ「高設定示唆」の参考アラートとして表示）。
+  ボーナス当選G数分布・ST当選G数分布・上位ST獲得枚数の「駆け抜け後／
+  下位ST後／上位ST後」の区分は実戦メモ集計のデータ分析欄に表示のみ行い、
+  判別計算には（複雑になりすぎるため）反映していません。
+================================================================================
+-->
+
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:rgba(0,0,0,0);}
-html,body{background:#0f0f14;color:#f0eee8;font-family:-apple-system,'Hiragino Sans',sans-serif;min-height:100vh;}
-body{padding-bottom:100px;}
-.header{background:#0f0f14;border-bottom:1px solid rgba(255,255,255,0.1);padding:12px 14px;padding-top:calc(12px + env(safe-area-inset-top,0px));position:sticky;top:0;z-index:999;}
+html,body{background:#0a0a0a;color:#f0eee8;font-family:-apple-system,'Hiragino Sans',sans-serif;min-height:100vh;}
+body{padding-bottom:150px;}
+:root{--accent:#c9a84c;--accent2:#e0c274;}
+
+.header{background:#0a0a0a;border-bottom:1px solid rgba(255,255,255,0.1);padding:12px 14px;padding-top:calc(12px + env(safe-area-inset-top,0px));position:sticky;top:0;z-index:999;}
 .header-inner{display:flex;align-items:center;gap:10px;}
-.hicon{width:36px;height:36px;border-radius:9px;overflow:hidden;flex-shrink:0;}
-.hicon img{width:100%;height:100%;object-fit:cover;}
+.hicon{width:36px;height:36px;background:var(--accent);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
 .htitle{font-size:15px;font-weight:700;}
 .hsub{font-size:10px;color:#a09e96;margin-top:1px;}
-.tabs{display:flex;background:#1a1a24;border-bottom:1px solid rgba(255,255,255,0.1);overflow-x:auto;-webkit-overflow-scrolling:touch;}
+
+.tabs{display:flex;background:#141414;border-bottom:1px solid rgba(255,255,255,0.1);overflow-x:auto;-webkit-overflow-scrolling:touch;}
 .tabs::-webkit-scrollbar{display:none;}
-.tab{flex:1;min-width:64px;padding:11px 4px;font-size:10px;font-weight:600;color:#555;text-align:center;border-bottom:2px solid transparent;cursor:pointer;white-space:nowrap;touch-action:manipulation;}
-.tab.on{color:#e85d2f;border-bottom-color:#e85d2f;}
+.tab{flex:1;min-width:76px;padding:12px 6px;font-size:11px;font-weight:600;color:#555;text-align:center;border-bottom:2px solid transparent;cursor:pointer;white-space:nowrap;}
+.tab.on{color:var(--accent);border-bottom-color:var(--accent);}
+
+.subtabs{display:flex;background:#101010;border-bottom:1px solid rgba(255,255,255,0.07);overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.subtabs::-webkit-scrollbar{display:none;}
+.subtab{flex:0 0 auto;padding:9px 14px;font-size:11px;font-weight:600;color:#666;border-bottom:2px solid transparent;cursor:pointer;white-space:nowrap;}
+.subtab.on{color:var(--accent2);border-bottom-color:var(--accent2);}
+
 .page{display:none;padding-bottom:20px;}
 .page.on{display:block;}
-.card{background:#1e1e2a;margin:12px 12px 0;border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,0.07);}
+.subpage{display:none;}
+.subpage.on{display:block;}
+
+.card{background:#161616;margin:12px 12px 0;border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,0.07);}
 .ctitle{font-size:10px;font-weight:700;color:#555;text-transform:uppercase;letter-spacing:.1em;padding:10px 14px;border-bottom:1px solid rgba(255,255,255,0.07);}
-.irow{display:flex;align-items:center;padding:10px 14px;border-bottom:1px solid rgba(255,255,255,0.07);gap:10px;min-height:52px;}
+.irow{display:flex;align-items:center;padding:11px 14px;border-bottom:1px solid rgba(255,255,255,0.07);gap:10px;min-height:56px;}
 .irow:last-child{border-bottom:none;}
 .ilabel{flex:1;font-size:13px;line-height:1.4;}
 .ilabel small{font-size:10px;color:#888;display:block;margin-top:2px;}
-.ifield{background:#252535;border:1px solid rgba(255,255,255,0.1);border-radius:9px;color:#f0eee8;font-size:16px;font-weight:600;text-align:right;padding:8px 12px;width:90px;-webkit-appearance:none;}
-.ifield:focus{outline:2px solid #e85d2f;}
-.stepper{display:flex;align-items:center;background:#252535;border-radius:10px;overflow:hidden;border:1px solid rgba(255,255,255,0.1);}
-.sbtn{width:42px;height:42px;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:300;color:#aaa;cursor:pointer;user-select:none;-webkit-user-select:none;flex-shrink:0;touch-action:manipulation;}
+.ifield{background:#1c1c1c;border:1px solid rgba(255,255,255,0.1);border-radius:9px;color:#f0eee8;font-size:16px;font-weight:600;text-align:right;padding:8px 12px;width:96px;-webkit-appearance:none;}
+.ifield:focus{outline:2px solid var(--accent);border-color:transparent;}
+.stepper{display:flex;align-items:center;background:#1c1c1c;border-radius:10px;overflow:hidden;border:1px solid rgba(255,255,255,0.1);flex-shrink:0;}
+.sbtn{width:40px;height:40px;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:300;color:#aaa;cursor:pointer;user-select:none;-webkit-user-select:none;flex-shrink:0;touch-action:manipulation;}
 .sbtn:active{background:rgba(232,93,47,0.35);color:#fff;}
-.sval{min-width:36px;text-align:center;font-size:15px;font-weight:700;color:#f0eee8;padding:0 4px;}
-.auto-val{font-size:16px;font-weight:700;color:#f0eee8;padding:8px 12px;background:#252535;border-radius:9px;min-width:60px;text-align:center;}
-.vgroup{font-size:11px;font-weight:700;color:#aaa;padding:7px 14px 4px;background:#161622;border-bottom:1px solid rgba(255,255,255,0.07);}
-.vrow{display:flex;align-items:center;padding:8px 14px;border-bottom:1px solid rgba(255,255,255,0.07);gap:10px;min-height:56px;}
+.sval{min-width:34px;text-align:center;font-size:15px;font-weight:700;color:#f0eee8;padding:0 2px;}
+.vgroup{font-size:11px;font-weight:700;color:#aaa;padding:8px 14px 5px;background:#111111;border-bottom:1px solid rgba(255,255,255,0.07);}
+.vrow{display:flex;align-items:center;padding:9px 14px;border-bottom:1px solid rgba(255,255,255,0.07);gap:10px;min-height:56px;}
 .vrow:last-child{border-bottom:none;}
 .vinfo{flex:1;min-width:0;}
-.vno{font-size:10px;color:#555;margin-bottom:1px;}
+.vno{font-size:10px;color:#555;margin-bottom:2px;}
 .vtxt{font-size:12px;line-height:1.4;}
-.badge{display:inline-block;font-size:9px;font-weight:700;padding:2px 6px;border-radius:4px;margin-top:3px;}
-.bf{color:#4a9ede;background:rgba(74,158,222,0.15);}
-.bm{color:#5aaa30;background:rgba(90,170,48,0.15);}
-.bkw{color:#c4880a;background:rgba(196,136,10,0.15);}
-.bkm{color:#d4602a;background:rgba(212,96,42,0.15);}
-.bks{color:#e04040;background:rgba(224,64,64,0.15);}
-.bn{color:#8878d0;background:rgba(136,120,208,0.15);}
-.bno{color:#888;background:rgba(136,136,136,0.15);}
-.bhi{color:#e04040;background:rgba(224,64,64,0.15);}
-.calcbtn{display:block;width:calc(100% - 24px);margin:14px 12px 0;padding:15px;background:#e85d2f;color:#fff;font-size:15px;font-weight:800;border:none;border-radius:13px;cursor:pointer;text-align:center;touch-action:manipulation;}
+.badge{display:inline-block;font-size:9px;font-weight:700;padding:2px 7px;border-radius:4px;margin-top:4px;}
+.b-high{color:#e04040;background:rgba(224,64,64,0.15);}
+.b-even{color:#4a9ede;background:rgba(74,158,222,0.15);}
+.b-odd{color:#5aaa30;background:rgba(90,170,48,0.15);}
+.b-s6{color:#e04040;background:rgba(224,64,64,0.15);}
+.b-kakutei{color:#8878d0;background:rgba(136,120,208,0.15);}
+.b-ref{color:#888;background:rgba(136,136,136,0.15);}
+
+.calcbtn{display:block;width:calc(100% - 24px);margin:14px 12px 0;padding:16px;background:var(--accent);color:#fff;font-size:15px;font-weight:800;border:none;border-radius:13px;cursor:pointer;text-align:center;touch-action:manipulation;}
 .calcbtn:active{opacity:.8;}
-.resetbtn{display:block;width:calc(100% - 24px);margin:10px 12px 0;padding:12px;background:#252535;color:#888;font-size:13px;font-weight:600;border:none;border-radius:11px;cursor:pointer;text-align:center;touch-action:manipulation;}
-.result-card{background:#1e1e2a;margin:12px 12px 0;border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,0.07);display:none;}
+.resetbtn{display:block;width:calc(100% - 24px);margin:10px 12px 0;padding:13px;background:#1c1c1c;color:#888;font-size:13px;font-weight:600;border:none;border-radius:11px;cursor:pointer;text-align:center;touch-action:manipulation;}
+.resetbtn:active{opacity:.7;}
+.actbtn{flex:1;padding:13px 8px;background:#1c1c1c;border:1px solid rgba(255,255,255,0.1);color:#f0eee8;font-size:13px;font-weight:700;border-radius:11px;cursor:pointer;text-align:center;touch-action:manipulation;}
+.actbtn:active{background:rgba(232,93,47,0.3);}
+.actbtn.primary{background:var(--accent);border-color:var(--accent);color:#fff;}
+.actrow{display:flex;gap:8px;padding:12px 14px;flex-wrap:wrap;}
+
+.result-card{background:#161616;margin:12px 12px 0;border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,0.07);display:none;}
 .result-card.show{display:block;}
-.brow{display:flex;align-items:center;padding:6px 14px;gap:8px;}
+.brow{display:flex;align-items:center;padding:7px 14px;gap:8px;}
 .blabel{width:44px;font-size:12px;font-weight:700;text-align:right;}
-.btrack{flex:1;height:22px;background:#252535;border-radius:5px;overflow:hidden;}
-.bfill{height:100%;border-radius:5px;display:flex;align-items:center;justify-content:flex-end;padding-right:7px;transition:width .7s cubic-bezier(.4,0,.2,1);}
+.btrack{flex:1;height:24px;background:#1c1c1c;border-radius:6px;overflow:hidden;}
+.bfill{height:100%;border-radius:6px;display:flex;align-items:center;justify-content:flex-end;padding-right:8px;transition:width .7s cubic-bezier(.4,0,.2,1);}
 .bpct{font-size:10px;font-weight:800;color:#fff;}
-.bnum{width:32px;font-size:11px;color:#888;text-align:right;}
-.vbox{padding:11px 14px;border-top:1px solid rgba(255,255,255,0.07);}
-.vmain{font-size:15px;font-weight:800;margin-bottom:7px;}
-.vtags{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:7px;}
-.vtag{font-size:10px;font-weight:700;padding:3px 8px;border-radius:5px;}
+.bnum{width:34px;font-size:11px;color:#888;text-align:right;}
+.vbox{padding:12px 14px;border-top:1px solid rgba(255,255,255,0.07);}
+.vmain{font-size:16px;font-weight:800;margin-bottom:8px;}
+.vtags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:8px;}
+.vtag{font-size:10px;font-weight:700;padding:3px 9px;border-radius:5px;}
 .thi{color:#1d9e75;background:rgba(29,158,117,.15);}
 .tlo{color:#e24b4a;background:rgba(226,75,74,.15);}
 .tev{color:#378add;background:rgba(55,138,221,.15);}
 .tod{color:#ba7517;background:rgba(186,117,23,.15);}
-.tnn{color:#888;background:#252535;}
-.vmsg{font-size:12px;color:#bbb;line-height:1.6;}
-.alert{margin:8px 12px 0;padding:10px 14px;border-radius:11px;font-size:12px;line-height:1.6;}
+.vmsg{font-size:13px;color:#bbb;line-height:1.6;}
+.alert{margin:8px 12px 0;padding:11px 14px;border-radius:11px;font-size:12px;line-height:1.6;}
 .aok{color:#1d9e75;background:rgba(29,158,117,.12);border:1px solid rgba(29,158,117,.25);}
 .awk{color:#ba7517;background:rgba(186,117,23,.12);border:1px solid rgba(186,117,23,.25);}
-.chips{padding:10px 14px;display:flex;flex-wrap:wrap;gap:5px;}
-.chip{font-size:10px;padding:3px 8px;border-radius:5px;background:#252535;color:#888;}
-.gcard{background:#1e1e2a;margin:12px 12px 0;border-radius:14px;padding:14px;border:1px solid rgba(255,255,255,0.07);}
-.gcard h3{font-size:13px;font-weight:800;color:#f5a623;margin-bottom:10px;}
-.gstep{display:flex;gap:10px;align-items:flex-start;margin-bottom:10px;}
-.gno{width:22px;height:22px;border-radius:50%;background:#e85d2f;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.gtxt{font-size:12px;color:#aaa;line-height:1.7;flex:1;}
-.gtxt strong{color:#f0eee8;}
-.gnote li{font-size:11px;color:#666;line-height:1.8;margin-left:14px;}
-.dnote{font-size:10px;color:#555;margin:10px 12px 0;padding:10px 14px;background:#1e1e2a;border-radius:10px;line-height:1.7;border:1px solid rgba(255,255,255,0.05);}
-.ktbl{font-size:11px;color:#aaa;padding:10px 14px 12px;line-height:2;}
-.ktbl strong{color:#f0eee8;}
-.ztag{display:inline-block;font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;background:rgba(55,138,221,.15);color:#378add;margin-left:6px;}
+.chips{padding:10px 14px;display:flex;flex-wrap:wrap;gap:6px;}
+.chip{font-size:10px;padding:4px 9px;border-radius:5px;background:#1c1c1c;color:#888;}
+.dnote{font-size:10px;color:#555;margin:10px 12px 0;padding:10px 14px;background:#161616;border-radius:10px;line-height:1.7;border:1px solid rgba(255,255,255,0.05);}
+
+/* 実戦メモ */
+.wizstep{padding:14px;}
+.wizq{font-size:13px;font-weight:700;color:#ddd;margin-bottom:10px;}
+.optgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+.optgrid.c2{grid-template-columns:repeat(2,1fr);}
+.optbtn{padding:14px 6px;background:#1c1c1c;border:1px solid rgba(255,255,255,0.1);border-radius:11px;color:#f0eee8;font-size:13px;font-weight:700;text-align:center;cursor:pointer;touch-action:manipulation;}
+.optbtn:active{background:rgba(232,93,47,0.35);border-color:var(--accent);}
+.wiznum{padding:14px;}
+.wiznum input{width:100%;background:#1c1c1c;border:1px solid rgba(255,255,255,0.1);border-radius:11px;color:#f0eee8;font-size:20px;font-weight:700;text-align:center;padding:14px;-webkit-appearance:none;}
+.wizhead{display:flex;align-items:center;justify-content:space-between;padding:10px 14px 0;}
+.wizback{font-size:11px;color:#888;cursor:pointer;padding:4px 8px;}
+.wizprog{font-size:10px;color:#555;}
+.histlist{padding:6px 0;}
+.hitem{padding:9px 14px;border-bottom:1px solid rgba(255,255,255,0.06);font-size:12px;line-height:1.6;color:#ccc;display:flex;justify-content:space-between;gap:8px;align-items:center;}
+.hitem .hno{color:#555;font-size:10px;min-width:26px;}
+.hitem .hdel{color:#e24b4a;font-size:11px;padding:4px 8px;cursor:pointer;flex-shrink:0;}
+.hdiv{text-align:center;font-size:10px;color:var(--accent2);font-weight:700;padding:8px 0;background:#111111;letter-spacing:.1em;}
+.hres-win{color:#1d9e75;font-weight:700;}
+.hres-lose{color:#666;}
+
+/* トグルスイッチ（確定示唆系） */
+.toggle{width:50px;height:28px;border-radius:14px;background:#1c1c1c;border:1px solid rgba(255,255,255,0.12);position:relative;cursor:pointer;flex-shrink:0;touch-action:manipulation;transition:background .2s;}
+.toggle.on{background:var(--accent);border-color:var(--accent);}
+.toggle .knob{position:absolute;top:2px;left:2px;width:22px;height:22px;border-radius:50%;background:#f0eee8;transition:left .2s;}
+.toggle.on .knob{left:24px;}
+.togwrap{display:flex;align-items:center;gap:8px;flex-shrink:0;}
+.togcount{font-size:11px;font-weight:700;color:var(--accent2);min-width:18px;text-align:center;}
+
+/* CZポイントバー */
+.czbar-wrap{padding:0 14px 11px;}
+.czbar-track{height:8px;background:#1c1c1c;border-radius:4px;overflow:hidden;margin-top:6px;}
+.czbar-fill{height:100%;background:var(--accent);border-radius:4px;transition:width .3s;}
+
+/* 下部固定バー */
+.bottombar{position:fixed;left:0;right:0;bottom:0;background:#0a0a0a;border-top:1px solid rgba(255,255,255,0.1);padding:8px 12px calc(8px + env(safe-area-inset-bottom,0px));display:flex;align-items:center;gap:10px;z-index:998;}
+.bb-stat{flex:1;min-width:0;}
+.bb-label{font-size:9px;color:#666;text-transform:uppercase;letter-spacing:.05em;}
+.bb-val{font-size:14px;font-weight:800;color:#f0eee8;}
+.bb-addbtn{width:46px;height:46px;border-radius:50%;background:var(--accent);color:#0a0a0a;font-size:24px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer;touch-action:manipulation;}
+.bb-addbtn:active{opacity:.8;}
+.thumb{width:30px;height:30px;border-radius:8px;background:#1c1c1c;border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;margin-right:2px;}
+
+/* CZポイントトラッカー */
+.pttrack{background:#161616;border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,0.1);margin:12px 12px 0;}
+.pthead{display:flex;align-items:center;justify-content:space-between;padding:12px 14px 2px;}
+.ptname{font-size:13px;font-weight:800;}
+.ptval{font-size:24px;font-weight:800;padding:2px 14px 0;color:#f0eee8;}
+.ptbar-track{height:8px;background:#1c1c1c;border-radius:4px;margin:8px 14px;overflow:hidden;}
+.ptbar-fill{height:100%;border-radius:4px;transition:width .3s;}
+.ptbtns{display:flex;gap:6px;padding:8px 14px;flex-wrap:wrap;}
+.ptbtn{flex:1;min-width:56px;background:#1c1c1c;border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:11px 4px;text-align:center;font-size:11px;font-weight:700;color:#ccc;cursor:pointer;touch-action:manipulation;}
+.ptbtn:active{background:rgba(201,168,76,0.3);}
+.ptenter{background:var(--accent);color:#0a0a0a;font-weight:800;border:none;}
+
+/* 下部ナビ（戻る/進む/遊技データ/＋） */
+.navbtn{width:44px;height:44px;border-radius:50%;background:#1c1c1c;border:1px solid rgba(255,255,255,0.1);color:#aaa;font-size:18px;display:flex;align-items:center;justify-content:center;cursor:pointer;touch-action:manipulation;flex-shrink:0;}
+.navbtn:active{background:rgba(201,168,76,0.25);}
+.navbtn.disabled{opacity:.35;pointer-events:none;}
+.gamedatabtn{flex:1;height:44px;border-radius:22px;background:#1c1c1c;border:1px solid rgba(255,255,255,0.1);color:#f0eee8;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:6px;cursor:pointer;touch-action:manipulation;}
+.gamedatabtn:active{background:rgba(201,168,76,0.2);}
+
+/* 遊技データ モーダル（ボトムシート） */
+.sheet-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:1000;display:none;}
+.sheet-overlay.show{display:block;}
+.sheet{position:fixed;left:0;right:0;bottom:0;max-height:88vh;overflow-y:auto;background:#111111;border-top-left-radius:20px;border-top-right-radius:20px;border-top:1px solid rgba(255,255,255,0.1);z-index:1001;display:none;padding-bottom:calc(20px + env(safe-area-inset-bottom,0px));}
+.sheet.show{display:block;}
+.sheet-head{display:flex;align-items:center;justify-content:space-between;padding:16px 16px 8px;position:sticky;top:0;background:#111111;}
+.sheet-title{font-size:15px;font-weight:800;display:flex;align-items:center;gap:8px;}
+.sheet-close{width:32px;height:32px;border-radius:50%;background:#1c1c1c;display:flex;align-items:center;justify-content:center;color:#aaa;font-size:16px;cursor:pointer;}
+.gd-row{padding:12px 16px;border-bottom:1px solid rgba(255,255,255,0.06);}
+.gd-label{font-size:12px;font-weight:700;color:#ccc;display:flex;align-items:center;gap:6px;margin-bottom:8px;}
+.gd-sub{font-size:10px;color:#666;margin-left:auto;font-weight:400;}
+.gd-inline{display:flex;align-items:center;gap:8px;}
+.gd-num{background:#1c1c1c;border:1px solid rgba(255,255,255,0.1);border-radius:8px;color:#f0eee8;font-size:14px;font-weight:600;text-align:center;padding:8px 6px;width:84px;-webkit-appearance:none;}
+.gd-arrow{color:#555;font-size:13px;}
+.gd-auto{font-size:13px;color:var(--accent2);font-weight:700;}
+.gd-note{font-size:10px;color:#555;margin-top:4px;}
+.gd-textarea{width:100%;background:#1c1c1c;border:1px solid rgba(255,255,255,0.1);border-radius:9px;color:#f0eee8;font-size:13px;padding:10px;min-height:60px;resize:vertical;}
+.gd-calcbtn{display:block;width:100%;padding:15px;background:var(--accent);color:#0a0a0a;font-size:14px;font-weight:800;border:none;border-radius:12px;cursor:pointer;text-align:center;margin-top:6px;}
 </style>
 </head>
 <body>
 
 <div class="header">
   <div class="header-inner">
-    <div class="hicon"><img src="data:image/jpeg;base64,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" alt="カバネリ"></div>
+    <div class="hicon">⛩️</div>
     <div>
-      <div class="htitle">カバネリ海門決戦 設定判別</div>
-      <div class="hsub">スマスロ 甲鉄城のカバネリ 海門（うなと）決戦</div>
+      <div class="htitle">甲鉄城のカバネリ 海門決戦</div>
+      <div class="hsub">設定判別ツール（リニューアル版）</div>
     </div>
   </div>
 </div>
 
 <div class="tabs" id="tabs">
-  <div class="tab on" onclick="showTab('p-basic',this)">基本</div>
-  <div class="tab" onclick="showTab('p-voice',this)">ボイス</div>
-  <div class="tab" onclick="showTab('p-chara',this)">キャラ</div>
-  <div class="tab" onclick="showTab('p-cycle',this)">周期</div>
-  <div class="tab" onclick="showTab('p-演出',this)">演出</div>
-  <div class="tab" onclick="showTab('p-result',this)">結果</div>
-  <div class="tab" onclick="showTab('p-guide',this)">使い方</div>
+  <div class="tab on" onclick="showTab('p-normal',this)">通常時</div>
+  <div class="tab" onclick="showTab('p-st',this)">ST中</div>
+  <div class="tab" onclick="showTab('p-memo',this)">実戦メモ</div>
+  <div class="tab" onclick="showTab('p-result',this)">判別結果</div>
 </div>
 
-<!-- 基本データ -->
-<div id="p-basic" class="page on">
+<!-- ============ 通常時 ============ -->
+<div id="p-normal" class="page on">
+  <div class="subtabs" id="subtabs-normal">
+    <div class="subtab on" onclick="showSub2('n-czpt',this)">CZポイント</div>
+    <div class="subtab" onclick="showSub2('n-item',this)">アイテムくじ</div>
+  </div>
+
+  <div id="n-czpt" class="subpage on">
+    <div class="pttrack" style="border-color:rgba(224,64,64,0.35);">
+      <div class="pthead">
+        <div class="ptname" style="color:#e0a0a0;">🕶️ 無名 CZポイント</div>
+        <div style="display:flex;align-items:center;gap:6px;"><span style="font-size:11px;color:#888;">高確中</span><div class="toggle" id="tg-koukaku-mumei" onclick="toggleKoukaku('mumei')"><div class="knob"></div></div></div>
+      </div>
+      <div class="ptval" id="ptval-mumei">0<span style="font-size:12px;color:#666;"> pt</span></div>
+      <div class="ptbar-track"><div class="ptbar-fill" id="ptbar-mumei" style="width:0%;background:#c0392b;"></div></div>
+      <div class="ptbtns" id="ptbtns-mumei"></div>
+      <div class="ptbtns"><div class="ptbtn ptenter" onclick="czEnter('mumei')">無名 CZ突入</div></div>
+    </div>
+
+    <div class="pttrack" style="border-color:rgba(46,125,79,0.35);">
+      <div class="pthead">
+        <div class="ptname" style="color:#8fd6ac;">🎋 生駒 CZポイント</div>
+        <div style="display:flex;align-items:center;gap:6px;"><span style="font-size:11px;color:#888;">高確中</span><div class="toggle" id="tg-koukaku-ikoma" onclick="toggleKoukaku('ikoma')"><div class="knob"></div></div></div>
+      </div>
+      <div class="ptval" id="ptval-ikoma">0<span style="font-size:12px;color:#666;"> pt</span></div>
+      <div class="ptbar-track"><div class="ptbar-fill" id="ptbar-ikoma" style="width:0%;background:#2e7d4f;"></div></div>
+      <div class="ptbtns" id="ptbtns-ikoma"></div>
+      <div class="ptbtns"><div class="ptbtn ptenter" onclick="czEnter('ikoma')">生駒 CZ突入</div></div>
+    </div>
+
+    <div class="card">
+      <div class="ctitle">銅藍CZ突入<span style="text-transform:none;color:#666;">（経由元を選択）</span></div>
+      <div class="ptbtns" style="padding:12px 14px;">
+        <div class="ptbtn" style="background:rgba(192,57,43,0.25);" onclick="czEnter('dourin','mumei')">無名CZ経由</div>
+        <div class="ptbtn" style="background:rgba(46,125,79,0.25);" onclick="czEnter('dourin','ikoma')">生駒CZ経由</div>
+      </div>
+      <div class="dnote" style="margin:0 14px 12px;">無名・生駒どちらかが規定pt到達し、もう片方も条件を満たした場合に銅藍CZへ格上げ。選んだ方のptはリセットされ、選ばなかった方のptは持ち越されます。</div>
+    </div>
+  </div>
+
+  <div id="n-item" class="subpage">
+    <div class="card">
+      <div class="ctitle">アイテムくじ記録</div>
+      <div class="irow"><div class="thumb">🏹</div><div class="ilabel">菖蒲の弓<small>設定差が最大級（重み高）</small></div>
+        <div class="stepper"><div class="sbtn" data-key="item_shobuyumi" data-d="-1">－</div><div class="sval" id="sv-item_shobuyumi">0</div><div class="sbtn" data-key="item_shobuyumi" data-d="1">＋</div></div>
+      </div>
+      <div class="irow"><div class="thumb">🦋</div><div class="ilabel">ミヤマカラスアゲハ<small>高設定示唆（強）</small></div>
+        <div class="stepper"><div class="sbtn" data-key="item_miyama" data-d="-1">－</div><div class="sval" id="sv-item_miyama">0</div><div class="sbtn" data-key="item_miyama" data-d="1">＋</div></div>
+      </div>
+      <div class="irow"><div class="thumb">🎐</div><div class="ilabel">小吉<small>設定2以上濃厚</small></div>
+        <div class="stepper"><div class="sbtn" data-key="item_kokichi" data-d="-1">－</div><div class="sval" id="sv-item_kokichi">0</div><div class="sbtn" data-key="item_kokichi" data-d="1">＋</div></div>
+      </div>
+      <div class="irow"><div class="ilabel">中吉<small>設定4以上確定</small></div>
+        <div class="stepper"><div class="sbtn" data-key="item_chukichi" data-d="-1">－</div><div class="sval" id="sv-item_chukichi">0</div><div class="sbtn" data-key="item_chukichi" data-d="1">＋</div></div>
+      </div>
+      <div class="irow"><div class="ilabel">大吉<small>設定6確定</small></div>
+        <div class="stepper"><div class="sbtn" data-key="item_daikichi" data-d="-1">－</div><div class="sval" id="sv-item_daikichi">0</div><div class="sbtn" data-key="item_daikichi" data-d="1">＋</div></div>
+      </div>
+      <div class="irow"><div class="thumb">🥋</div><div class="ilabel">ツラヌキ筒<small>設定4で出にくい</small></div>
+        <div class="stepper"><div class="sbtn" data-key="item_tsuranuki" data-d="-1">－</div><div class="sval" id="sv-item_tsuranuki">0</div><div class="sbtn" data-key="item_tsuranuki" data-d="1">＋</div></div>
+      </div>
+      <div class="irow"><div class="thumb">🔫</div><div class="ilabel">無名の短銃<small>設定3で出にくい</small></div>
+        <div class="stepper"><div class="sbtn" data-key="item_mumeitanju" data-d="-1">－</div><div class="sval" id="sv-item_mumeitanju">0</div><div class="sbtn" data-key="item_mumeitanju" data-d="1">＋</div></div>
+      </div>
+      <div class="irow"><div class="thumb">🎒</div><div class="ilabel">自決袋<small>設定1で出にくい</small></div>
+        <div class="stepper"><div class="sbtn" data-key="item_jiketsu" data-d="-1">－</div><div class="sval" id="sv-item_jiketsu">0</div><div class="sbtn" data-key="item_jiketsu" data-d="1">＋</div></div>
+      </div>
+      <div class="irow"><div class="thumb">🗡️</div><div class="ilabel">来栖の刀<small>判別価値ほぼ無し（重み最小）</small></div>
+        <div class="stepper"><div class="sbtn" data-key="item_kurusukatana" data-d="-1">－</div><div class="sval" id="sv-item_kurusukatana">0</div><div class="sbtn" data-key="item_kurusukatana" data-d="1">＋</div></div>
+      </div>
+      <div class="irow"><div class="thumb">🪀</div><div class="ilabel">無名のけん玉<small>判別価値ほぼ無し（重み最小）</small></div>
+        <div class="stepper"><div class="sbtn" data-key="item_mumeikendama" data-d="-1">－</div><div class="sval" id="sv-item_mumeikendama">0</div><div class="sbtn" data-key="item_mumeikendama" data-d="1">＋</div></div>
+      </div>
+    </div>
+    <button class="calcbtn" data-action="calc">計算して結果を見る →</button>
+  </div>
+</div>
+
+
+<!-- ============ ST中 ============ -->
+<div id="p-st" class="page">
+  <div class="subtabs" id="subtabs-st">
+    <div class="subtab on" onclick="showSub('s-voice',this)">ボイス</div>
+    <div class="subtab" onclick="showSub('s-chara',this)">キャラ紹介</div>
+    <div class="subtab" onclick="showSub('s-end',this)">ST終了画面</div>
+    <div class="subtab" onclick="showSub('s-trophy',this)">トロフィー</div>
+    <div class="subtab" onclick="showSub('s-renda',this)">連打枚数</div>
+    <div class="subtab" onclick="showSub('s-win',this)">獲得枚数</div>
+  </div>
+
+  <div id="s-voice" class="subpage on">
+    <div class="card">
+      <div class="vgroup">無名ボイス（偶数示唆）</div>
+      <div class="vrow"><div class="vinfo"><div class="vno">No.1</div><div class="vtxt">無名（偶数）</div><span class="badge b-even">偶数設定示唆</span></div><div class="stepper"><div class="sbtn" data-key="v1" data-d="-1">－</div><div class="sval" id="sv-v1">0</div><div class="sbtn" data-key="v1" data-d="1">＋</div></div></div>
+      <div class="vrow"><div class="vinfo"><div class="vno">No.2</div><div class="vtxt">無名（偶数強）予想</div><span class="badge b-even">偶数強示唆</span></div><div class="stepper"><div class="sbtn" data-key="v2" data-d="-1">－</div><div class="sval" id="sv-v2">0</div><div class="sbtn" data-key="v2" data-d="1">＋</div></div></div>
+      <div class="vrow"><div class="vinfo"><div class="vno">No.3</div><div class="vtxt">無名（設定2以上確定）</div><span class="badge b-kakutei">設定2以上確定</span></div><div class="stepper"><div class="sbtn" data-key="v3" data-d="-1">－</div><div class="sval" id="sv-v3">0</div><div class="sbtn" data-key="v3" data-d="1">＋</div></div></div>
+    </div>
+    <div class="card">
+      <div class="vgroup">菖蒲ボイス（偶数示唆）</div>
+      <div class="vrow"><div class="vinfo"><div class="vno">No.4</div><div class="vtxt">菖蒲（偶数）</div><span class="badge b-even">偶数設定示唆</span></div><div class="stepper"><div class="sbtn" data-key="v4" data-d="-1">－</div><div class="sval" id="sv-v4">0</div><div class="sbtn" data-key="v4" data-d="1">＋</div></div></div>
+      <div class="vrow"><div class="vinfo"><div class="vno">No.5</div><div class="vtxt">菖蒲（偶数）</div><span class="badge b-even">偶数設定示唆</span></div><div class="stepper"><div class="sbtn" data-key="v5" data-d="-1">－</div><div class="sval" id="sv-v5">0</div><div class="sbtn" data-key="v5" data-d="1">＋</div></div></div>
+      <div class="vrow"><div class="vinfo"><div class="vno">No.6</div><div class="vtxt">菖蒲（偶数）</div><span class="badge b-even">偶数設定示唆</span></div><div class="stepper"><div class="sbtn" data-key="v6" data-d="-1">－</div><div class="sval" id="sv-v6">0</div><div class="sbtn" data-key="v6" data-d="1">＋</div></div></div>
+      <div class="vrow"><div class="vinfo"><div class="vno">No.7</div><div class="vtxt">菖蒲（偶数）</div><span class="badge b-even">偶数設定示唆</span></div><div class="stepper"><div class="sbtn" data-key="v7" data-d="-1">－</div><div class="sval" id="sv-v7">0</div><div class="sbtn" data-key="v7" data-d="1">＋</div></div></div>
+      <div class="vrow"><div class="vinfo"><div class="vno">No.8</div><div class="vtxt">菖蒲（偶数強）予想</div><span class="badge b-even">偶数強示唆</span></div><div class="stepper"><div class="sbtn" data-key="v8" data-d="-1">－</div><div class="sval" id="sv-v8">0</div><div class="sbtn" data-key="v8" data-d="1">＋</div></div></div>
+    </div>
+    <div class="card">
+      <div class="vgroup">生駒ボイス（奇数示唆）</div>
+      <div class="vrow"><div class="vinfo"><div class="vno">No.9</div><div class="vtxt">生駒（奇数）</div><span class="badge b-odd">奇数設定示唆</span></div><div class="stepper"><div class="sbtn" data-key="v9" data-d="-1">－</div><div class="sval" id="sv-v9">0</div><div class="sbtn" data-key="v9" data-d="1">＋</div></div></div>
+      <div class="vrow"><div class="vinfo"><div class="vno">No.10</div><div class="vtxt">生駒（奇数）</div><span class="badge b-odd">奇数設定示唆</span></div><div class="stepper"><div class="sbtn" data-key="v10" data-d="-1">－</div><div class="sval" id="sv-v10">0</div><div class="sbtn" data-key="v10" data-d="1">＋</div></div></div>
+      <div class="vrow"><div class="vinfo"><div class="vno">No.11</div><div class="vtxt">生駒（奇数）</div><span class="badge b-odd">奇数設定示唆</span></div><div class="stepper"><div class="sbtn" data-key="v11" data-d="-1">－</div><div class="sval" id="sv-v11">0</div><div class="sbtn" data-key="v11" data-d="1">＋</div></div></div>
+      <div class="vrow"><div class="vinfo"><div class="vno">No.12</div><div class="vtxt">生駒（奇数）</div><span class="badge b-odd">奇数設定示唆</span></div><div class="stepper"><div class="sbtn" data-key="v12" data-d="-1">－</div><div class="sval" id="sv-v12">0</div><div class="sbtn" data-key="v12" data-d="1">＋</div></div></div>
+      <div class="vrow"><div class="vinfo"><div class="vno">No.13</div><div class="vtxt">生駒（奇数強）予想</div><span class="badge b-odd">奇数強示唆</span></div><div class="stepper"><div class="sbtn" data-key="v13" data-d="-1">－</div><div class="sval" id="sv-v13">0</div><div class="sbtn" data-key="v13" data-d="1">＋</div></div></div>
+    </div>
+    <div class="card">
+      <div class="vgroup">来栖ボイス（奇数示唆）</div>
+      <div class="vrow"><div class="vinfo"><div class="vno">No.14</div><div class="vtxt">来栖（奇数）</div><span class="badge b-odd">奇数設定示唆</span></div><div class="stepper"><div class="sbtn" data-key="v14" data-d="-1">－</div><div class="sval" id="sv-v14">0</div><div class="sbtn" data-key="v14" data-d="1">＋</div></div></div>
+      <div class="vrow"><div class="vinfo"><div class="vno">No.15</div><div class="vtxt">来栖（奇数）</div><span class="badge b-odd">奇数設定示唆</span></div><div class="stepper"><div class="sbtn" data-key="v15" data-d="-1">－</div><div class="sval" id="sv-v15">0</div><div class="sbtn" data-key="v15" data-d="1">＋</div></div></div>
+      <div class="vrow"><div class="vinfo"><div class="vno">No.16</div><div class="vtxt">来栖（奇数強）予想</div><span class="badge b-odd">奇数強示唆</span></div><div class="stepper"><div class="sbtn" data-key="v16" data-d="-1">－</div><div class="sval" id="sv-v16">0</div><div class="sbtn" data-key="v16" data-d="1">＋</div></div></div>
+    </div>
+    <div class="card">
+      <div class="vgroup">景之ボイス（高設定示唆・重み中／サンプル依存）</div>
+      <div class="vrow"><div class="vinfo"><div class="vno">No.17</div><div class="vtxt">景之弱</div><span class="badge b-high">高設定示唆(弱)</span></div><div class="stepper"><div class="sbtn" data-key="v17" data-d="-1">－</div><div class="sval" id="sv-v17">0</div><div class="sbtn" data-key="v17" data-d="1">＋</div></div></div>
+      <div class="vrow"><div class="vinfo"><div class="vno">No.18</div><div class="vtxt">景之中</div><span class="badge b-high">高設定示唆(中)</span></div><div class="stepper"><div class="sbtn" data-key="v18" data-d="-1">－</div><div class="sval" id="sv-v18">0</div><div class="sbtn" data-key="v18" data-d="1">＋</div></div></div>
+      <div class="vrow"><div class="vinfo"><div class="vno">No.19</div><div class="vtxt">景之強</div><span class="badge b-high">高設定示唆(強)</span></div><div class="stepper"><div class="sbtn" data-key="v19" data-d="-1">－</div><div class="sval" id="sv-v19">0</div><div class="sbtn" data-key="v19" data-d="1">＋</div></div></div>
+      <div class="vrow"><div class="vinfo"><div class="vno">No.20</div><div class="vtxt">ボイスなし</div><span class="badge b-high">高設定ほど出やすい</span></div><div class="stepper"><div class="sbtn" data-key="v_none" data-d="-1">－</div><div class="sval" id="sv-v_none">0</div><div class="sbtn" data-key="v_none" data-d="1">＋</div></div></div>
+    </div>
+    <button class="calcbtn" data-action="calc">計算して結果を見る →</button>
+  </div>
+
+  <div id="s-chara" class="subpage">
+    <div class="card">
+      <div class="ctitle">キャラ紹介（rotScaleなし・序盤から有効）</div>
+      <div class="vrow"><div class="vinfo"><div class="vno">女性キャラ</div><div class="vtxt">1〜3合計</div><span class="badge b-ref">設定6で出やすい傾向</span></div><div class="stepper"><div class="sbtn" data-key="ch_female" data-d="-1">－</div><div class="sval" id="sv-ch_female">0</div><div class="sbtn" data-key="ch_female" data-d="1">＋</div></div></div>
+      <div class="vrow"><div class="vinfo"><div class="vno">男性キャラ</div><div class="vtxt">4〜6合計</div><span class="badge b-ref">設定5で出やすい傾向</span></div><div class="stepper"><div class="sbtn" data-key="ch_male" data-d="-1">－</div><div class="sval" id="sv-ch_male">0</div><div class="sbtn" data-key="ch_male" data-d="1">＋</div></div></div>
+      <div class="vrow"><div class="vinfo"><div class="vno">美馬</div><div class="vtxt">低設定では未確認</div><span class="badge b-high">高設定示唆</span></div><div class="stepper"><div class="sbtn" data-key="ch_mibu" data-d="-1">－</div><div class="sval" id="sv-ch_mibu">0</div><div class="sbtn" data-key="ch_mibu" data-d="1">＋</div></div></div>
+    </div>
+    <button class="calcbtn" data-action="calc">計算して結果を見る →</button>
+  </div>
+
+  <div id="s-end" class="subpage">
+    <div class="card">
+      <div class="ctitle">ST終了画面</div>
+      <div class="vrow"><div class="vinfo"><div class="vno">鉄下駄</div><div class="vtxt">実戦値未公表・参考値のみ</div><span class="badge b-ref">判別未使用</span></div><div class="stepper"><div class="sbtn" data-key="end_tekkageta" data-d="-1">－</div><div class="sval" id="sv-end_tekkageta">0</div><div class="sbtn" data-key="end_tekkageta" data-d="1">＋</div></div></div>
+      <div class="vrow"><div class="vinfo"><div class="vno">集合</div><div class="vtxt">設定6で出やすい</div><span class="badge b-high">高設定示唆</span></div><div class="stepper"><div class="sbtn" data-key="end_shugo" data-d="-1">－</div><div class="sval" id="sv-end_shugo">0</div><div class="sbtn" data-key="end_shugo" data-d="1">＋</div></div></div>
+      <div class="vrow"><div class="vinfo"><div class="vno">水着</div><div class="vtxt">設定6のみ確認例あり</div><span class="badge b-kakutei">設定6濃厚</span></div><div class="stepper"><div class="sbtn" data-key="end_mizugi" data-d="-1">－</div><div class="sval" id="sv-end_mizugi">0</div><div class="sbtn" data-key="end_mizugi" data-d="1">＋</div></div></div>
+    </div>
+    <button class="calcbtn" data-action="calc">計算して結果を見る →</button>
+  </div>
+
+  <div id="s-trophy" class="subpage">
+    <div class="card">
+      <div class="ctitle">トロフィー<span style="text-transform:none;color:#666;">（実戦値未公表・虹のみ参考アラート）</span></div>
+      <div class="vrow"><div class="vinfo"><div class="vno">銅</div><span class="badge b-kakutei">設定2以上確定</span></div><div class="togwrap"><span class="togcount" id="sv-tr_do">0</span><div class="toggle" data-toggle="tr_do" id="tg-tr_do"><div class="knob"></div></div></div></div>
+      <div class="vrow"><div class="vinfo"><div class="vno">銀</div><span class="badge b-kakutei">設定3以上確定</span></div><div class="togwrap"><span class="togcount" id="sv-tr_gin">0</span><div class="toggle" data-toggle="tr_gin" id="tg-tr_gin"><div class="knob"></div></div></div></div>
+      <div class="vrow"><div class="vinfo"><div class="vno">金</div><span class="badge b-kakutei">設定4以上確定</span></div><div class="togwrap"><span class="togcount" id="sv-tr_kin">0</span><div class="toggle" data-toggle="tr_kin" id="tg-tr_kin"><div class="knob"></div></div></div></div>
+      <div class="vrow"><div class="vinfo"><div class="vno">キリン柄</div><span class="badge b-kakutei">設定5以上確定</span></div><div class="togwrap"><span class="togcount" id="sv-tr_kirin">0</span><div class="toggle" data-toggle="tr_kirin" id="tg-tr_kirin"><div class="knob"></div></div></div></div>
+      <div class="vrow"><div class="vinfo"><div class="vno">虹</div><span class="badge b-kakutei">設定6確定</span></div><div class="togwrap"><span class="togcount" id="sv-tr_niji">0</span><div class="toggle" data-toggle="tr_niji" id="tg-tr_niji"><div class="knob"></div></div></div></div>
+    </div>
+    <button class="calcbtn" data-action="calc">計算して結果を見る →</button>
+  </div>
+
+  <div id="s-renda" class="subpage">
+    <div class="card">
+      <div class="ctitle">連打枚数<span style="text-transform:none;color:#666;">（実戦値未公表・参考記録のみ）</span></div>
+      <div class="vrow"><div class="vinfo"><div class="vno">+44</div><span class="badge b-kakutei">設定4以上確定</span></div><div class="togwrap"><span class="togcount" id="sv-renda44">0</span><div class="toggle" data-toggle="renda44" id="tg-renda44"><div class="knob"></div></div></div></div>
+      <div class="vrow"><div class="vinfo"><div class="vno">+55</div><span class="badge b-kakutei">設定5以上確定</span></div><div class="togwrap"><span class="togcount" id="sv-renda55">0</span><div class="toggle" data-toggle="renda55" id="tg-renda55"><div class="knob"></div></div></div></div>
+      <div class="vrow"><div class="vinfo"><div class="vno">+66</div><span class="badge b-kakutei">設定6確定</span></div><div class="togwrap"><span class="togcount" id="sv-renda66">0</span><div class="toggle" data-toggle="renda66" id="tg-renda66"><div class="knob"></div></div></div></div>
+      <div class="vrow"><div class="vinfo"><div class="vno">+77</div><span class="badge b-kakutei">設定6確定</span></div><div class="togwrap"><span class="togcount" id="sv-renda77">0</span><div class="toggle" data-toggle="renda77" id="tg-renda77"><div class="knob"></div></div></div></div>
+    </div>
+    <button class="calcbtn" data-action="calc">計算して結果を見る →</button>
+  </div>
+
+  <div id="s-win" class="subpage">
+    <div class="card">
+      <div class="ctitle">獲得枚数<span style="text-transform:none;color:#666;">（実戦値未公表・参考記録のみ）</span></div>
+      <div class="vrow"><div class="vinfo"><div class="vno">456枚OVER</div><span class="badge b-kakutei">設定4以上確定</span></div><div class="togwrap"><span class="togcount" id="sv-win456">0</span><div class="toggle" data-toggle="win456" id="tg-win456"><div class="knob"></div></div></div></div>
+      <div class="vrow"><div class="vinfo"><div class="vno">666枚OVER</div><span class="badge b-kakutei">設定6確定</span></div><div class="togwrap"><span class="togcount" id="sv-win666">0</span><div class="toggle" data-toggle="win666" id="tg-win666"><div class="knob"></div></div></div></div>
+    </div>
+    <button class="calcbtn" data-action="calc">計算して結果を見る →</button>
+  </div>
+</div>
+
+<!-- ============ 実戦メモ ============ -->
+<div id="p-memo" class="page">
+  <div class="card" id="wiz-card">
+    <div class="ctitle">1回の記録フロー</div>
+    <div class="wizhead"><div class="wizback" id="wiz-back" onclick="wizBack()">← 戻る</div><div class="wizprog" id="wiz-prog"></div></div>
+    <div id="wiz-body"></div>
+  </div>
+
   <div class="card">
-    <div class="ctitle">基本データ</div>
-    <div class="irow"><div class="ilabel">総回転数</div><input class="ifield" type="number" id="f-total" inputmode="numeric" placeholder="0" min="0"></div>
-    <div class="irow"><div class="ilabel">通常時回転数<small>ST・ボーナスを除く</small></div><input class="ifield" type="number" id="f-normal" inputmode="numeric" placeholder="0" min="0"></div>
-    <div class="irow"><div class="ilabel">下段ベル 回数<small>自力カウント必須（マイスロ不可）</small></div><input class="ifield" type="number" id="f-bell" inputmode="numeric" placeholder="0" min="0"></div>
-    <div class="irow">
-      <div class="ilabel">エピソードボーナス 回数<small>マイスロで確認</small></div>
-      <div class="stepper"><div class="sbtn" data-key="ep" data-d="-1">－</div><div class="sval" id="sv-ep">0</div><div class="sbtn" data-key="ep" data-d="1">＋</div></div>
-    </div>
-    <div class="irow">
-      <div class="ilabel">駿城ボーナス 回数<small>マイスロで確認</small></div>
-      <div class="stepper"><div class="sbtn" data-key="hayajiro" data-d="-1">－</div><div class="sval" id="sv-hayajiro">0</div><div class="sbtn" data-key="hayajiro" data-d="1">＋</div></div>
-    </div>
-    <div class="irow">
-      <div class="ilabel">ボーナス初当たり 回数<small>エピソード＋駿城から自動計算</small></div>
-      <div class="auto-val" id="bonus-auto">0</div>
-    </div>
-    <div class="irow">
-      <div class="ilabel">駿城→ST当選 回数<small>駿城ボーナスからSTに入った回数</small></div>
-      <div class="stepper"><div class="sbtn" data-key="hayajiro_st" data-d="-1">－</div><div class="sval" id="sv-hayajiro_st">0</div><div class="sbtn" data-key="hayajiro_st" data-d="1">＋</div></div>
-    </div>
-    <div class="irow">
-      <div class="ilabel">ST突入 回数<small>エピソード直撃＋駿城からST</small></div>
-      <div class="auto-val" id="st-auto">0</div>
-    </div>
+    <div class="ctitle">履歴（新しい順）</div>
+    <div class="histlist" id="hist-list"><div class="hitem" style="color:#555;">まだ記録がありません</div></div>
   </div>
-  <button class="calcbtn" data-action="calc">計算して結果を見る →</button>
-  <button class="resetbtn" data-action="reset">🔄 全データをリセット</button>
+  <button class="resetbtn" data-action="memo-reset">🔄 実戦メモを全て削除</button>
 </div>
 
-<!-- ボイス -->
-<div id="p-voice" class="page">
-  <div class="card">
-    <div class="vgroup">無名</div>
-    <div class="vrow"><div class="vinfo"><div class="vno">No.1</div><div class="vtxt">「私たちは弱くても生きるよ」</div><span class="badge bf">偶数示唆</span></div><div class="stepper"><div class="sbtn" data-key="v1" data-d="-1">－</div><div class="sval" id="sv-v1">0</div><div class="sbtn" data-key="v1" data-d="1">＋</div></div></div>
-    <div class="vrow"><div class="vinfo"><div class="vno">No.2</div><div class="vtxt">「シュコンシュコン」<span style="color:#f5a623;font-size:10px;"> 偶数示唆強・予想</span></div><span class="badge bf">偶数示唆（強）</span></div><div class="stepper"><div class="sbtn" data-key="v2" data-d="-1">－</div><div class="sval" id="sv-v2">0</div><div class="sbtn" data-key="v2" data-d="1">＋</div></div></div>
-    <div class="vrow"><div class="vinfo"><div class="vno">No.3</div><div class="vtxt">「やっぱりこの台…普通じゃないね」</div><span class="badge bn">設定2以上確定</span></div><div class="stepper"><div class="sbtn" data-key="v3" data-d="-1">－</div><div class="sval" id="sv-v3">0</div><div class="sbtn" data-key="v3" data-d="1">＋</div></div></div>
-    <div class="vgroup">菖蒲</div>
-    <div class="vrow"><div class="vinfo"><div class="vno">No.4</div><div class="vtxt">「私も生駒を信じます」</div><span class="badge bf">偶数示唆</span></div><div class="stepper"><div class="sbtn" data-key="v4" data-d="-1">－</div><div class="sval" id="sv-v4">0</div><div class="sbtn" data-key="v4" data-d="1">＋</div></div></div>
-    <div class="vrow"><div class="vinfo"><div class="vno">No.5</div><div class="vtxt">「怯えて民草を守らぬ武士はカバネと変わりません！」</div><span class="badge bf">偶数示唆</span></div><div class="stepper"><div class="sbtn" data-key="v5" data-d="-1">－</div><div class="sval" id="sv-v5">0</div><div class="sbtn" data-key="v5" data-d="1">＋</div></div></div>
-    <div class="vrow"><div class="vinfo"><div class="vno">No.6</div><div class="vtxt">「私は甲鉄城を預かる者として糺さなければ…！」</div><span class="badge bf">偶数示唆</span></div><div class="stepper"><div class="sbtn" data-key="v6" data-d="-1">－</div><div class="sval" id="sv-v6">0</div><div class="sbtn" data-key="v6" data-d="1">＋</div></div></div>
-    <div class="vrow"><div class="vinfo"><div class="vno">No.7</div><div class="vtxt">「撃ち抜くべきは、互いを疑う心です！」</div><span class="badge bf">偶数示唆</span></div><div class="stepper"><div class="sbtn" data-key="v7" data-d="-1">－</div><div class="sval" id="sv-v7">0</div><div class="sbtn" data-key="v7" data-d="1">＋</div></div></div>
-    <div class="vrow"><div class="vinfo"><div class="vno">No.8</div><div class="vtxt">「おまんじゅうが食べたいな…」<span style="color:#f5a623;font-size:10px;"> 偶数示唆強・予想</span></div><span class="badge bf">偶数示唆（強）</span></div><div class="stepper"><div class="sbtn" data-key="v8" data-d="-1">－</div><div class="sval" id="sv-v8">0</div><div class="sbtn" data-key="v8" data-d="1">＋</div></div></div>
-    <div class="vgroup">生駒</div>
-    <div class="vrow"><div class="vinfo"><div class="vno">No.9</div><div class="vtxt">「全然なってないぜ」</div><span class="badge bm">設定3・5示唆</span></div><div class="stepper"><div class="sbtn" data-key="v9" data-d="-1">－</div><div class="sval" id="sv-v9">0</div><div class="sbtn" data-key="v9" data-d="1">＋</div></div></div>
-    <div class="vrow"><div class="vinfo"><div class="vno">No.10</div><div class="vtxt">「カバネを倒すために俺の命はあるんだぁ！」</div><span class="badge bm">設定3・5示唆</span></div><div class="stepper"><div class="sbtn" data-key="v10" data-d="-1">－</div><div class="sval" id="sv-v10">0</div><div class="sbtn" data-key="v10" data-d="1">＋</div></div></div>
-    <div class="vrow"><div class="vinfo"><div class="vno">No.11</div><div class="vtxt">「無名を人に戻すと約束した それだけだ！」</div><span class="badge bm">設定3・5示唆</span></div><div class="stepper"><div class="sbtn" data-key="v11" data-d="-1">－</div><div class="sval" id="sv-v11">0</div><div class="sbtn" data-key="v11" data-d="1">＋</div></div></div>
-    <div class="vrow"><div class="vinfo"><div class="vno">No.12</div><div class="vtxt">「俺はカバネリだ！」</div><span class="badge bm">設定3・5示唆</span></div><div class="stepper"><div class="sbtn" data-key="v12" data-d="-1">－</div><div class="sval" id="sv-v12">0</div><div class="sbtn" data-key="v12" data-d="1">＋</div></div></div>
-    <div class="vrow"><div class="vinfo"><div class="vno">No.13</div><div class="vtxt">「俺の誇れる俺になるんだあぁ！」<span style="color:#f5a623;font-size:10px;"> 設定3・5示唆強・予想</span></div><span class="badge bm">設定3・5示唆（強）</span></div><div class="stepper"><div class="sbtn" data-key="v13" data-d="-1">－</div><div class="sval" id="sv-v13">0</div><div class="sbtn" data-key="v13" data-d="1">＋</div></div></div>
-    <div class="vgroup">来栖</div>
-    <div class="vrow"><div class="vinfo"><div class="vno">No.14</div><div class="vtxt">「貴様ヒトかカバネか！」</div><span class="badge bm">設定3・5示唆</span></div><div class="stepper"><div class="sbtn" data-key="v14" data-d="-1">－</div><div class="sval" id="sv-v14">0</div><div class="sbtn" data-key="v14" data-d="1">＋</div></div></div>
-    <div class="vrow"><div class="vinfo"><div class="vno">No.15</div><div class="vtxt">「生駒！お前は何だ！」</div><span class="badge bm">設定3・5示唆</span></div><div class="stepper"><div class="sbtn" data-key="v15" data-d="-1">－</div><div class="sval" id="sv-v15">0</div><div class="sbtn" data-key="v15" data-d="1">＋</div></div></div>
-    <div class="vrow"><div class="vinfo"><div class="vno">No.16</div><div class="vtxt">「あの世で稽古を受けるといい」<span style="color:#f5a623;font-size:10px;"> 設定3・5示唆強・予想</span></div><span class="badge bm">設定3・5示唆（強）</span></div><div class="stepper"><div class="sbtn" data-key="v16" data-d="-1">－</div><div class="sval" id="sv-v16">0</div><div class="sbtn" data-key="v16" data-d="1">＋</div></div></div>
-    <div class="vgroup">景之</div>
-    <div class="vrow"><div class="vinfo"><div class="vno">No.17</div><div class="vtxt">「なぜ言わなかった、私をヒトだと！」</div><span class="badge bkw">高設定示唆（弱）</span></div><div class="stepper"><div class="sbtn" data-key="v17" data-d="-1">－</div><div class="sval" id="sv-v17">0</div><div class="sbtn" data-key="v17" data-d="1">＋</div></div></div>
-    <div class="vrow"><div class="vinfo"><div class="vno">No.18</div><div class="vtxt">「私は…ヒトか、カバネか！？」</div><span class="badge bkm">高設定示唆（中）</span></div><div class="stepper"><div class="sbtn" data-key="v18" data-d="-1">－</div><div class="sval" id="sv-v18">0</div><div class="sbtn" data-key="v18" data-d="1">＋</div></div></div>
-    <div class="vrow"><div class="vinfo"><div class="vno">No.19</div><div class="vtxt">「今年は最後かな」</div><span class="badge bks">高設定示唆（強）</span></div><div class="stepper"><div class="sbtn" data-key="v19" data-d="-1">－</div><div class="sval" id="sv-v19">0</div><div class="sbtn" data-key="v19" data-d="1">＋</div></div></div>
-    <div class="vgroup">特殊・なし</div>
-    <div class="vrow"><div class="vinfo"><div class="vno">—</div><div class="vtxt">ボイスなし（目押し成功でボイス非発生）</div><span class="badge bno">設定5以上確定</span></div><div class="stepper"><div class="sbtn" data-key="vnone" data-d="-1">－</div><div class="sval" id="sv-vnone">0</div><div class="sbtn" data-key="vnone" data-d="1">＋</div></div></div>
-  </div>
-  <button class="calcbtn" data-action="calc">計算して結果を見る →</button>
-</div>
-
-<!-- キャラ紹介 -->
-<div id="p-chara" class="page">
-  <div class="card">
-    <div class="ctitle">キャラ紹介（ボーナス中）<span class="ztag" id="zone-label">総G数入力で区間自動判定</span></div>
-    <div class="irow"><div class="ilabel">女性キャラ<small>無名・菖蒲・鰍・侑那 → 偶数設定期待</small></div><div class="stepper"><div class="sbtn" data-key="kf" data-d="-1">－</div><div class="sval" id="sv-kf">0</div><div class="sbtn" data-key="kf" data-d="1">＋</div></div></div>
-    <div class="irow"><div class="ilabel">男性キャラ<small>生駒・来栖・景之 → 設定3・5期待</small></div><div class="stepper"><div class="sbtn" data-key="km" data-d="-1">－</div><div class="sval" id="sv-km">0</div><div class="sbtn" data-key="km" data-d="1">＋</div></div></div>
-    <div class="irow"><div class="ilabel">美馬<small>設定4以上確定！5001G〜で出やすくなる</small></div><div class="stepper"><div class="sbtn" data-key="kuma" data-d="-1">－</div><div class="sval" id="sv-kuma">0</div><div class="sbtn" data-key="kuma" data-d="1">＋</div></div></div>
-  </div>
-  <div class="card" style="margin-top:10px">
-    <div class="ctitle">区間別 選択率（公表値）</div>
-    <div class="ktbl">
-      <strong>① 0〜5000G / 8001G〜</strong><br>
-      設定1: 女50% 男50% 美馬－<br>設定2: 女57.5% 男42.5%<br>設定3: 女41.5% 男58.5%<br>設定4: 女58.5% 男41.4% 美馬0.1%<br>設定5: 女39.9% 男60% 美馬0.1%<br>設定6: 女60% 男39.85% 美馬0.15%<br><br>
-      <strong>② 5001〜7000G（美馬UP）</strong><br>設定4/5: 美馬2%　設定6: 美馬3%<br><br>
-      <strong>③ 7001〜8000G（美馬大幅UP）</strong><br>設定4/5: 美馬10%　設定6: 美馬15%
-    </div>
-  </div>
-  <button class="calcbtn" data-action="calc">計算して結果を見る →</button>
-</div>
-
-<!-- 周期 -->
-<div id="p-cycle" class="page">
-  <div class="card">
-    <div class="ctitle">周期別ボーナス当選（到達回数 / 当選回数）</div>
-    <p style="font-size:11px;color:#888;padding:8px 14px 4px;">各周期に到達した回数と、そのうちボーナスに当選した回数を入力<br><span style="color:#e24b4a;">※朝一（リセット後）の周期は除いてカウント</span></p>
-    <div class="irow"><div class="ilabel">1周期（〜150G）到達回数</div><div class="stepper"><div class="sbtn" data-key="p1a" data-d="-1">－</div><div class="sval" id="sv-p1a">0</div><div class="sbtn" data-key="p1a" data-d="1">＋</div></div></div>
-    <div class="irow"><div class="ilabel">1周期　うちボーナス当選回数</div><div class="stepper"><div class="sbtn" data-key="p1h" data-d="-1">－</div><div class="sval" id="sv-p1h">0</div><div class="sbtn" data-key="p1h" data-d="1">＋</div></div></div>
-    <div class="irow"><div class="ilabel">2周期（〜300G）到達回数</div><div class="stepper"><div class="sbtn" data-key="p2a" data-d="-1">－</div><div class="sval" id="sv-p2a">0</div><div class="sbtn" data-key="p2a" data-d="1">＋</div></div></div>
-    <div class="irow"><div class="ilabel">2周期　うちボーナス当選回数</div><div class="stepper"><div class="sbtn" data-key="p2h" data-d="-1">－</div><div class="sval" id="sv-p2h">0</div><div class="sbtn" data-key="p2h" data-d="1">＋</div></div></div>
-    <div class="irow"><div class="ilabel">3周期（〜450G）到達回数</div><div class="stepper"><div class="sbtn" data-key="p3a" data-d="-1">－</div><div class="sval" id="sv-p3a">0</div><div class="sbtn" data-key="p3a" data-d="1">＋</div></div></div>
-    <div class="irow"><div class="ilabel">3周期　うちボーナス当選回数</div><div class="stepper"><div class="sbtn" data-key="p3h" data-d="-1">－</div><div class="sval" id="sv-p3h">0</div><div class="sbtn" data-key="p3h" data-d="1">＋</div></div></div>
-    <div class="irow"><div class="ilabel">4周期（〜600G）到達回数</div><div class="stepper"><div class="sbtn" data-key="p4a" data-d="-1">－</div><div class="sval" id="sv-p4a">0</div><div class="sbtn" data-key="p4a" data-d="1">＋</div></div></div>
-    <div class="irow"><div class="ilabel">4周期　うちボーナス当選回数</div><div class="stepper"><div class="sbtn" data-key="p4h" data-d="-1">－</div><div class="sval" id="sv-p4h">0</div><div class="sbtn" data-key="p4h" data-d="1">＋</div></div></div>
-  </div>
-  <div class="card" style="margin-top:10px">
-    <div class="ctitle">周期別 当選率（参考）</div>
-    <div class="ktbl">
-      <strong>公式値（3・4周期）</strong><br>
-      設定1: 3周期18.4% / 4周期33.6%<br>設定2: 3周期23.8% / 4周期35.2%<br>設定3: 3周期21.1% / 4周期36.3%<br>設定4: 3周期28.5% / 4周期40.2%<br>設定5: 3周期32.4% / 4周期43.4%<br>設定6: 3周期37.1% / 4周期46.9%<br><br>
-      <strong>実戦値（目安）</strong><br>
-      1周期: 低設定〜設定6 約33%（設定差小）<br>
-      2周期: 低設定〜設定6 約33%〜60%（設定差大）<br>
-      3周期: 低設定〜設定6 約18%〜37%<br>
-      4周期: 低設定〜設定6 約34%〜47%
-    </div>
-  </div>
-  <button class="calcbtn" data-action="calc">計算して結果を見る →</button>
-</div>
-
-<!-- 演出 -->
-<div id="p-演出" class="page">
-  <div class="card">
-    <div class="ctitle">ST終了画面</div>
-    <div class="irow"><div class="ilabel">ST終了 総回数<small>マイスロで確認</small></div><div class="stepper"><div class="sbtn" data-key="st_end_total" data-d="-1">－</div><div class="sval" id="sv-st_end_total">0</div><div class="sbtn" data-key="st_end_total" data-d="1">＋</div></div></div>
-    <div class="irow"><div class="ilabel">集合画面<small>高設定示唆（設定6で約9.7%）</small></div><div class="stepper"><div class="sbtn" data-key="st_end_shugo" data-d="-1">－</div><div class="sval" id="sv-st_end_shugo">0</div><div class="sbtn" data-key="st_end_shugo" data-d="1">＋</div></div></div>
-    <div class="irow"><div class="ilabel">水着画面<small>設定6濃厚（設定6で約2.9%）</small></div><div class="stepper"><div class="sbtn" data-key="st_end_mizugi" data-d="-1">－</div><div class="sval" id="sv-st_end_mizugi">0</div><div class="sbtn" data-key="st_end_mizugi" data-d="1">＋</div></div></div>
-  </div>
-  <div class="card" style="margin-top:10px">
-    <div class="ctitle">アイテムくじ</div>
-    <div class="irow"><div class="ilabel">アイテムくじ 総回数<small>マイスロで確認</small></div><div class="stepper"><div class="sbtn" data-key="item_total" data-d="-1">－</div><div class="sval" id="sv-item_total">0</div><div class="sbtn" data-key="item_total" data-d="1">＋</div></div></div>
-    <div class="irow"><div class="ilabel">菖蒲の弓<small>高設定示唆弱（低設定4.6% vs 設定5以上12%）</small></div><div class="stepper"><div class="sbtn" data-key="item_yumi" data-d="-1">－</div><div class="sval" id="sv-item_yumi">0</div><div class="sbtn" data-key="item_yumi" data-d="1">＋</div></div></div>
-    <div class="irow"><div class="ilabel">ミヤマカラスアゲハ<small>高設定示唆強（低設定0.4% vs 設定6:2.1%）</small></div><div class="stepper"><div class="sbtn" data-key="item_ageha" data-d="-1">－</div><div class="sval" id="sv-item_ageha">0</div><div class="sbtn" data-key="item_ageha" data-d="1">＋</div></div></div>
-    <div class="irow"><div class="ilabel">小吉<small>設定2以上濃厚</small></div><div class="stepper"><div class="sbtn" data-key="item_sho" data-d="-1">－</div><div class="sval" id="sv-item_sho">0</div><div class="sbtn" data-key="item_sho" data-d="1">＋</div></div></div>
-    <div class="irow"><div class="ilabel">中吉<small>設定4以上濃厚</small></div><div class="stepper"><div class="sbtn" data-key="item_chu" data-d="-1">－</div><div class="sval" id="sv-item_chu">0</div><div class="sbtn" data-key="item_chu" data-d="1">＋</div></div></div>
-    <div class="irow"><div class="ilabel">大吉<small>設定6濃厚</small></div><div class="stepper"><div class="sbtn" data-key="item_dai" data-d="-1">－</div><div class="sval" id="sv-item_dai">0</div><div class="sbtn" data-key="item_dai" data-d="1">＋</div></div></div>
-  </div>
-  <button class="calcbtn" data-action="calc">計算して結果を見る →</button>
-</div>
-
-<!-- 結果 -->
+<!-- ============ 判別結果 ============ -->
 <div id="p-result" class="page">
   <div class="result-card" id="result-main">
     <div class="ctitle">各設定の確率</div>
@@ -261,439 +429,945 @@ body{padding-bottom:100px;}
   </div>
   <div id="alerts-area"></div>
   <div class="result-card" id="result-chips" style="margin-top:8px;">
-    <div class="ctitle">データ分析</div>
+    <div class="ctitle">データ分析（実戦メモ集計）</div>
     <div class="chips" id="chips"></div>
   </div>
-  <div class="dnote">データ根拠：スロタイガーnote実戦集計データ（2026年6月）／サミー公式（3・4周期）／ヨコハチ・あやねnote・パチーモX合算実戦値</div>
+  <div class="dnote">データ根拠：スロタイガーnote（2026年6月実戦値）／引き継ぎ指示書。設定1〜6への割付は一部推定を含みます（詳細はソース冒頭コメント参照）。</div>
   <button class="calcbtn" data-action="calc" style="margin-top:10px;">再計算</button>
+  <button class="resetbtn" data-action="reset">🔄 ボイス・キャラ等カウンターをリセット</button>
 </div>
 
-<!-- 使い方 -->
-<div id="p-guide" class="page">
-  <div class="gcard">
-    <h3>📱 使い方</h3>
-    <div class="gstep"><div class="gno">1</div><div class="gtxt"><strong>基本</strong>タブにエピソード・駿城・駿城→ST回数を入力（ボーナス・ST合計は自動計算）</div></div>
-    <div class="gstep"><div class="gno">2</div><div class="gtxt"><strong>ボイス</strong>タブでマイスロを見ながらNo別に＋ボタンで回数を入力</div></div>
-    <div class="gstep"><div class="gno">3</div><div class="gtxt"><strong>キャラ</strong>タブでボーナス中のキャラを女性/男性/美馬で入力</div></div>
-    <div class="gstep"><div class="gno">4</div><div class="gtxt"><strong>周期</strong>タブで1〜4周期の到達回数と当選回数を入力</div></div>
-    <div class="gstep"><div class="gno">5</div><div class="gtxt"><strong>演出</strong>タブでST終了画面・アイテムくじを入力</div></div>
-    <div class="gstep"><div class="gno">6</div><div class="gtxt">「計算して結果を見る」を押すと<strong>結果</strong>タブに設定確率が表示される</div></div>
+<div class="bottombar">
+  <div class="navbtn" id="btn-undo" onclick="doUndo()">↩︎</div>
+  <div class="navbtn" id="btn-redo" onclick="doRedo()">↪︎</div>
+  <div class="gamedatabtn" onclick="openGameData()">📋 遊技データ</div>
+  <div class="bb-addbtn" id="bb-add" onclick="bottomBarAdd()">＋</div>
+</div>
+
+<div class="sheet-overlay" id="gd-overlay" onclick="closeGameData()"></div>
+<div class="sheet" id="gd-sheet">
+  <div class="sheet-head">
+    <div class="sheet-title">📋 遊技データ</div>
+    <div class="sheet-close" onclick="closeGameData()">✕</div>
   </div>
-  <div class="gcard" style="margin-top:8px;">
-    <h3>⚠️ 注意点</h3>
-    <ul class="gnote">
-      <li>下段ベルはマイスロでカウント不可。カチカチくん等で自力カウント必須</li>
-      <li>美馬は5000G以降に出やすくなる（区間自動判定済み）</li>
-      <li>クイックマイスロでは設定示唆が表示されない（通常マイスロ登録推奨）</li>
-      <li>5000G未満は精度が下がる（信頼度バーを参考に）</li>
-    </ul>
+
+  <div class="gd-row">
+    <div class="gd-label">🔔 下段ベル<span class="gd-sub" id="gd-bell-rate">出現確率 ---</span></div>
+    <div class="stepper"><div class="sbtn" data-key="bell" data-d="-1">－</div><div class="sval" id="sv-bell">0</div><div class="sbtn" data-key="bell" data-d="1">＋</div></div>
   </div>
-  <div class="gcard" style="margin-top:8px;">
-    <h3>🎯 設定判別の優先順位</h3>
-    <div style="font-size:12px;color:#aaa;line-height:1.9;">
-      ① 周期当選率（特に2・3周期）<br>
-      ② 景之ボイス率（No17〜19合計）<br>
-      ③ キャラ紹介（偶奇比率）<br>
-      ④ ST終了画面・アイテムくじ<br>
-      ⑤ エピソード比率・駿城スルー率<br>
-      ⑥ 下段ベル・ボーナス確率・ST確率
+
+  <div class="gd-row">
+    <div class="gd-label"># 総ゲーム数<span class="gd-sub">手入力</span></div>
+    <div class="gd-inline">
+      <span style="font-size:10px;color:#666;">開始</span>
+      <input type="number" inputmode="numeric" class="gd-num" id="gd-total-start" placeholder="0">
+      <span class="gd-arrow">→</span>
+      <span style="font-size:10px;color:#666;">現在</span>
+      <input type="number" inputmode="numeric" class="gd-num" id="gd-total-now" placeholder="0">
     </div>
+  </div>
+
+  <div class="gd-row">
+    <div class="gd-label"># 通常ゲーム数<span class="gd-sub">実戦メモから自動計算</span></div>
+    <div class="gd-auto" id="gd-normal-auto">0G</div>
+    <div class="gd-note">通常時タブの実戦メモに記録された当選G数の合計です</div>
+  </div>
+
+  <div class="gd-row">
+    <div class="gd-label">ボーナス回数<span class="gd-sub">実戦メモから自動集計（手動調整可）</span></div>
+    <div class="gd-inline" style="margin-bottom:10px;">
+      <span style="width:56px;font-size:12px;color:#e24b4a;font-weight:700;">初当り</span>
+      <div class="stepper"><div class="sbtn" data-key="bonusAdj" data-d="-1">－</div><div class="sval" id="gd-bonus-total">0</div><div class="sbtn" data-key="bonusAdj" data-d="1">＋</div></div>
+    </div>
+    <div class="gd-inline">
+      <span style="width:56px;font-size:12px;color:#378add;font-weight:700;">ST</span>
+      <div class="stepper"><div class="sbtn" data-key="stAdj" data-d="-1">－</div><div class="sval" id="gd-st-total">0</div><div class="sbtn" data-key="stAdj" data-d="1">＋</div></div>
+    </div>
+  </div>
+
+  <div class="gd-row">
+    <div class="gd-label">◎ CZ突入<span class="gd-sub">実戦メモから自動集計（手動調整可）</span></div>
+    <div class="stepper"><div class="sbtn" data-key="czAdj" data-d="-1">－</div><div class="sval" id="gd-cz-total">0</div><div class="sbtn" data-key="czAdj" data-d="1">＋</div></div>
+  </div>
+
+  <div class="gd-row">
+    <div class="gd-label">📄 メモ</div>
+    <textarea class="gd-textarea" id="gd-memo" placeholder="台番号、機種メモなど"></textarea>
+  </div>
+
+  <div class="gd-row" style="border-bottom:none;">
+    <div class="gd-label">📊 設定推測</div>
+    <button class="gd-calcbtn" onclick="calcFromGameData()">この内容で判別結果を計算する →</button>
+    <div class="gd-note">※ベイズ推定による推測値。設定2〜5の演出確率は設定1・6などの集計値からの補間値を使用しています。下段ベル・ボーナス・ST確率は解析サイト公表値、加算式ポイント換算は6.5号機時代の推定値を含みます。</div>
   </div>
 </div>
 
 <script>
+// ================================================================================
+//  状態
+// ================================================================================
 const S={
-  total:0,normal:0,bell:0,ep:0,hayajiro:0,hayajiro_st:0,
-  v1:0,v2:0,v3:0,v4:0,v5:0,v6:0,v7:0,v8:0,
-  v9:0,v10:0,v11:0,v12:0,v13:0,v14:0,v15:0,v16:0,
-  v17:0,v18:0,v19:0,vnone:0,
-  kf:0,km:0,kuma:0,
-  p1a:0,p1h:0,p2a:0,p2h:0,p3a:0,p3h:0,p4a:0,p4h:0,
-  st_end_total:0,st_end_shugo:0,st_end_mizugi:0,
-  item_total:0,item_yumi:0,item_ageha:0,item_sho:0,item_chu:0,item_dai:0
+  bell:0,
+  item_shobuyumi:0,item_miyama:0,item_kokichi:0,item_chukichi:0,item_daikichi:0,
+  item_tsuranuki:0,item_mumeitanju:0,item_jiketsu:0,item_kurusukatana:0,item_mumeikendama:0,
+  v1:0,v2:0,v3:0,v4:0,v5:0,v6:0,v7:0,v8:0,v9:0,v10:0,v11:0,v12:0,v13:0,v14:0,v15:0,v16:0,v17:0,v18:0,v19:0,v_none:0,
+  ch_female:0,ch_male:0,ch_mibu:0,
+  end_tekkageta:0,end_shugo:0,end_mizugi:0,
+  tr_do:0,tr_gin:0,tr_kin:0,tr_kirin:0,tr_niji:0,
+  renda44:0,renda55:0,renda66:0,renda77:0,
+  win456:0,win666:0,
+  bonusAdj:0,stAdj:0,czAdj:0, // 遊技データ：実戦メモの自動集計に対する手動調整分
+  // CZポイントトラッカー
+  cz_pt_mumei:0,cz_pt_ikoma:0,
+  cz_koukaku_mumei:0,cz_koukaku_ikoma:0, // 高確中フラグ（0/1）
+  mumei_normal:0,mumei_hikari:0,ikoma_normal:0,ikoma_hikari:0, // 発光率集計用（非高確中のみ加算）
 };
+let RECORDS=[]; // 実戦メモ履歴
+let MUMEI_PT_LOG=[],IKOMA_PT_LOG=[]; // CZ突入時の到達pt履歴（⑨規定pt分布の尤度化に使用）
+let GAMEDATA={totalStart:0,totalNow:0,memo:''}; // 遊技データパネル（総ゲーム数・メモ）
+let UNDO_STACK=[],REDO_STACK=[];
 
-// ====== 自動計算 ======
-function updateBonus(){
-  const b=(S.ep||0)+(S.hayajiro||0);
-  S.bonus=b;
-  const el=document.getElementById('bonus-auto');
-  if(el)el.textContent=b;
+const SAVE_KEY='kabaneri_kaimon_v7';
+function saveState(){
+  try{localStorage.setItem(SAVE_KEY,JSON.stringify({S,RECORDS,GAMEDATA,MUMEI_PT_LOG,IKOMA_PT_LOG}));}catch(e){}
 }
-function updateST(){
-  const st=(S.ep||0)+(S.hayajiro_st||0);
-  S.st=st;
-  const el=document.getElementById('st-auto');
-  if(el)el.textContent=st;
-}
-
-// ====== localStorage ======
-const SAVE_KEY='kabaneri_v6';
-function saveState(){try{localStorage.setItem(SAVE_KEY,JSON.stringify(S));}catch(e){}}
 function loadState(){
   try{
     const d=localStorage.getItem(SAVE_KEY);
     if(!d)return;
     const saved=JSON.parse(d);
-    Object.keys(saved).forEach(k=>{if(k in S)S[k]=saved[k];});
+    if(saved.S)Object.keys(saved.S).forEach(k=>{if(k in S)S[k]=saved.S[k];});
+    if(saved.RECORDS)RECORDS=saved.RECORDS;
+    if(saved.GAMEDATA)GAMEDATA=Object.assign(GAMEDATA,saved.GAMEDATA);
+    if(saved.MUMEI_PT_LOG)MUMEI_PT_LOG=saved.MUMEI_PT_LOG;
+    if(saved.IKOMA_PT_LOG)IKOMA_PT_LOG=saved.IKOMA_PT_LOG;
     Object.keys(S).forEach(k=>{const el=document.getElementById('sv-'+k);if(el)el.textContent=S[k];});
-    ['total','normal','bell'].forEach(k=>{const el=document.getElementById('f-'+k);if(el&&S[k])el.value=S[k];});
-    updateZoneLabel();updateBonus();updateST();
+    const tsEl=document.getElementById('gd-total-start');if(tsEl)tsEl.value=GAMEDATA.totalStart||'';
+    const tnEl=document.getElementById('gd-total-now');if(tnEl)tnEl.value=GAMEDATA.totalNow||'';
+    const memoEl=document.getElementById('gd-memo');if(memoEl)memoEl.value=GAMEDATA.memo||'';
   }catch(e){}
 }
 
-// ====== タブ ======
+// ================================================================================
+//  タブ / サブタブ
+// ================================================================================
 function showTab(pageId,el){
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));
   if(el)el.classList.add('on');
   const pg=document.getElementById(pageId);
   if(pg)pg.classList.add('on');
+  if(pageId==='p-memo'){renderWizard();renderHistory();}
+  window.scrollTo(0,0);
+}
+function showSub(subId,el){
+  document.querySelectorAll('#subtabs-st .subtab').forEach(t=>t.classList.remove('on'));
+  document.querySelectorAll('#p-st .subpage').forEach(p=>p.classList.remove('on'));
+  if(el)el.classList.add('on');
+  const pg=document.getElementById(subId);
+  if(pg)pg.classList.add('on');
+  window.scrollTo(0,0);
+}
+function showSub2(subId,el){
+  document.querySelectorAll('#subtabs-normal .subtab').forEach(t=>t.classList.remove('on'));
+  document.querySelectorAll('#p-normal .subpage').forEach(p=>p.classList.remove('on'));
+  if(el)el.classList.add('on');
+  const pg=document.getElementById(subId);
+  if(pg)pg.classList.add('on');
   window.scrollTo(0,0);
 }
 
-// ====== ゾーンラベル ======
-function updateZoneLabel(){
-  const t=S.total;
-  let txt=t>7000&&t<=8000?'区間③ 7001〜8000G（美馬大幅UP）':t>5000&&t<=7000?'区間② 5001〜7000G（美馬UP）':t>0?'区間① 0〜5000G / 8001G〜':'総G数入力で区間自動判定';
-  document.getElementById('zone-label').textContent=txt;
+// ================================================================================
+//  戻る/進む（誤入力の取り消し）
+// ================================================================================
+function pushUndo(action){
+  UNDO_STACK.push(action);
+  if(UNDO_STACK.length>50)UNDO_STACK.shift();
+  REDO_STACK=[];
+  updateUndoRedoButtons();
+}
+function updateUndoRedoButtons(){
+  const u=document.getElementById('btn-undo'),r=document.getElementById('btn-redo');
+  if(u)u.classList.toggle('disabled',UNDO_STACK.length===0);
+  if(r)r.classList.toggle('disabled',REDO_STACK.length===0);
+}
+function applyValueAction(key,val){
+  S[key]=val;
+  const el=document.getElementById('sv-'+key);
+  if(el)el.textContent=S[key];
+  if(key.startsWith('cz_pt_'))refreshPtDisplay(key.replace('cz_pt_',''));
+  if(key==='bell'||key==='bonusAdj'||key==='stAdj'||key==='czAdj')refreshGameDataPanel();
+  saveState();
+}
+function doUndo(){
+  const a=UNDO_STACK.pop();
+  if(!a)return;
+  if(a.type==='value'){applyValueAction(a.key,a.prev);}
+  else if(a.type==='record_add'){RECORDS.pop();renderHistory();}
+  else if(a.type==='record_delete'){RECORDS.splice(a.index,0,a.record);renderHistory();}
+  REDO_STACK.push(a);
+  saveState();
+  updateUndoRedoButtons();
+}
+function doRedo(){
+  const a=REDO_STACK.pop();
+  if(!a)return;
+  if(a.type==='value'){applyValueAction(a.key,a.next);}
+  else if(a.type==='record_add'){RECORDS.push(a.record);renderHistory();}
+  else if(a.type==='record_delete'){RECORDS.splice(a.index,1);renderHistory();}
+  UNDO_STACK.push(a);
+  saveState();
+  updateUndoRedoButtons();
 }
 
-// ====== タッチ・クリック ======
+// ステッパー / ボタン共通処理
+function bump(key,d){
+  const prev=S[key]||0;
+  const next=Math.max(0,prev+d);
+  if(next===prev)return;
+  applyValueAction(key,next);
+  pushUndo({type:'value',key,prev,next});
+}
+
+// ================================================================================
+//  CZポイントトラッカー（無名/生駒）
+// ================================================================================
+const PT_BUTTONS_NORMAL=[
+  {label:'通常',amt:1,tapType:'normal'},
+  {label:'不明',amt:1,tapType:'unknown'},
+  {label:'発光',amt:15,tapType:'hikari'},
+  {label:'複合',amt:15,tapType:'fukugou'},
+  {label:'オール',amt:30,tapType:'all'},
+];
+const PT_BUTTONS_KOUKAKU=[
+  {label:'不明',amt:15,tapType:'unknown'},
+  {label:'複合',amt:30,tapType:'fukugou'},
+  {label:'オール',amt:60,tapType:'all'},
+];
+function renderPtButtons(who){
+  const el=document.getElementById('ptbtns-'+who);
+  if(!el)return;
+  const list = S['cz_koukaku_'+who] ? PT_BUTTONS_KOUKAKU : PT_BUTTONS_NORMAL;
+  el.innerHTML=list.map(b=>`<div class="ptbtn" onclick="bumpPt('${who}',${b.amt},'${b.tapType}')">${b.label}<br>+${b.amt}</div>`).join('');
+}
+function refreshPtDisplay(who){
+  const v=document.getElementById('ptval-'+who);
+  const bar=document.getElementById('ptbar-'+who);
+  if(v)v.innerHTML=(S['cz_pt_'+who]||0)+'<span style="font-size:12px;color:#666;"> pt</span>';
+  if(bar)bar.style.width=Math.min((S['cz_pt_'+who]||0)/150*100,100)+'%';
+}
+function toggleKoukaku(who){
+  const key='cz_koukaku_'+who;
+  S[key]=S[key]?0:1;
+  document.getElementById('tg-koukaku-'+who).classList.toggle('on',!!S[key]);
+  renderPtButtons(who);
+  saveState();
+}
+function bumpPt(who,amt,tapType){
+  const key='cz_pt_'+who;
+  const prev=S[key]||0;
+  const next=prev+amt;
+  S[key]=next;
+  // 発光率集計（非高確中の通常/発光のみカウント）
+  if(!S['cz_koukaku_'+who]){
+    if(tapType==='normal')S[who+'_normal']=(S[who+'_normal']||0)+1;
+    if(tapType==='hikari')S[who+'_hikari']=(S[who+'_hikari']||0)+1;
+  }
+  refreshPtDisplay(who);
+  pushUndo({type:'value',key,prev,next});
+  saveState();
+}
+// CZ突入（who: 'mumei'|'ikoma'|'dourin', viaSource: 銅藍格上げ時の経由元）
+function czEnter(who,viaSource){
+  const sourceKey = viaSource ? viaSource : who;
+  const pt = S['cz_pt_'+sourceKey]||0;
+  if(sourceKey==='mumei')MUMEI_PT_LOG.push(pt);
+  if(sourceKey==='ikoma')IKOMA_PT_LOG.push(pt);
+  // 選んだ方のptだけリセット（もう片方は持ち越し）
+  const prevPt=S['cz_pt_'+sourceKey]||0;
+  S['cz_pt_'+sourceKey]=0;
+  pushUndo({type:'value',key:'cz_pt_'+sourceKey,prev:prevPt,next:0});
+  refreshPtDisplay(sourceKey);
+  saveState();
+  // 実戦メモウィザードへジャンプ（入り口=CZ、種別を事前選択）
+  const tab=Array.from(document.querySelectorAll('.tab')).find(t=>t.getAttribute('onclick')&&t.getAttribute('onclick').includes('p-memo'));
+  showTab('p-memo',tab);
+  wizReset();
+  WIZ.step='g';
+  window.__wizPreset={entryType:'cz',entryDetail:who};
+  window.scrollTo(0,0);
+}
 document.body.addEventListener('touchstart',function(e){
   const sbtn=e.target.closest('.sbtn');
   if(!sbtn)return;
   e.preventDefault();
-  const key=sbtn.dataset.key,d=parseInt(sbtn.dataset.d);
-  S[key]=Math.max(0,(S[key]||0)+d);
-  const el=document.getElementById('sv-'+key);
-  if(el)el.textContent=S[key];
-  if(key==='ep'||key==='hayajiro'){updateBonus();}
-  if(key==='ep'||key==='hayajiro_st'){updateST();}
-  saveState();
+  bump(sbtn.dataset.key,parseInt(sbtn.dataset.d));
 },{passive:false});
-
 document.body.addEventListener('click',function(e){
   const sbtn=e.target.closest('.sbtn');
-  if(sbtn){
-    const key=sbtn.dataset.key,d=parseInt(sbtn.dataset.d);
-    S[key]=Math.max(0,(S[key]||0)+d);
-    const el=document.getElementById('sv-'+key);
-    if(el)el.textContent=S[key];
-    if(key==='ep'||key==='hayajiro'){updateBonus();}
-    if(key==='ep'||key==='hayajiro_st'){updateST();}
-    saveState();return;
+  if(sbtn){bump(sbtn.dataset.key,parseInt(sbtn.dataset.d));return;}
+
+  const tog=e.target.closest('.toggle');
+  if(tog){
+    const key=tog.dataset.toggle;
+    bump(key,1);
+    tog.classList.add('on');
+    setTimeout(()=>tog.classList.remove('on'),260);
+    return;
   }
+
   const act=e.target.closest('[data-action]');
-  if(!act)return;
-  if(act.dataset.action==='calc'){
-    calc();
-    document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));
-    document.querySelectorAll('.page').forEach(x=>x.classList.remove('on'));
-    document.getElementById('p-result').classList.add('on');
-    document.querySelectorAll('.tab').forEach(t=>{if(t.getAttribute('onclick')&&t.getAttribute('onclick').includes('p-result'))t.classList.add('on');});
-    window.scrollTo(0,0);
+  if(act){
+    if(act.dataset.action==='calc'){
+      calc();
+      document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));
+      document.querySelectorAll('.page').forEach(x=>x.classList.remove('on'));
+      document.getElementById('p-result').classList.add('on');
+      document.querySelectorAll('.tab').forEach(t=>{if(t.getAttribute('onclick')&&t.getAttribute('onclick').includes('p-result'))t.classList.add('on');});
+      window.scrollTo(0,0);
+    }
+    if(act.dataset.action==='reset'){
+      ['bell','item_shobuyumi','item_miyama','item_kokichi','item_chukichi','item_daikichi',
+       'item_tsuranuki','item_mumeitanju','item_jiketsu','item_kurusukatana','item_mumeikendama',
+       'v1','v2','v3','v4','v5','v6','v7','v8','v9','v10','v11','v12','v13','v14','v15','v16','v17','v18','v19','v_none',
+       'ch_female','ch_male','ch_mibu','end_tekkageta','end_shugo','end_mizugi',
+       'tr_do','tr_gin','tr_kin','tr_kirin','tr_niji','renda44','renda55','renda66','renda77','win456','win666'
+      ].forEach(k=>{S[k]=0;const el=document.getElementById('sv-'+k);if(el)el.textContent='0';});
+      document.getElementById('result-main').classList.remove('show');
+      document.getElementById('result-chips').classList.remove('show');
+      document.getElementById('alerts-area').innerHTML='';
+      saveState();
+    }
+    if(act.dataset.action==='memo-reset'){
+      if(confirm('実戦メモの記録を全て削除します。よろしいですか？')){
+        RECORDS=[];
+        saveState();
+        renderHistory();
+        updateBottomBar();
+      }
+    }
+    return;
   }
-  if(act.dataset.action==='reset'){
-    Object.keys(S).forEach(k=>S[k]=0);
-    document.querySelectorAll('.sval').forEach(el=>el.textContent='0');
-    ['f-total','f-normal','f-bell'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
-    document.getElementById('result-main').classList.remove('show');
-    document.getElementById('result-chips').classList.remove('show');
-    document.getElementById('alerts-area').innerHTML='';
-    document.getElementById('zone-label').textContent='総G数入力で区間自動判定';
-    document.getElementById('bonus-auto').textContent='0';
-    document.getElementById('st-auto').textContent='0';
+
+  // 実戦メモウィザードのボタン
+  const wopt=e.target.closest('[data-wiz]');
+  if(wopt){wizHandle(wopt.dataset.wiz,wopt.dataset.val);return;}
+
+  const hdel=e.target.closest('.hdel');
+  if(hdel){
+    const idx=parseInt(hdel.dataset.idx);
+    const removed=RECORDS[idx];
+    RECORDS.splice(idx,1);
+    pushUndo({type:'record_delete',index:idx,record:removed});
     saveState();
+    renderHistory();
+    updateBottomBar();
+    return;
   }
 });
 
-['total','normal','bell'].forEach(k=>{
-  const el=document.getElementById('f-'+k);
-  if(el)el.addEventListener('input',function(){
-    S[k]=parseInt(this.value)||0;
-    if(k==='total')updateZoneLabel();
-    saveState();
+// ================================================================================
+//  実戦メモ：記録ウィザード
+// ================================================================================
+let WIZ={step:'g', g:null, entryType:null, entryDetail:null, result:null, bonusType:null, stEntered:null, stType:null};
+
+function wizReset(){
+  WIZ={step:'g', g:null, entryType:null, entryDetail:null, result:null, bonusType:null, stEntered:null, stType:null};
+  renderWizard();
+}
+
+function renderWizard(){
+  const body=document.getElementById('wiz-body');
+  const back=document.getElementById('wiz-back');
+  const prog=document.getElementById('wiz-prog');
+  back.style.visibility = WIZ.step==='g' ? 'hidden' : 'visible';
+
+  if(WIZ.step==='g'){
+    prog.textContent='STEP 1 / 当選G数';
+    body.innerHTML=`<div class="wiznum">
+      <div class="wizq">当選G数を入力（データランプ基準）</div>
+      <input type="number" inputmode="numeric" id="wiz-g-input" placeholder="例：320">
+      <div class="actrow"><div class="actbtn primary" style="flex:1" onclick="wizSubmitG()">次へ →</div></div>
+    </div>`;
+    return;
+  }
+  if(WIZ.step==='entry'){
+    prog.textContent='STEP 2 / 入り口選択';
+    body.innerHTML=`<div class="wizstep">
+      <div class="wizq">① 入り口を選択</div>
+      <div style="font-size:11px;color:#888;margin-bottom:6px;">周期</div>
+      <div class="optgrid" style="margin-bottom:10px;">
+        <div class="optbtn" data-wiz="entry-cycle" data-val="1">1周期</div>
+        <div class="optbtn" data-wiz="entry-cycle" data-val="2">2周期</div>
+        <div class="optbtn" data-wiz="entry-cycle" data-val="3">3周期</div>
+        <div class="optbtn" data-wiz="entry-cycle" data-val="4">4周期</div>
+        <div class="optbtn" data-wiz="entry-cycle" data-val="5">5周期</div>
+        <div class="optbtn" data-wiz="entry-cycle" data-val="6">6周期</div>
+        <div class="optbtn" data-wiz="entry-cycle" data-val="tencho">天井</div>
+      </div>
+      <div style="font-size:11px;color:#888;margin-bottom:6px;">CZ</div>
+      <div class="optgrid c2">
+        <div class="optbtn" data-wiz="entry-cz" data-val="mumei">無名</div>
+        <div class="optbtn" data-wiz="entry-cz" data-val="ikoma">生駒</div>
+        <div class="optbtn" data-wiz="entry-cz" data-val="dourin">銅藍</div>
+      </div>
+    </div>`;
+    return;
+  }
+  if(WIZ.step==='result'){
+    prog.textContent='STEP 3 / 結果';
+    const isCycle=WIZ.entryType==='cycle';
+    body.innerHTML=`<div class="wizstep">
+      <div class="wizq">② 結果</div>
+      <div class="optgrid c2">
+        <div class="optbtn" data-wiz="result" data-val="win">${isCycle?'当選':'成功'}</div>
+        <div class="optbtn" data-wiz="result" data-val="lose">${isCycle?'ハズレ':'失敗'}</div>
+      </div>
+    </div>`;
+    return;
+  }
+  if(WIZ.step==='bonus'){
+    prog.textContent='STEP 4 / ボーナス種類';
+    body.innerHTML=`<div class="wizstep">
+      <div class="wizq">③ ボーナス種類</div>
+      <div class="optgrid c2">
+        <div class="optbtn" data-wiz="bonus" data-val="episode">エピソード</div>
+        <div class="optbtn" data-wiz="bonus" data-val="shunjo">駿城</div>
+      </div>
+    </div>`;
+    return;
+  }
+  if(WIZ.step==='stenter'){
+    prog.textContent='STEP 4 / ST突入？';
+    body.innerHTML=`<div class="wizstep">
+      <div class="wizq">駿城 → ST突入？</div>
+      <div class="optgrid c2">
+        <div class="optbtn" data-wiz="stenter" data-val="yes">はい</div>
+        <div class="optbtn" data-wiz="stenter" data-val="no">いいえ</div>
+      </div>
+    </div>`;
+    return;
+  }
+  if(WIZ.step==='sttype'){
+    prog.textContent='STEP 5 / ST種類';
+    body.innerHTML=`<div class="wizstep">
+      <div class="wizq">④ ST種類</div>
+      <div class="optgrid c2">
+        <div class="optbtn" data-wiz="sttype" data-val="normal">通常ST</div>
+        <div class="optbtn" data-wiz="sttype" data-val="kageyuki">景之ST</div>
+        <div class="optbtn" data-wiz="sttype" data-val="shinkageyuki">真景之ST</div>
+        <div class="optbtn" data-wiz="sttype" data-val="urakageyuki">裏景之ST</div>
+      </div>
+    </div>`;
+    return;
+  }
+  if(WIZ.step==='payout'){
+    prog.textContent='STEP 6 / ST獲得枚数';
+    body.innerHTML=`<div class="wiznum">
+      <div class="wizq">⑤ ST獲得枚数（上位ST時のみ）</div>
+      <input type="number" inputmode="numeric" id="wiz-payout-input" placeholder="例：1200">
+      <div class="actrow"><div class="actbtn primary" style="flex:1" onclick="wizSubmitPayout()">記録を保存 →</div></div>
+    </div>`;
+    return;
+  }
+}
+
+function wizSubmitG(){
+  const v=parseInt(document.getElementById('wiz-g-input').value);
+  if(!v&&v!==0){alert('G数を入力してください');return;}
+  WIZ.g=v;
+  if(window.__wizPreset){
+    WIZ.entryType=window.__wizPreset.entryType;
+    WIZ.entryDetail=window.__wizPreset.entryDetail;
+    window.__wizPreset=null;
+    WIZ.step='result';
+  }else{
+    WIZ.step='entry';
+  }
+  renderWizard();
+}
+function wizSubmitPayout(){
+  const v=parseInt(document.getElementById('wiz-payout-input').value)||0;
+  WIZ.stPayout=v;
+  finalizeRecord();
+}
+function wizBack(){
+  const order=['g','entry','result','bonus','stenter','sttype','payout'];
+  const i=order.indexOf(WIZ.step);
+  if(i<=0){wizReset();return;}
+  // 直前ステップに単純に戻る（分岐は再現しないため一部リセット）
+  wizReset();
+}
+
+function wizHandle(kind,val){
+  if(kind==='entry-cycle'){
+    WIZ.entryType='cycle';WIZ.entryDetail=val;WIZ.step='result';renderWizard();return;
+  }
+  if(kind==='entry-cz'){
+    WIZ.entryType='cz';WIZ.entryDetail=val;WIZ.step='result';renderWizard();return;
+  }
+  if(kind==='result'){
+    WIZ.result=val;
+    if(val==='lose'){finalizeRecord();return;}
+    WIZ.step='bonus';renderWizard();return;
+  }
+  if(kind==='bonus'){
+    WIZ.bonusType=val;
+    if(val==='episode'){WIZ.step='sttype';renderWizard();return;}
+    WIZ.step='stenter';renderWizard();return;
+  }
+  if(kind==='stenter'){
+    WIZ.stEntered=(val==='yes');
+    if(!WIZ.stEntered){WIZ.stType='none';finalizeRecord();return;}
+    WIZ.step='sttype';renderWizard();return;
+  }
+  if(kind==='sttype'){
+    WIZ.stType=val;
+    if(val==='normal'){WIZ.stPayout=0;finalizeRecord();return;}
+    WIZ.step='payout';renderWizard();return;
+  }
+}
+
+function finalizeRecord(){
+  const rec={
+    g:WIZ.g, entryType:WIZ.entryType, entryDetail:WIZ.entryDetail,
+    result:WIZ.result, bonusType:WIZ.bonusType||null,
+    stType:WIZ.stType||null, stPayout: (WIZ.stPayout||0),
+    ts:Date.now()
+  };
+  RECORDS.push(rec);
+  pushUndo({type:'record_add',record:rec});
+  saveState();
+  wizReset();
+  renderHistory();
+  updateBottomBar();
+}
+
+const CYCLE_LABEL={1:'1周期',2:'2周期',3:'3周期',4:'4周期',5:'5周期',6:'6周期',tencho:'天井'};
+const CZ_LABEL={mumei:'無名CZ',ikoma:'生駒CZ',dourin:'銅藍CZ'};
+const ST_LABEL={normal:'通常ST',kageyuki:'景之ST',shinkageyuki:'真景之ST',urakageyuki:'裏景之ST',none:'ST入らず'};
+const BONUS_LABEL={episode:'エピソード',shunjo:'駿城'};
+
+function isUpperST(stType){return stType==='kageyuki'||stType==='shinkageyuki'||stType==='urakageyuki';}
+
+function updateBottomBar(){
+  updateUndoRedoButtons();
+  const sheet=document.getElementById('gd-sheet');
+  if(sheet&&sheet.classList.contains('show'))refreshGameDataPanel();
+}
+function bottomBarAdd(){
+  const tab=Array.from(document.querySelectorAll('.tab')).find(t=>t.getAttribute('onclick')&&t.getAttribute('onclick').includes('p-memo'));
+  showTab('p-memo',tab);
+  wizReset();
+  window.scrollTo(0,0);
+}
+
+function renderHistory(){
+  const list=document.getElementById('hist-list');
+  if(RECORDS.length===0){list.innerHTML='<div class="hitem" style="color:#555;">まだ記録がありません</div>';return;}
+  let cum=0;
+  let html='';
+  // 古い順に累計計算 → 新しい順に表示するため配列を作ってから反転
+  const rows=[];
+  RECORDS.forEach((r,idx)=>{
+    const isFail=(r.result==='lose');
+    if(!isFail){cum+=r.g;}
+    const entryLabel = r.entryType==='cycle' ? CYCLE_LABEL[r.entryDetail] : CZ_LABEL[r.entryDetail];
+    let line;
+    if(isFail){
+      line=`${r.g}G ${entryLabel} <span class="hres-lose">${r.entryType==='cycle'?'ハズレ':'失敗'}</span>`;
+    }else{
+      const bonusLabel = r.bonusType ? BONUS_LABEL[r.bonusType] : '';
+      const stLabel = ST_LABEL[r.stType]||'';
+      const payoutTxt = (r.stPayout>0) ? ` ${r.stPayout}枚` : '';
+      line=`${r.g}G(${cum}) ${bonusLabel} <span class="hres-win">${stLabel}</span>${payoutTxt}`;
+    }
+    rows.push({idx,line,upper:!isFail&&isUpperST(r.stType)});
+    if(!isFail&&isUpperST(r.stType)){cum=0;}
   });
+  // 新しい順に出力（ST終了区切りも含む）
+  let out=[];
+  rows.forEach((row,i)=>{
+    out.push(`<div class="hitem"><span><span class="hno">#${row.idx+1}</span> ${row.line}</span><span class="hdel" data-idx="${row.idx}">削除</span></div>`);
+    if(row.upper) out.push(`<div class="hdiv">────────── ST終了 ──────────</div>`);
+  });
+  list.innerHTML=out.reverse().join('');
+}
+
+// ================================================================================
+//  データ集計（実戦メモから）
+// ================================================================================
+function aggregateMemo(){
+  const agg={
+    totalG:0,
+    cycleAttempt:{1:0,2:0,3:0,4:0,5:0,6:0,tencho:0},
+    cycleWin:{1:0,2:0,3:0,4:0,5:0,6:0,tencho:0},
+    czAttempt:{mumei:0,ikoma:0,dourin:0},
+    czWin:{mumei:0,ikoma:0,dourin:0},
+    throughCount:0, // 現在の駿城スルー連続回数
+    throughEpisode:{0:{ep:0,tot:0},1:{ep:0,tot:0},2:{ep:0,tot:0}},
+    payout1200:{low:0,high:0,lowTot:0,highTot:0}, // 参考（設定不明のため実際は使わない）
+    bonusGDist:{le200:0,le350:0,tencho:0,total:0},
+  };
+  let through=0;
+  RECORDS.forEach(r=>{
+    agg.totalG+=r.g;
+    if(r.entryType==='cycle'){
+      agg.cycleAttempt[r.entryDetail]=(agg.cycleAttempt[r.entryDetail]||0)+1;
+      if(r.result==='win')agg.cycleWin[r.entryDetail]=(agg.cycleWin[r.entryDetail]||0)+1;
+    }else if(r.entryType==='cz'){
+      agg.czAttempt[r.entryDetail]=(agg.czAttempt[r.entryDetail]||0)+1;
+      if(r.result==='win')agg.czWin[r.entryDetail]=(agg.czWin[r.entryDetail]||0)+1;
+    }
+    if(r.result==='win'){
+      const bucket=Math.min(through,2);
+      agg.throughEpisode[bucket].tot++;
+      if(r.bonusType==='episode')agg.throughEpisode[bucket].ep++;
+      // ボーナス当選G数分布
+      agg.bonusGDist.total++;
+      if(r.g<=200)agg.bonusGDist.le200++;
+      if(r.g<=350)agg.bonusGDist.le350++;
+      if(r.entryDetail==='tencho')agg.bonusGDist.tencho++;
+      // スルー更新
+      if(r.bonusType==='shunjo' && r.stType==='none'){through++;}
+      else{through=0;}
+    }
+  });
+  return agg;
+}
+
+// 実戦メモから「初当り回数」「ST回数」「CZ突入回数」を自動集計
+function sessionStats(){
+  const bonusAuto=RECORDS.filter(r=>r.result==='win').length;
+  const stAuto=RECORDS.filter(r=>r.result==='win' && r.stType && r.stType!=='none').length;
+  const czAuto=RECORDS.filter(r=>r.entryType==='cz').length;
+  return {bonusAuto,stAuto,czAuto};
+}
+
+// ================================================================================
+//  遊技データ パネル（ボトムシート）
+// ================================================================================
+function openGameData(){
+  document.getElementById('gd-overlay').classList.add('show');
+  document.getElementById('gd-sheet').classList.add('show');
+  refreshGameDataPanel();
+}
+function closeGameData(){
+  const ts=document.getElementById('gd-total-start'),tn=document.getElementById('gd-total-now'),m=document.getElementById('gd-memo');
+  GAMEDATA.totalStart=parseInt(ts.value)||0;
+  GAMEDATA.totalNow=parseInt(tn.value)||0;
+  GAMEDATA.memo=m.value||'';
+  saveState();
+  document.getElementById('gd-overlay').classList.remove('show');
+  document.getElementById('gd-sheet').classList.remove('show');
+}
+function refreshGameDataPanel(){
+  const agg=aggregateMemo();
+  const stats=sessionStats();
+  const normalG=agg.totalG;
+  document.getElementById('gd-normal-auto').textContent=normalG+'G（記録'+RECORDS.length+'件分）';
+  document.getElementById('gd-bonus-total').textContent=(stats.bonusAuto+S.bonusAdj);
+  document.getElementById('gd-st-total').textContent=(stats.stAuto+S.stAdj);
+  document.getElementById('gd-cz-total').textContent=(stats.czAuto+S.czAdj);
+  const totalNow=parseInt((document.getElementById('gd-total-now')||{}).value)||GAMEDATA.totalNow||0;
+  const totalStart=parseInt((document.getElementById('gd-total-start')||{}).value)||GAMEDATA.totalStart||0;
+  const totalG=Math.max(totalNow-totalStart,0);
+  const rateEl=document.getElementById('gd-bell-rate');
+  if(S.bell>0 && totalG>0){rateEl.textContent='出現確率 1/'+(totalG/S.bell).toFixed(1);}
+  else{rateEl.textContent='出現確率 ---';}
+}
+function calcFromGameData(){
+  closeGameData();
+  calc();
+  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));
+  document.querySelectorAll('.page').forEach(x=>x.classList.remove('on'));
+  document.getElementById('p-result').classList.add('on');
+  document.querySelectorAll('.tab').forEach(t=>{if(t.getAttribute('onclick')&&t.getAttribute('onclick').includes('p-result'))t.classList.add('on');});
+  window.scrollTo(0,0);
+}
+document.addEventListener('input',function(e){
+  if(e.target.id==='gd-total-start'||e.target.id==='gd-total-now'){refreshGameDataPanel();}
 });
 
-// ====== 確率テーブル ======
+// ================================================================================
+//  ベイズ推定テーブル（スロタイガーnote 2026年6月実戦値）
+//  ※「低設定/設定4/設定5/設定6」等の粗い区分は 1-2-3 / 4 / 5 / 6 に割付（冒頭コメント参照）
+// ================================================================================
+const VSEL={
+  mumei_even:        [0.085,0.100,0.080,0.090,0.075,0.080],
+  mumei_even_strong: [0.010,0.015,0.005,0.015,0.005,0.025],
+  mumei_kakutei2:    [0.000,0.005,0.005,0.005,0.005,0.005],
+  shobu_even:        [0.085,0.100,0.065,0.090,0.065,0.080],
+  shobu_even_strong: [0.010,0.015,0.005,0.020,0.005,0.025],
+  ikoma_odd:         [0.070,0.055,0.080,0.055,0.070,0.055],
+  ikoma_odd_strong:  [0.010,0.010,0.025,0.010,0.025,0.010],
+  kurusu_odd:        [0.070,0.055,0.080,0.055,0.070,0.055],
+  kurusu_odd_strong: [0.010,0.010,0.025,0.010,0.025,0.010],
+  kageyuki_weak:     [0.100,0.100,0.100,0.130,0.145,0.160],
+  kageyuki_mid:      [0.010,0.010,0.010,0.020,0.020,0.020],
+  kageyuki_strong:   [0.005,0.005,0.005,0.010,0.010,0.010],
+  voice_none:        [0.000,0.000,0.000,0.000,0.005,0.005],
+  ch_female:         [0.523,0.523,0.523,0.563,0.388,0.615],
+  ch_male:           [0.477,0.477,0.477,0.420,0.597,0.360],
+  ch_mibu:           [0.000,0.000,0.000,0.017,0.015,0.024],
+  end_shugo:         [0.025,0.025,0.025,0.040,0.037,0.103],
+  end_mizugi:        [0.000,0.000,0.000,0.000,0.000,0.027],
+  // アイテムくじ（設定1〜6直接値・実戦値＋公式解析からの逆算推定 2026/7時点）
+  item_shobuyumi:    [0.070,0.080,0.090,0.110,0.130,0.145],
+  item_miyama:       [0.002,0.003,0.005,0.007,0.009,0.010],
+  item_kokichi:      [0.000,0.020,0.020,0.020,0.020,0.045],
+  item_chukichi:     [0.000,0.000,0.000,0.005,0.005,0.005],
+  item_daikichi:     [0.000,0.000,0.000,0.000,0.000,0.0075],
+  item_tsuranuki:    [0.310,0.300,0.290,0.230,0.270,0.265],
+  item_mumeitanju:   [0.250,0.240,0.200,0.230,0.230,0.225],
+  item_jiketsu:      [0.160,0.200,0.220,0.230,0.220,0.210],
+  item_kurusukatana: [0.060,0.050,0.040,0.030,0.030,0.025],
+  item_mumeikendama: [0.060,0.060,0.060,0.060,0.060,0.060],
+};
+function getCat(key){
+  const map={
+    v1:'mumei_even',v2:'mumei_even_strong',v3:'mumei_kakutei2',
+    v4:'shobu_even',v5:'shobu_even',v6:'shobu_even',v7:'shobu_even',v8:'shobu_even_strong',
+    v9:'ikoma_odd',v10:'ikoma_odd',v11:'ikoma_odd',v12:'ikoma_odd',v13:'ikoma_odd_strong',
+    v14:'kurusu_odd',v15:'kurusu_odd',v16:'kurusu_odd_strong',
+    v17:'kageyuki_weak',v18:'kageyuki_mid',v19:'kageyuki_strong',v_none:'voice_none',
+    ch_female:'ch_female',ch_male:'ch_male',ch_mibu:'ch_mibu',
+    end_shugo:'end_shugo',end_mizugi:'end_mizugi',
+    item_shobuyumi:'item_shobuyumi',item_miyama:'item_miyama',item_kokichi:'item_kokichi',
+    item_chukichi:'item_chukichi',item_daikichi:'item_daikichi',
+    item_tsuranuki:'item_tsuranuki',item_mumeitanju:'item_mumeitanju',item_jiketsu:'item_jiketsu',
+    item_kurusukatana:'item_kurusukatana',item_mumeikendama:'item_mumeikendama',
+  };
+  return map[key]||null;
+}
+// no-rotScale カテゴリ（偶奇ボイス・キャラ紹介：サンプル数に関係なく序盤から満額の重み）
+const NO_ROTSCALE_CATS=new Set(['mumei_even','mumei_even_strong','shobu_even','shobu_even_strong','ikoma_odd','ikoma_odd_strong','kurusu_odd','kurusu_odd_strong','ch_female','ch_male','ch_mibu']);
+// カテゴリ別の重みティア（アイテムくじの精度差を反映）
+const CAT_WEIGHT_TIER={
+  item_shobuyumi:0.7, item_kokichi:0.7,           // 高：設定差が明確
+  item_miyama:0.4, item_tsuranuki:0.4, item_mumeitanju:0.4, item_jiketsu:0.4, // 中：方向性のみ確認
+  item_kurusukatana:0.08, item_mumeikendama:0.08, // 最小：判別価値ほぼ無し
+};
+// 確定示唆系（VSELの数値も併用。常にフル・rotScaleなし）
+const KAKUTEI_CATS=new Set(['mumei_kakutei2','end_mizugi','item_chukichi','item_daikichi']);
+// ハードクリップ（Sキー直指定・数値データの有無に関わらず、しきい値未満の設定を強制除外）
+const HARD_CLIP_RULES=[
+  ['v3',2],['end_mizugi',6],['item_kokichi',2],['item_chukichi',4],['item_daikichi',6],
+  ['tr_do',2],['tr_gin',3],['tr_kin',4],['tr_kirin',5],['tr_niji',6],
+  ['renda44',4],['renda55',5],['renda66',6],['renda77',6],
+  ['win456',4],['win666',6],
+];
+
+// 周期別 当選率テーブル [設定1-6]
+const CYCLE_WIN_RATE={
+  1:[0.33,0.33,0.33,0.33,0.33,0.33],
+  2:[0.33,0.33,0.33,0.40,0.50,0.60],
+  3:[0.184,0.238,0.211,0.285,0.324,0.371],
+  4:[0.336,0.352,0.363,0.402,0.434,0.469],
+  5:[0.33,0.33,0.33,0.33,0.33,0.33],
+  6:[1.00,1.00,1.00,1.00,1.00,1.00],
+  tencho:[1.00,1.00,1.00,1.00,1.00,1.00],
+};
+// 周期の重み（2・3周期は重み高め）
+const CYCLE_WEIGHT={1:0.5,2:1.0,3:1.0,4:0.6,5:0.2,6:0.05,tencho:0.05};
+
+// CZ成功率テーブル [設定1-6]（低設定/4以上/5以上/6 の粗い区分を割付）
+const CZ_WIN_RATE={
+  mumei:[0.377,0.377,0.377,0.397,0.424,0.348],
+  ikoma:[0.428,0.428,0.428,0.625,0.561,0.541],
+  dourin:[0.788,0.788,0.788,0.828,0.857,0.773],
+};
+const CZ_WEIGHT=0.6;
+
+// スルー回数別エピボ率（低設定/高設定の二区分→1-3/4-6に割付）「重要ポイント」
+const THROUGH_EPIBO={
+  0:[0.450,0.450,0.450,0.395,0.395,0.395],
+  1:[0.492,0.492,0.492,0.633,0.633,0.633],
+  2:[0.576,0.576,0.576,0.862,0.862,0.862],
+};
+const THROUGH_WEIGHT=0.8;
+
+// ⑨ CZ到達pt分布：76pt以上に到達した割合 [設定1-6]（低設定/4以上/5以上/6の粗い区分を割付）
+const PT_HIGH76={
+  mumei:[0.575,0.575,0.575,0.480,0.605,0.372],
+  ikoma:[0.616,0.616,0.616,0.591,0.607,0.614],
+};
+const PT_WEIGHT=0.35; // サンプル数依存・小サンプル注意のため中程度
+
+// ⑨ 単独チャンス目の発光率 [設定1-6]（低設定〜高設定の2区分→1-3/6に割付、4・5は補間）
+const HIKARI_RATE={
+  mumei:[0.14,0.145,0.15,0.17,0.185,0.20],
+  ikoma:[0.12,0.125,0.13,0.145,0.155,0.16],
+};
+const HIKARI_WEIGHT=0.3;
+
+// ボーナス確率・ST確率・下段ベル確率（なな徹まとめ・設定1〜6直接値）
 const BP={1:1/254.2,2:1/242.3,3:1/239.6,4:1/214.0,5:1/203.2,6:1/195.1};
 const SP={1:1/422.5,2:1/405.9,3:1/398.7,4:1/357.2,5:1/332.6,6:1/318.5};
 const BLP={1:1/121.1,2:1/114.4,3:1/112.8,4:1/106.2,5:1/104.2,6:1/99.1};
-
-// ====== ボイス選択率（スロタイガーnote実戦データ 2026年6月） ======
-// 推定低設定1230件 / 推定設定4:985件 / 推定設定5:553件 / 設定6:2433件
-// 設定2・3は設定1と設定4の間を補間
-const VSEL={
-  // 偶数通常（No1,4,5,6,7）
-  v_even_norm:  [0.082, 0.095, 0.088, 0.093, 0.075, 0.085],
-  // 偶数強（No2,8）予想
-  v_even_str:   [0.012, 0.015, 0.013, 0.020, 0.006, 0.026],
-  // 奇数通常（No9,10,11,12,14,15）
-  v_odd_norm:   [0.065, 0.056, 0.060, 0.053, 0.074, 0.052],
-  // 奇数強（No13,16）予想
-  v_odd_str:    [0.012, 0.009, 0.010, 0.018, 0.018, 0.012],
-  // 景之弱（No17）
-  v_kage17:     [0.105, 0.118, 0.131, 0.131, 0.137, 0.167],
-  // 景之中（No18）
-  v_kage18:     [0.008, 0.015, 0.022, 0.022, 0.025, 0.018],
-  // 景之強（No19）
-  v_kage19:     [0.005, 0.007, 0.009, 0.009, 0.009, 0.008],
-  // 無名特殊（No3）設定2以上確定
-  v_nana3:      [0.000, 0.004, 0.005, 0.005, 0.013, 0.002],
-  // ボイスなし 設定5以上確定
-  v_vnone:      [0.000, 0.000, 0.000, 0.000, 0.005, 0.002],
-};
-
-// ボイスNoとカテゴリの対応
-function getVCat(n){
-  if([1,4,5,6,7].includes(n)) return 'v_even_norm';
-  if([2,8].includes(n)) return 'v_even_str';
-  if([9,10,11,12,14,15].includes(n)) return 'v_odd_norm';
-  if([13,16].includes(n)) return 'v_odd_str';
-  if(n===17) return 'v_kage17';
-  if(n===18) return 'v_kage18';
-  if(n===19) return 'v_kage19';
-  if(n===3) return 'v_nana3';
-  return null;
-}
-
-// ====== キャラ紹介選択率（実戦データ反映）======
-const KSEL={
-  z0:{
-    f:[0.500,0.575,0.415,0.585,0.399,0.600],
-    m:[0.500,0.425,0.585,0.414,0.600,0.3985],
-    ma:[0,0,0,0.001,0.001,0.0015]
-  },
-  z1:{
-    f:[0.500,0.575,0.415,0.585,0.380,0.597],
-    m:[0.500,0.425,0.585,0.395,0.600,0.373],
-    ma:[0,0,0,0.020,0.020,0.030]
-  },
-  z2:{
-    f:[0.500,0.575,0.415,0.585,0.300,0.597],
-    m:[0.500,0.425,0.585,0.315,0.600,0.253],
-    ma:[0,0,0,0.100,0.100,0.150]
-  },
-};
-
-// ====== 周期当選率（公式値＋実戦値）======
-// 1周期: 設定差ほぼなし（約33%）
-// 2周期: 設定差大（実戦: 低設定31.1% 設定6:60.8%）
-// 3周期: 設定差大（公式: 設定1:18.4% 設定6:37.1%）
-// 4周期: 設定差中（公式: 設定1:33.6% 設定6:46.9%）
-const CYCLE={
-  p1:[0.269,0.290,0.310,0.354,0.340,0.321], // 1周期（設定差小・実戦値）
-  p2:[0.311,0.340,0.360,0.387,0.516,0.608], // 2周期（設定差大・実戦値）
-  p3:[0.184,0.238,0.211,0.285,0.324,0.371], // 3周期（公式値）
-  p4:[0.336,0.352,0.363,0.402,0.434,0.469], // 4周期（公式値）
-};
-
-// ====== エピソード比率（スルー回数別）======
-// 駆け抜け後2スルー時: 低設定57.6% vs 高設定86.2%（設定差大）
-// 下位ST後2スルー時: 低設定46.1% vs 高設定70.1%
-// 全体エピソード直撃率: 低設定〜高設定
-const EP_DIRECT={1:0.420,2:0.445,3:0.510,4:0.580,5:0.640,6:0.712};
-
-// ====== ST終了画面選択率 ======
-const ST_END={
-  shugo:[0.027,0.030,0.035,0.045,0.039,0.097], // 集合画面
-  mizugi:[0.000,0.000,0.000,0.000,0.000,0.029], // 水着
-};
-
-// ====== アイテムくじ選択率 ======
-const ITEM={
-  yumi: [0.046,0.060,0.075,0.084,0.122,0.113],  // 菖蒲の弓
-  ageha:[0.004,0.004,0.005,0.005,0.017,0.021],  // ミヤマカラスアゲハ
-};
+// 引き継ぎ資料の方針通り「参考程度・重み低め」。下段ベルは通常のみ使用可能なため中程度。
+const BP_WEIGHT=0.15, SP_WEIGHT=0.15, BELL_WEIGHT=0.4;
 
 const COLORS=['#6b6b70','#1d9e75','#378add','#ba7517','#993556','#e24b4a'];
 
+// ================================================================================
+//  計算エンジン
+// ================================================================================
 function calc(){
-  const total=S.total,normal=S.normal||S.total,bell=S.bell;
-  const bonus=S.bonus||0,st=S.st||0;
-  const ep=S.ep||0,hayajiro=S.hayajiro||0;
-  const epTotal=ep+hayajiro>0?ep+hayajiro:bonus;
-  const epRate=epTotal>0?ep/epTotal:-1;
+  const agg=aggregateMemo();
+  const totalSample = agg.totalG + Object.values(S).reduce((a,b)=>a+b,0);
 
-  // ボイス集計
-  const vc={};
-  Object.keys(VSEL).forEach(cat=>vc[cat]=0);
-  for(let n=1;n<=19;n++){
-    const cat=getVCat(n),v=S['v'+n]||0;
-    if(cat&&v>0){vc[cat]=(vc[cat]||0)+v;}
+  // rotScale：実戦メモの総回転数を基準に、500G以下=10%、5000Gでフル
+  const rotScale=Math.max(0.1,Math.min((agg.totalG-500)/4500,1));
+
+  const sc={1:0,2:0,3:0,4:0,5:0,6:0};
+
+  // --- 演出カウンター（ボイス・キャラ・ST終了・アイテム） ---
+  Object.keys(S).forEach(key=>{
+    const cat=getCat(key);
+    const cnt=S[key]||0;
+    if(!cat||cnt<=0)return;
+    const isKakutei=KAKUTEI_CATS.has(cat);
+    const noRot=NO_ROTSCALE_CATS.has(cat);
+    const tierW=CAT_WEIGHT_TIER[cat];
+    let w;
+    if(isKakutei) w=1.0;
+    else if(cat.startsWith('kageyuki')) w=Math.min(cnt/30,1)*0.5*rotScale; // 重み中・サンプル依存
+    else if(noRot) w=0.6; // rotScaleなし（偶奇ボイス・キャラ紹介）
+    else if(tierW!==undefined) w=Math.min(cnt/15,1)*tierW*rotScale; // アイテムくじの重みティア
+    else w=Math.min(cnt/15,1)*0.5*rotScale; // 通常（ST終了画面など）
+    for(let s=1;s<=6;s++){
+      sc[s]+=w*cnt*Math.log(Math.max(VSEL[cat][s-1],1e-9));
+    }
+  });
+
+  // --- ハードクリップ（しきい値未満の設定を強制的に除外） ---
+  HARD_CLIP_RULES.forEach(([key,minS])=>{
+    if((S[key]||0)>0){
+      for(let s=1;s<minS;s++){ sc[s]=-1e9; }
+    }
+  });
+
+  // --- 周期別当選/ハズレ（実戦メモ） ---
+  Object.keys(agg.cycleAttempt).forEach(cyc=>{
+    const attempts=agg.cycleAttempt[cyc];
+    if(!attempts)return;
+    const wins=agg.cycleWin[cyc];
+    const wgt=CYCLE_WEIGHT[cyc]!==undefined?CYCLE_WEIGHT[cyc]:0.3;
+    for(let s=1;s<=6;s++){
+      const p=Math.min(Math.max(CYCLE_WIN_RATE[cyc][s-1],1e-6),1-1e-6);
+      sc[s]+=wgt*(wins*Math.log(p)+(attempts-wins)*Math.log(1-p));
+    }
+  });
+
+  // --- CZ成功/失敗（実戦メモ） ---
+  Object.keys(agg.czAttempt).forEach(cz=>{
+    const attempts=agg.czAttempt[cz];
+    if(!attempts)return;
+    const wins=agg.czWin[cz];
+    for(let s=1;s<=6;s++){
+      const p=Math.min(Math.max(CZ_WIN_RATE[cz][s-1],1e-6),1-1e-6);
+      sc[s]+=CZ_WEIGHT*(wins*Math.log(p)+(attempts-wins)*Math.log(1-p));
+    }
+  });
+
+  // --- スルー回数別エピボ率（実戦メモ・重要ポイント） ---
+  [0,1,2].forEach(bucket=>{
+    const tot=agg.throughEpisode[bucket].tot;
+    if(!tot)return;
+    const ep=agg.throughEpisode[bucket].ep;
+    for(let s=1;s<=6;s++){
+      const p=Math.min(Math.max(THROUGH_EPIBO[bucket][s-1],1e-6),1-1e-6);
+      sc[s]+=THROUGH_WEIGHT*(ep*Math.log(p)+(tot-ep)*Math.log(1-p));
+    }
+  });
+
+  // --- ⑨ CZ到達pt分布（無名/生駒別・76pt以上到達率） ---
+  [['mumei',MUMEI_PT_LOG],['ikoma',IKOMA_PT_LOG]].forEach(([who,log])=>{
+    const tot=log.length;
+    if(!tot)return;
+    const high=log.filter(pt=>pt>=76).length;
+    for(let s=1;s<=6;s++){
+      const p=Math.min(Math.max(PT_HIGH76[who][s-1],1e-6),1-1e-6);
+      sc[s]+=PT_WEIGHT*(high*Math.log(p)+(tot-high)*Math.log(1-p));
+    }
+  });
+
+  // --- ⑨ 単独チャンス目の発光率（無名/生駒別） ---
+  [['mumei'],['ikoma']].forEach(([who])=>{
+    const normal=S[who+'_normal']||0, hikari=S[who+'_hikari']||0;
+    const tot=normal+hikari;
+    if(!tot)return;
+    for(let s=1;s<=6;s++){
+      const p=Math.min(Math.max(HIKARI_RATE[who][s-1],1e-6),1-1e-6);
+      sc[s]+=HIKARI_WEIGHT*(hikari*Math.log(p)+(normal)*Math.log(1-p));
+    }
+  });
+
+  // --- ボーナス確率・ST確率・下段ベル確率（遊技データパネルの数値） ---
+  const stats=sessionStats();
+  const bonusCount=stats.bonusAuto+S.bonusAdj;
+  const stCount=stats.stAuto+S.stAdj;
+  const normalG=agg.totalG; // 通常ゲーム数（実戦メモ集計）
+  const gdTotalStart=parseInt((document.getElementById('gd-total-start')||{}).value)||GAMEDATA.totalStart||0;
+  const gdTotalNow=parseInt((document.getElementById('gd-total-now')||{}).value)||GAMEDATA.totalNow||0;
+  const totalG=Math.max(gdTotalNow-gdTotalStart,0); // 総ゲーム数（下段ベルの分母）
+
+  if(normalG>0 && bonusCount>=0){
+    for(let s=1;s<=6;s++){
+      const p=Math.min(Math.max(BP[s],1e-6),1-1e-6);
+      sc[s]+=BP_WEIGHT*(bonusCount*Math.log(p)+(normalG-bonusCount)*Math.log(1-p));
+    }
   }
-  vc['v_nana3']=(S.v3||0);
-  vc['v_vnone']=(S.vnone||0);
-  const totalV=Object.values(vc).reduce((a,b)=>a+b,0);
-
-  // キャラ紹介
-  const kf=S.kf||0,km=S.km||0,kuma=S.kuma||0;
-  const totalK=kf+km+kuma;
-  const t=S.total;
-  const zk=t>7000&&t<=8000?'z2':t>5000&&t<=7000?'z1':'z0';
-  const KS=KSEL[zk];
-
-  // 周期
-  const p1a=S.p1a||0,p1h=S.p1h||0;
-  const p2a=S.p2a||0,p2h=S.p2h||0;
-  const p3a=S.p3a||0,p3h=S.p3h||0;
-  const p4a=S.p4a||0,p4h=S.p4h||0;
-
-  // ST終了画面
-  const ste_t=S.st_end_total||0;
-  const ste_s=S.st_end_shugo||0;
-  const ste_m=S.st_end_mizugi||0;
-
-  // アイテムくじ
-  const it_t=S.item_total||0;
-  const it_y=S.item_yumi||0;
-  const it_a=S.item_ageha||0;
-  const it_sho=S.item_sho||0;
-  const it_chu=S.item_chu||0;
-  const it_dai=S.item_dai||0;
-
-  // 確定示唆チェック
-  const has_nana3=vc['v_nana3']>0;
-  const has_vnone=vc['v_vnone']>0;
-  const has_mima=kuma>0;
-  const has_chu=it_chu>0;
-  const has_dai=it_dai>0;
-  const has_mizugi=ste_m>0;
-
-  // 総回転数スケール（500G以下=10%、5000Gでフル稼働）
-  const rotScale=Math.max(0.1,Math.min((total-500)/4500,1));
-
-  // 重み設定
-  const wBonus  =Math.min(bonus/20,1)*0.3*rotScale;
-  const wST     =Math.min(st/15,1)*0.3*rotScale;
-  const wBell   =Math.min(bell/50,1)*0.3*rotScale;
-  // 偶奇はrotScaleなし（試行回数のみで制御）
-  const wVoiceEO=Math.min(totalV/150,1)*0.5;
-  const wChara  =Math.min(totalK/20,1)*0.5;
-  const wEp     =Math.min(epTotal/20,1)*0.1*rotScale;
-  // 周期は重み高め
-  const wCycle1 =Math.min(p1a/20,1)*0.3*rotScale; // 1周期は設定差小
-  const wCycle2 =Math.min(p2a/20,1)*0.6*rotScale; // 2周期は設定差大
-  const wCycle3 =Math.min(p3a/20,1)*0.6*rotScale; // 3周期も設定差大
-  const wCycle4 =Math.min(p4a/20,1)*0.4*rotScale;
-  const wSTE    =Math.min(ste_t/20,1)*0.4*rotScale;
-  const wItem   =Math.min(it_t/20,1)*0.3*rotScale;
-
-  const sc={};
-  for(let s=1;s<=6;s++){
-    let lk=0;
-
-    // ボーナス確率
-    if(normal>0&&bonus>0&&wBonus>0){
-      const p=BP[s];
-      lk+=wBonus*(bonus*Math.log(p)+(normal-bonus)*Math.log(Math.max(1-p,1e-10)));
+  if(normalG>0 && stCount>=0){
+    for(let s=1;s<=6;s++){
+      const p=Math.min(Math.max(SP[s],1e-6),1-1e-6);
+      sc[s]+=SP_WEIGHT*(stCount*Math.log(p)+(normalG-stCount)*Math.log(1-p));
     }
-    // ST確率
-    if(normal>0&&st>0&&wST>0){
-      const p=SP[s];
-      lk+=wST*(st*Math.log(p)+(normal-st)*Math.log(Math.max(1-p,1e-10)));
+  }
+  if(totalG>0 && S.bell>=0){
+    for(let s=1;s<=6;s++){
+      const p=Math.min(Math.max(BLP[s],1e-6),1-1e-6);
+      sc[s]+=BELL_WEIGHT*(S.bell*Math.log(p)+(totalG-S.bell)*Math.log(1-p));
     }
-    // 下段ベル
-    if(total>0&&bell>0&&wBell>0){
-      const p=BLP[s];
-      lk+=wBell*(bell*Math.log(p)+(total-bell)*Math.log(Math.max(1-p,1e-10)));
-    }
-    // ボイス
-    if(totalV>0){
-      Object.keys(VSEL).forEach(cat=>{
-        const cnt=vc[cat]||0;
-        if(cnt>0){
-          let w;
-          if(cat==='v_nana3'||cat==='v_vnone') w=1.0;
-          else if(cat==='v_kage18'||cat==='v_kage19') w=0.5;
-          else if(cat==='v_kage17') w=0.3;
-          else w=wVoiceEO;
-          lk+=w*cnt*Math.log(Math.max(VSEL[cat][s-1],1e-9));
-        }
-      });
-    }
-    // キャラ紹介
-    if(totalK>0){
-      if(kf>0) lk+=wChara*kf*Math.log(Math.max(KS.f[s-1],1e-9));
-      if(km>0) lk+=wChara*km*Math.log(Math.max(KS.m[s-1],1e-9));
-      if(kuma>0) lk+=1.0*kuma*Math.log(Math.max(KS.ma[s-1],1e-9));
-    }
-    // 周期
-    if(p1a>0&&wCycle1>0){const p=CYCLE.p1[s-1];lk+=wCycle1*(p1h*Math.log(Math.max(p,1e-9))+(p1a-p1h)*Math.log(Math.max(1-p,1e-9)));}
-    if(p2a>0&&wCycle2>0){const p=CYCLE.p2[s-1];lk+=wCycle2*(p2h*Math.log(Math.max(p,1e-9))+(p2a-p2h)*Math.log(Math.max(1-p,1e-9)));}
-    if(p3a>0&&wCycle3>0){const p=CYCLE.p3[s-1];lk+=wCycle3*(p3h*Math.log(Math.max(p,1e-9))+(p3a-p3h)*Math.log(Math.max(1-p,1e-9)));}
-    if(p4a>0&&wCycle4>0){const p=CYCLE.p4[s-1];lk+=wCycle4*(p4h*Math.log(Math.max(p,1e-9))+(p4a-p4h)*Math.log(Math.max(1-p,1e-9)));}
-    // エピソード比率
-    if(epTotal>0&&epRate>=0&&wEp>0){
-      const p=EP_DIRECT[s];
-      lk+=wEp*(ep*Math.log(Math.max(p,1e-9))+(epTotal-ep)*Math.log(Math.max(1-p,1e-9)));
-    }
-    // ST終了画面
-    if(ste_t>0&&wSTE>0){
-      if(ste_s>0){const p=ST_END.shugo[s-1];lk+=wSTE*ste_s*Math.log(Math.max(p,1e-9));}
-      const ste_def=ste_t-ste_s-ste_m;
-      if(ste_def>0){const p=Math.max(1-ST_END.shugo[s-1]-ST_END.mizugi[s-1],0.001);lk+=wSTE*ste_def*Math.log(p);}
-    }
-    // アイテムくじ
-    if(it_t>0&&wItem>0){
-      if(it_y>0){const p=ITEM.yumi[s-1];lk+=wItem*it_y*Math.log(Math.max(p,1e-9));}
-      if(it_a>0){const p=ITEM.ageha[s-1];lk+=wItem*it_a*Math.log(Math.max(p,1e-9));}
-    }
-
-    // 確定示唆クリップ
-    if(has_nana3&&s===1) lk=-1e9;
-    if(has_vnone&&s<=4) lk=-1e9;
-    if(has_mima&&s<=3) lk=-1e9;
-    if(has_chu&&s<=3) lk=-1e9;
-    if(has_dai&&s<=4) lk=-1e9;
-    if(has_mizugi&&s<=4) lk=-1e9;
-    if(it_sho>0&&s===1) lk=-1e9;
-
-    sc[s]=lk;
   }
 
   // softmax
-  const mx=Math.max(...Object.values(sc));
-  let se=0;const ex={};
-  for(let s=1;s<=6;s++){ex[s]=Math.exp(sc[s]-mx);se+=ex[s];}
-  const pr={};
-  for(let s=1;s<=6;s++)pr[s]=ex[s]/se;
+  const maxLk=Math.max(...Object.values(sc));
+  let sumE=0;const expS={};
+  for(let s=1;s<=6;s++){expS[s]=Math.exp(sc[s]-maxLk);sumE+=expS[s];}
+  const probs={};
+  for(let s=1;s<=6;s++)probs[s]=expS[s]/sumE;
 
-  // 信頼度
-  const allW=[wBonus,wST,wBell,wVoiceEO,wChara,wEp,wCycle1,wCycle2,wCycle3,wCycle4,wSTE,wItem];
-  const actW=allW.filter(w=>w>0);
-  const trustScore=rotScale*(actW.length>0?Math.min(actW.reduce((a,b)=>a+b,0)/actW.length/0.5,1):0);
-  const trustPct=Math.round(trustScore*100);
+  // --- 描画：バー ---
+  let bh='';
+  for(let s=1;s<=6;s++){
+    const pct=Math.round(probs[s]*100);
+    bh+=`<div class="brow"><div class="blabel" style="color:${COLORS[s-1]}">設定${s}</div><div class="btrack"><div class="bfill" style="width:${pct}%;background:${COLORS[s-1]}"><span class="bpct">${pct>10?pct+'%':''}</span></div></div><div class="bnum">${pct}%</div></div>`;
+  }
+  let topS=1,topP=0;
+  for(let s=1;s<=6;s++)if(probs[s]>topP){topP=probs[s];topS=s;}
+  const hi56=Math.round((probs[5]+probs[6])*100);
+  const lo123=Math.round((probs[1]+probs[2]+probs[3])*100);
+  const even=Math.round((probs[2]+probs[4]+probs[6])*100);
+  const odd=Math.round((probs[1]+probs[3]+probs[5])*100);
+
+  const trustPct=Math.round(rotScale*100);
   let trustLabel,trustColor;
   if(trustPct<25){trustLabel='⚠️ 参考程度（サンプル不足）';trustColor='#e24b4a';}
   else if(trustPct<50){trustLabel='△ やや不安定';trustColor='#ba7517';}
   else if(trustPct<75){trustLabel='○ ある程度信頼できる';trustColor='#378add';}
   else{trustLabel='◎ 精度高い';trustColor='#1d9e75';}
-
-  // バー描画
-  let bh=`<div style="padding:8px 14px 4px;display:flex;align-items:center;gap:8px;">
-    <span style="font-size:10px;color:#888;white-space:nowrap;">判別信頼度</span>
-    <div style="flex:1;height:6px;background:#252535;border-radius:3px;overflow:hidden;">
-      <div style="width:${trustPct}%;height:100%;background:${trustColor};border-radius:3px;transition:width .6s;"></div>
+  const trustBar=`<div style="padding:8px 14px 4px;display:flex;align-items:center;gap:8px;">
+    <span style="font-size:10px;color:#888;white-space:nowrap;">判別信頼度（実戦メモ${agg.totalG}G基準）</span>
+    <div style="flex:1;height:6px;background:#1c1c1c;border-radius:3px;overflow:hidden;">
+      <div style="width:${trustPct}%;height:100%;background:${trustColor};border-radius:3px;"></div>
     </div>
     <span style="font-size:10px;font-weight:700;color:${trustColor};white-space:nowrap;">${trustLabel}</span>
   </div>`;
-  for(let s=1;s<=6;s++){
-    const p=Math.round(pr[s]*100);
-    bh+=`<div class="brow"><div class="blabel" style="color:${COLORS[s-1]}">設定${s}</div><div class="btrack"><div class="bfill" style="width:${p}%;background:${COLORS[s-1]}"><span class="bpct">${p>10?p+'%':''}</span></div></div><div class="bnum">${p}%</div></div>`;
-  }
-  document.getElementById('bars').innerHTML=bh;
+  document.getElementById('bars').innerHTML=trustBar+bh;
 
-  let top=1,tp=0;
-  for(let s=1;s<=6;s++)if(pr[s]>tp){tp=pr[s];top=s;}
-  const hi56=Math.round((pr[5]+pr[6])*100);
-  const lo123=Math.round((pr[1]+pr[2]+pr[3])*100);
-  const even=Math.round((pr[2]+pr[4]+pr[6])*100);
-  const odd=Math.round((pr[1]+pr[3]+pr[5])*100);
-
-  document.getElementById('vmain').innerHTML=`最有力：<span style="color:${COLORS[top-1]}">設定${top}</span>（${Math.round(tp*100)}%）`;
+  document.getElementById('vmain').innerHTML=`最有力：<span style="color:${COLORS[topS-1]}">設定${topS}</span>（${Math.round(topP*100)}%）`;
   document.getElementById('vtags').innerHTML=
     `<span class="vtag thi">高設定5・6 ${hi56}%</span>`+
     `<span class="vtag tlo">低設定1〜3 ${lo123}%</span>`+
@@ -701,75 +1375,85 @@ function calc(){
     `<span class="vtag tod">奇数 ${odd}%</span>`;
 
   let msg='';
-  if(pr[6]>0.55)msg='★ 設定6が濃厚！閉店まで継続を推奨';
-  else if(pr[5]+pr[6]>0.65)msg='▲ 高設定（5・6）が濃厚';
-  else if(pr[4]+pr[5]+pr[6]>0.65)msg='△ 設定4以上の可能性あり';
-  else if(pr[1]+pr[2]>0.65)msg='▼ 低設定が濃厚。見切りを検討';
+  if(probs[6]>0.55)msg='★ 設定6が濃厚！閉店まで継続を推奨';
+  else if(probs[5]+probs[6]>0.65)msg='▲ 高設定（5・6）が濃厚';
+  else if(probs[4]+probs[5]+probs[6]>0.65)msg='△ 設定4以上の可能性あり';
+  else if(probs[1]+probs[2]>0.65)msg='▼ 低設定が濃厚。見切りを検討';
   else msg='△ 判別困難。サンプルを増やして再判定';
   document.getElementById('vmsg').textContent=msg;
 
-  // アラート
+  // アラート（ハードクリップ系が出た項目を自動表示）
+  const CLIP_LABEL={
+    v3:'無名ボイス「設定2以上確定」', end_mizugi:'ST終了画面「水着」',
+    item_kokichi:'アイテムくじ「小吉」', item_chukichi:'アイテムくじ「中吉」', item_daikichi:'アイテムくじ「大吉」',
+    tr_do:'銅トロフィー', tr_gin:'銀トロフィー', tr_kin:'金トロフィー', tr_kirin:'キリン柄トロフィー', tr_niji:'虹トロフィー',
+    renda44:'連打+44', renda55:'連打+55', renda66:'連打+66', renda77:'連打+77',
+    win456:'獲得枚数456枚OVER', win666:'獲得枚数666枚OVER',
+  };
   let ah='';
-  if(has_dai) ah+=`<div class="alert aok">✓ 大吉 ${it_dai}回 → 設定6濃厚！</div>`;
-  if(has_mizugi) ah+=`<div class="alert aok">✓ 水着画面 ${ste_m}回 → 設定6濃厚！</div>`;
-  if(vc['v_kage19']>0) ah+=`<div class="alert aok">✓ No19「今年は最後かな」${vc['v_kage19']}回 → 設定6濃厚</div>`;
-  if(vc['v_kage18']>0) ah+=`<div class="alert aok">✓ No18「私は…ヒトか、カバネか！？」${vc['v_kage18']}回 → 高設定示唆（中）</div>`;
-  if(vc['v_kage17']>0) ah+=`<div class="alert awk">✓ No17「なぜ言わなかった…」${vc['v_kage17']}回 → 高設定示唆（弱）</div>`;
-  if(has_chu) ah+=`<div class="alert aok">✓ 中吉 ${it_chu}回 → 設定4以上確定！</div>`;
-  if(has_mima) ah+=`<div class="alert aok">✓ 美馬 ${kuma}回 → 設定4以上確定！</div>`;
-  if(has_nana3) ah+=`<div class="alert aok">✓ No3「やっぱりこの台…」${vc['v_nana3']}回 → 設定2以上確定</div>`;
-  if(has_vnone) ah+=`<div class="alert aok">✓ ボイスなし ${vc['v_vnone']}回 → 設定5以上確定</div>`;
-  if(it_sho>0) ah+=`<div class="alert aok">✓ 小吉 ${it_sho}回 → 設定2以上確定</div>`;
+  HARD_CLIP_RULES.forEach(([key,minS])=>{
+    const cnt=S[key]||0;
+    if(cnt>0){
+      const label=CLIP_LABEL[key]||key;
+      const suffix=minS>=6?'設定6確定！':`設定${minS}以上確定！`;
+      ah+=`<div class="alert aok">✓ ${label} ${cnt}回 → ${suffix}</div>`;
+    }
+  });
   document.getElementById('alerts-area').innerHTML=ah;
 
-  // データ分析チップ
+  // データ分析チップ（実戦メモ集計）
   let ch='';
-  if(normal>0&&bonus>0){
-    const r=Math.round(normal/bonus);
-    const bpVals={1:254,2:242,3:240,4:214,5:203,6:195};
-    let bc=1,bd=999;for(let s=1;s<=6;s++){const d=Math.abs(r-bpVals[s]);if(d<bd){bd=d;bc=s;}}
-    ch+=`<span class="chip">ボーナス確率 1/${r} → 設定${bc}に最も近い</span>`;
+  ch+=`<span class="chip">通常時総回転数 ${agg.totalG}G</span>`;
+  if(bonusCount>0&&normalG>0)ch+=`<span class="chip">ボーナス確率 1/${(normalG/bonusCount).toFixed(1)}</span>`;
+  if(stCount>0&&normalG>0)ch+=`<span class="chip">ST確率 1/${(normalG/stCount).toFixed(1)}</span>`;
+  if(S.bell>0&&totalG>0)ch+=`<span class="chip">下段ベル確率 1/${(totalG/S.bell).toFixed(1)}</span>`;
+  if(MUMEI_PT_LOG.length>0)ch+=`<span class="chip">無名CZ 76pt以上到達率 ${Math.round(MUMEI_PT_LOG.filter(p=>p>=76).length/MUMEI_PT_LOG.length*100)}%（${MUMEI_PT_LOG.length}件）</span>`;
+  if(IKOMA_PT_LOG.length>0)ch+=`<span class="chip">生駒CZ 76pt以上到達率 ${Math.round(IKOMA_PT_LOG.filter(p=>p>=76).length/IKOMA_PT_LOG.length*100)}%（${IKOMA_PT_LOG.length}件）</span>`;
+  if((S.mumei_normal+S.mumei_hikari)>0)ch+=`<span class="chip">無名 発光率 ${Math.round(S.mumei_hikari/(S.mumei_normal+S.mumei_hikari)*100)}%</span>`;
+  if((S.ikoma_normal+S.ikoma_hikari)>0)ch+=`<span class="chip">生駒 発光率 ${Math.round(S.ikoma_hikari/(S.ikoma_normal+S.ikoma_hikari)*100)}%</span>`;
+  Object.keys(agg.cycleAttempt).forEach(cyc=>{
+    const a=agg.cycleAttempt[cyc];
+    if(a>0){
+      const w=agg.cycleWin[cyc];
+      ch+=`<span class="chip">${CYCLE_LABEL[cyc]} 当選率 ${Math.round(w/a*100)}%（${w}/${a}）</span>`;
+    }
+  });
+  Object.keys(agg.czAttempt).forEach(cz=>{
+    const a=agg.czAttempt[cz];
+    if(a>0){
+      const w=agg.czWin[cz];
+      ch+=`<span class="chip">${CZ_LABEL[cz]} 成功率 ${Math.round(w/a*100)}%（${w}/${a}）</span>`;
+    }
+  });
+  [0,1,2].forEach(b=>{
+    const t=agg.throughEpisode[b].tot;
+    if(t>0){
+      const e=agg.throughEpisode[b].ep;
+      ch+=`<span class="chip">${b===2?'2':b}スルー後エピボ率 ${Math.round(e/t*100)}%（${e}/${t}）</span>`;
+    }
+  });
+  if(agg.bonusGDist.total>0){
+    ch+=`<span class="chip">200G以内 ${Math.round(agg.bonusGDist.le200/agg.bonusGDist.total*100)}%</span>`;
+    ch+=`<span class="chip">350G以内 ${Math.round(agg.bonusGDist.le350/agg.bonusGDist.total*100)}%</span>`;
+    ch+=`<span class="chip">天井到達 ${agg.bonusGDist.tencho}回</span>`;
   }
-  if(normal>0&&st>0){
-    const r=Math.round(normal/st);
-    const spVals={1:423,2:406,3:399,4:357,5:333,6:319};
-    let sc2=1,sd=999;for(let s=1;s<=6;s++){const d=Math.abs(r-spVals[s]);if(d<sd){sd=d;sc2=s;}}
-    ch+=`<span class="chip">ST確率 1/${r} → 設定${sc2}に最も近い</span>`;
-  }
-  if(total>0&&bell>0){
-    const r=total/bell;
-    const blVals={1:121.1,2:114.4,3:112.8,4:106.2,5:104.2,6:99.1};
-    let blc=1,bld=999;for(let s=1;s<=6;s++){const d=Math.abs(r-blVals[s]);if(d<bld){bld=d;blc=s;}}
-    ch+=`<span class="chip">下段ベル 1/${r.toFixed(1)} → 設定${blc}に最も近い</span>`;
-  }
-  if(totalV>0){
-    const k=vc['v_kage17']+vc['v_kage18']+vc['v_kage19'];
-    const kpct=Math.round(k/totalV*100);
-    const kVals={1:12,2:13,3:14,4:16,5:18,6:20};
-    let kc=1,kd=999;for(let s=1;s<=6;s++){const d=Math.abs(kpct-kVals[s]);if(d<kd){kd=d;kc=s;}}
-    ch+=`<span class="chip">景之ボイス率 ${kpct}% → 設定${kc}に最も近い</span>`;
-    const ev=vc['v_even_norm']+vc['v_even_str'];
-    const od=vc['v_odd_norm']+vc['v_odd_str'];
-    if(ev+od>0) ch+=`<span class="chip">偶数:奇数 = ${ev}:${od}（偶数多→偶数設定寄り）</span>`;
-  }
-  if(epTotal>0&&ep>=0){
-    const epPct=Math.round(ep/epTotal*100);
-    const epVals={1:42,2:45,3:51,4:58,5:64,6:71};
-    let epc=1,epd=999;for(let s=1;s<=6;s++){const d=Math.abs(epPct-epVals[s]);if(d<epd){epd=d;epc=s;}}
-    ch+=`<span class="chip">エピソード率 ${epPct}% → 設定${epc}に最も近い</span>`;
-  }
-  if(p2a>0){const r=Math.round(p2h/p2a*100);const p2V={1:31,2:34,3:36,4:39,5:52,6:61};let p2c=1,p2d=999;for(let s=1;s<=6;s++){const d=Math.abs(r-p2V[s]);if(d<p2d){p2d=d;p2c=s;}}ch+=`<span class="chip">2周期当選率 ${r}% → 設定${p2c}に最も近い</span>`;}
-  if(p3a>0){const r=Math.round(p3h/p3a*100);const p3V={1:18,2:24,3:21,4:29,5:32,6:37};let p3c=1,p3d=999;for(let s=1;s<=6;s++){const d=Math.abs(r-p3V[s]);if(d<p3d){p3d=d;p3c=s;}}ch+=`<span class="chip">3周期当選率 ${r}% → 設定${p3c}に最も近い</span>`;}
-  if(p4a>0){const r=Math.round(p4h/p4a*100);const p4V={1:34,2:35,3:36,4:40,5:43,6:47};let p4c=1,p4d=999;for(let s=1;s<=6;s++){const d=Math.abs(r-p4V[s]);if(d<p4d){p4d=d;p4c=s;}}ch+=`<span class="chip">4周期当選率 ${r}% → 設定${p4c}に最も近い</span>`;}
-  if(ste_t>0&&ste_s>=0){const r=Math.round(ste_s/ste_t*100);ch+=`<span class="chip">集合画面率 ${r}%（設定6目安:9.7%、低設定:2.7%）</span>`;}
-  if(it_t>0&&it_y>=0){const r=Math.round(it_y/it_t*100);ch+=`<span class="chip">菖蒲の弓率 ${r}%（設定5以上目安:12%、低設定:4.6%）</span>`;}
+  document.getElementById('chips').innerHTML=ch||'<span class="chip">実戦メモにデータがありません</span>';
 
-  document.getElementById('chips').innerHTML=ch||'<span class="chip">データなし</span>';
   document.getElementById('result-main').classList.add('show');
   document.getElementById('result-chips').classList.add('show');
 }
 
+// 起動時
 loadState();
+renderPtButtons('mumei');
+renderPtButtons('ikoma');
+refreshPtDisplay('mumei');
+refreshPtDisplay('ikoma');
+if(S.cz_koukaku_mumei)document.getElementById('tg-koukaku-mumei').classList.add('on');
+if(S.cz_koukaku_ikoma)document.getElementById('tg-koukaku-ikoma').classList.add('on');
+renderWizard();
+renderHistory();
+updateBottomBar();
 </script>
 </body>
 </html>
