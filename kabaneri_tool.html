@@ -514,6 +514,7 @@ body{padding-bottom:150px;}
     <div class="gd-label">📊 設定推測</div>
     <button class="gd-calcbtn" onclick="calcFromGameData()">この内容で判別結果を計算する →</button>
     <div class="gd-note">※ベイズ推定による推測値。設定2〜5の演出確率は設定1・6などの集計値からの補間値を使用しています。下段ベル・ボーナス・ST確率は解析サイト公表値、加算式ポイント換算は6.5号機時代の推定値を含みます。</div>
+    <button class="gd-calcbtn" style="background:#252535;color:#e24b4a;margin-top:14px;" onclick="resetEverything()">🗑 全データを削除（実戦メモ・CZポイント・全カウンター）</button>
   </div>
 </div>
 
@@ -1117,6 +1118,36 @@ function calcFromGameData(){
 document.addEventListener('input',function(e){
   if(e.target.id==='gd-total-start'||e.target.id==='gd-total-now'){refreshGameDataPanel();}
 });
+
+function resetEverything(){
+  if(!confirm('実戦メモ・CZポイント・全カウンター・遊技データを全部削除します。元に戻せません。よろしいですか？'))return;
+  // 全カウンター（ボイス・キャラ・ST終了・アイテム・トロフィー・連打・獲得枚数・下段ベル・CZ調整分）を0に
+  Object.keys(S).forEach(k=>{S[k]=0;});
+  RECORDS=[];
+  MUMEI_PT_LOG=[];
+  IKOMA_PT_LOG=[];
+  GAMEDATA={totalStart:0,totalNow:0,memo:''};
+  UNDO_STACK=[];
+  REDO_STACK=[];
+  // 画面表示を全部更新
+  Object.keys(S).forEach(k=>{const el=document.getElementById('sv-'+k);if(el)el.textContent='0';});
+  ['tg-koukaku-mumei','tg-koukaku-ikoma'].forEach(id=>{const el=document.getElementById(id);if(el)el.classList.remove('on');});
+  refreshPtDisplay('mumei');refreshPtDisplay('ikoma');
+  refreshHikariDisplay('mumei');refreshHikariDisplay('ikoma');
+  renderPtButtons('mumei');renderPtButtons('ikoma');
+  document.getElementById('gd-total-start').value='';
+  document.getElementById('gd-total-now').value='';
+  document.getElementById('gd-memo').value='';
+  document.getElementById('bb-bell-count').textContent='0';
+  document.getElementById('result-main').classList.remove('show');
+  document.getElementById('result-chips').classList.remove('show');
+  document.getElementById('alerts-area').innerHTML='';
+  renderHistory();
+  refreshGameDataPanel();
+  updateUndoRedoButtons();
+  saveState();
+  alert('全データを削除しました');
+}
 
 // ================================================================================
 //  ベイズ推定テーブル（スロタイガーnote 2026年6月実戦値）
