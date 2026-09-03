@@ -11,21 +11,44 @@
 
 <!--
 ================================================================================
-  カバネリ海門決戦 設定判別アプリ（リニューアル版 v7）
+  カバネリ海門決戦 設定判別アプリ（リニューアル版 v8）
 ================================================================================
-  引き継ぎ指示書に基づき、汎用テンプレートをベースに全面リニューアル。
+  引き継ぎ指示書に基づき、汎用テンプレートをベースに全面リニューアル（v7）。
+  v8では2026年マイスロ集計結果②③・水着回転数別出現率・来栖の刀＆無名の
+  けん玉の否定示唆情報を追加反映。
 
-  【このファイルで採用した前提・簡略化について】
+  【v8で追加・変更した内容】
+  ・ボイス（技術介入時）：旧「女性/男性2分類＋レアパターン4種」を廃止し、
+    無名・菖蒲・生駒・来栖それぞれの「通常ボイス」「レア(強示唆)ボイス」＋
+    景之3段階＋確定系2種の計13カテゴリに全面差し替え（n=1824〜3795）。
+    強示唆枠(v_*_strong)には旧アプリの個別セリフ（シュコンシュコン等）の
+    ラベルを流用しているが、集計データ上は「(示唆強)予想」区分としての
+    数値であり、セリフとの厳密な対応は未確認（推定）。
+  ・キャラ紹介：旧「女性1-3合計/男性4-6合計/美馬」の3項目を廃止し、
+    無名・菖蒲・鮴侑那・生駒・来栖・景之・美馬の個別7項目に差し替え（n=468〜1432）。
+  ・アイテムくじ：全10項目の出現率をマイスロ集計値に更新（n=268〜701）。
+    うち「来栖の刀」「無名のけん玉」は判別価値ほぼ無しから
+    「特定設定の否定示唆」へ格上げ（来栖の刀＝設定2・3否定、
+    無名のけん玉＝設定1・3否定）。個別設定ごとの実測値が無いため、
+    「低設定」集計値を按分比2:0.5:0.5（来栖の刀）/0.5:2:0.5（けん玉）で
+    設定1/2/3に再分配する簡易処理を実装（VSELテーブル脚注参照）。
+  ・ST終了画面：鉄下駄に初めて設定別データが得られたため判別計算に使用開始
+    （他演出が出ない時の残り物的な数値のため弱い逆相関シグナル）。
+    水着は総回転数依存の出現率（〜4000G=0.2%/5000-7000G=5.0%/
+    7000-8000G=25.0%、8000G以降未取得）を参考情報としてUIに追加したが、
+    計算ロジックは複雑化を避けるため据え置き（設定6確定のハードクリップのみ）。
+
+  【v7からの継続事項】
   引き継ぎ資料の実戦値テーブルの一部は「低設定／設定4／設定5／設定6」
   「低設定／設定4以上／設定5以上／設定6」という粗い区分でしか与えられて
   いません。設定1〜6全てで個別の値が必要なベイズ計算のため、以下のルールで
   6段階に割り付けています（実データが手に入り次第、VSEL/各種テーブルの
   数値を書き換えてください）。
-    ・「低設定」表記 → 設定1・2・3に同じ値を適用
+    ・「低設定」表記 → 設定1・2・3に同じ値を適用（来栖の刀・けん玉は上記按分あり）
     ・「設定4以上」→ 設定4に適用／「設定5以上」→ 設定5に適用／「設定6」→設定6
   トロフィー（銅・銀・金・キリン・虹）、連打枚数（+44〜+77）、獲得枚数
-  （456枚・666枚OVER）、鉄下駄画面、下段ベル確率は実戦値の公表元が
-  無かったため、カウンターとしては実装しましたが判別計算には未使用です
+  （456枚・666枚OVER）、下段ベル確率は実戦値の公表元が無かったため、
+  カウンターとしては実装しましたが判別計算には未使用です
   （虹トロフィーのみ「高設定示唆」の参考アラートとして表示）。
   ボーナス当選G数分布・ST当選G数分布・上位ST獲得枚数の「駆け抜け後／
   下位ST後／上位ST後」の区分は実戦メモ集計のデータ分析欄に表示のみ行い、
@@ -347,13 +370,15 @@ body{padding-bottom:150px;}
 
   <div id="s-voice" class="subpage on">
     <div class="card">
-      <div class="vgroup">サンド目停止時のボイス</div>
-      <div class="vrow"><div class="vinfo"><div class="vtxt">下記以外の女性ボイス</div><span class="badge b-even">偶数設定示唆</span></div><div class="stepper"><div class="sbtn" data-key="v_female_even" data-d="-1">－</div><div class="sval" id="sv-v_female_even">0</div><div class="sbtn" data-key="v_female_even" data-d="1">＋</div></div></div>
-      <div class="vrow"><div class="vinfo"><div class="vtxt">下記以外の男性ボイス</div><span class="badge b-odd">設定3・5期待度UP</span></div><div class="stepper"><div class="sbtn" data-key="v_male_odd" data-d="-1">－</div><div class="sval" id="sv-v_male_odd">0</div><div class="sbtn" data-key="v_male_odd" data-d="1">＋</div></div></div>
-      <div class="vrow"><div class="vinfo"><div class="vtxt">無名「シュコンシュコン」</div><span class="badge b-even">偶数設定期待度UP（レアパターン）</span></div><div class="stepper"><div class="sbtn" data-key="v_mumei_shukon" data-d="-1">－</div><div class="sval" id="sv-v_mumei_shukon">0</div><div class="sbtn" data-key="v_mumei_shukon" data-d="1">＋</div></div></div>
-      <div class="vrow"><div class="vinfo"><div class="vtxt">菖蒲「おまんじゅうが食べたいな…」</div><span class="badge b-even">偶数設定期待度UP（レアパターン）</span></div><div class="stepper"><div class="sbtn" data-key="v_shobu_omanju" data-d="-1">－</div><div class="sval" id="sv-v_shobu_omanju">0</div><div class="sbtn" data-key="v_shobu_omanju" data-d="1">＋</div></div></div>
-      <div class="vrow"><div class="vinfo"><div class="vtxt">生駒「俺の誇れる俺になるんだあぁ！」</div><span class="badge b-odd">設定3・5期待度UP（レアパターン）</span></div><div class="stepper"><div class="sbtn" data-key="v_ikoma_ore" data-d="-1">－</div><div class="sval" id="sv-v_ikoma_ore">0</div><div class="sbtn" data-key="v_ikoma_ore" data-d="1">＋</div></div></div>
-      <div class="vrow"><div class="vinfo"><div class="vtxt">来栖「あの世で稽古を受けるといい」</div><span class="badge b-odd">設定3・5期待度UP（レアパターン）</span></div><div class="stepper"><div class="sbtn" data-key="v_kurusu_anoyo" data-d="-1">－</div><div class="sval" id="sv-v_kurusu_anoyo">0</div><div class="sbtn" data-key="v_kurusu_anoyo" data-d="1">＋</div></div></div>
+      <div class="vgroup">サンド目停止時のボイス（技術介入時・2026年マイスロ集計反映）</div>
+      <div class="vrow"><div class="vinfo"><div class="vtxt">無名（通常ボイス）</div><span class="badge b-even">偶数示唆</span></div><div class="stepper"><div class="sbtn" data-key="v_mumei_normal" data-d="-1">－</div><div class="sval" id="sv-v_mumei_normal">0</div><div class="sbtn" data-key="v_mumei_normal" data-d="1">＋</div></div></div>
+      <div class="vrow"><div class="vinfo"><div class="vtxt">無名「シュコンシュコン」等（レア）</div><span class="badge b-even">偶数示唆（強）</span></div><div class="stepper"><div class="sbtn" data-key="v_mumei_strong" data-d="-1">－</div><div class="sval" id="sv-v_mumei_strong">0</div><div class="sbtn" data-key="v_mumei_strong" data-d="1">＋</div></div></div>
+      <div class="vrow"><div class="vinfo"><div class="vtxt">菖蒲（通常ボイス）</div><span class="badge b-even">偶数示唆</span></div><div class="stepper"><div class="sbtn" data-key="v_shobu_normal" data-d="-1">－</div><div class="sval" id="sv-v_shobu_normal">0</div><div class="sbtn" data-key="v_shobu_normal" data-d="1">＋</div></div></div>
+      <div class="vrow"><div class="vinfo"><div class="vtxt">菖蒲「おまんじゅうが食べたいな…」（レア）</div><span class="badge b-even">偶数示唆（強）</span></div><div class="stepper"><div class="sbtn" data-key="v_shobu_strong" data-d="-1">－</div><div class="sval" id="sv-v_shobu_strong">0</div><div class="sbtn" data-key="v_shobu_strong" data-d="1">＋</div></div></div>
+      <div class="vrow"><div class="vinfo"><div class="vtxt">生駒（通常ボイス）</div><span class="badge b-odd">設定3・5示唆</span></div><div class="stepper"><div class="sbtn" data-key="v_ikoma_normal" data-d="-1">－</div><div class="sval" id="sv-v_ikoma_normal">0</div><div class="sbtn" data-key="v_ikoma_normal" data-d="1">＋</div></div></div>
+      <div class="vrow"><div class="vinfo"><div class="vtxt">生駒「俺の誇れる俺になるんだあぁ！」（レア）</div><span class="badge b-odd">設定3・5示唆（強）</span></div><div class="stepper"><div class="sbtn" data-key="v_ikoma_strong" data-d="-1">－</div><div class="sval" id="sv-v_ikoma_strong">0</div><div class="sbtn" data-key="v_ikoma_strong" data-d="1">＋</div></div></div>
+      <div class="vrow"><div class="vinfo"><div class="vtxt">来栖（通常ボイス）</div><span class="badge b-odd">設定3・5示唆</span></div><div class="stepper"><div class="sbtn" data-key="v_kurusu_normal" data-d="-1">－</div><div class="sval" id="sv-v_kurusu_normal">0</div><div class="sbtn" data-key="v_kurusu_normal" data-d="1">＋</div></div></div>
+      <div class="vrow"><div class="vinfo"><div class="vtxt">来栖「あの世で稽古を受けるといい」（レア）</div><span class="badge b-odd">設定3・5示唆（強）</span></div><div class="stepper"><div class="sbtn" data-key="v_kurusu_strong" data-d="-1">－</div><div class="sval" id="sv-v_kurusu_strong">0</div><div class="sbtn" data-key="v_kurusu_strong" data-d="1">＋</div></div></div>
       <div class="vrow"><div class="vinfo"><div class="vtxt">景之「なぜ言わなかった私をヒトだと!!」</div><span class="badge b-high">高設定期待度UP(弱)</span></div><div class="stepper"><div class="sbtn" data-key="v17" data-d="-1">－</div><div class="sval" id="sv-v17">0</div><div class="sbtn" data-key="v17" data-d="1">＋</div></div></div>
       <div class="vrow"><div class="vinfo"><div class="vtxt">景之「私は…ヒトか、カバネか!?」</div><span class="badge b-high">高設定期待度UP(中)</span></div><div class="stepper"><div class="sbtn" data-key="v18" data-d="-1">－</div><div class="sval" id="sv-v18">0</div><div class="sbtn" data-key="v18" data-d="1">＋</div></div></div>
       <div class="vrow"><div class="vinfo"><div class="vtxt">景之「今年は最後かな」</div><span class="badge b-high">高設定期待度UP(強)</span></div><div class="stepper"><div class="sbtn" data-key="v19" data-d="-1">－</div><div class="sval" id="sv-v19">0</div><div class="sbtn" data-key="v19" data-d="1">＋</div></div></div>
@@ -365,10 +390,14 @@ body{padding-bottom:150px;}
 
   <div id="s-chara" class="subpage">
     <div class="card">
-      <div class="ctitle">キャラ紹介（rotScaleなし・序盤から有効）</div>
-      <div class="vrow"><div class="thumb" style="color:#e0a0a0;"><img src="imgch_female.png" alt="" onerror="this.remove()"><svg class="icon-svg" viewBox="0 0 24 24"><circle cx="12" cy="6" r="3.2"/><path d="M6 21 Q6 13 12 13 Q18 13 18 21"/></svg></div><div class="vinfo"><div class="vno">女性キャラ</div><div class="vtxt">1〜3合計</div><span class="badge b-ref">設定6で出やすい傾向</span></div><div class="stepper"><div class="sbtn" data-key="ch_female" data-d="-1">－</div><div class="sval" id="sv-ch_female">0</div><div class="sbtn" data-key="ch_female" data-d="1">＋</div></div></div>
-      <div class="vrow"><div class="thumb" style="color:#8fbfe0;"><img src="imgch_male.png" alt="" onerror="this.remove()"><svg class="icon-svg" viewBox="0 0 24 24"><circle cx="12" cy="6" r="3.2"/><path d="M6 21 Q6 13 12 13 Q18 13 18 21"/></svg></div><div class="vinfo"><div class="vno">男性キャラ</div><div class="vtxt">4〜6合計</div><span class="badge b-ref">設定5で出やすい傾向</span></div><div class="stepper"><div class="sbtn" data-key="ch_male" data-d="-1">－</div><div class="sval" id="sv-ch_male">0</div><div class="sbtn" data-key="ch_male" data-d="1">＋</div></div></div>
-      <div class="vrow"><div class="thumb" style="color:#e0c274;"><img src="imgch_mibu.png" alt="" onerror="this.remove()"><svg class="icon-svg" viewBox="0 0 24 24"><circle cx="12" cy="6" r="3.2"/><path d="M6 21 Q6 13 12 13 Q18 13 18 21"/><path d="M5 5 Q12 -1 19 5" opacity="0.6"/></svg></div><div class="vinfo"><div class="vno">美馬</div><div class="vtxt">低設定では未確認</div><span class="badge b-high">高設定示唆</span></div><div class="stepper"><div class="sbtn" data-key="ch_mibu" data-d="-1">－</div><div class="sval" id="sv-ch_mibu">0</div><div class="sbtn" data-key="ch_mibu" data-d="1">＋</div></div></div>
+      <div class="ctitle">キャラ紹介（rotScaleなし・序盤から有効・2026年マイスロ集計反映）</div>
+      <div class="vrow"><div class="thumb" style="color:#e0a0a0;"><img src="imgch_female.png" alt="" onerror="this.remove()"><svg class="icon-svg" viewBox="0 0 24 24"><circle cx="12" cy="6" r="3.2"/><path d="M6 21 Q6 13 12 13 Q18 13 18 21"/></svg></div><div class="vinfo"><div class="vno">無名</div><span class="badge b-even">偶数示唆</span></div><div class="stepper"><div class="sbtn" data-key="ch_mumei" data-d="-1">－</div><div class="sval" id="sv-ch_mumei">0</div><div class="sbtn" data-key="ch_mumei" data-d="1">＋</div></div></div>
+      <div class="vrow"><div class="thumb" style="color:#e0a0a0;"><img src="imgch_female.png" alt="" onerror="this.remove()"><svg class="icon-svg" viewBox="0 0 24 24"><circle cx="12" cy="6" r="3.2"/><path d="M6 21 Q6 13 12 13 Q18 13 18 21"/></svg></div><div class="vinfo"><div class="vno">菖蒲</div><span class="badge b-even">偶数示唆</span></div><div class="stepper"><div class="sbtn" data-key="ch_shobu" data-d="-1">－</div><div class="sval" id="sv-ch_shobu">0</div><div class="sbtn" data-key="ch_shobu" data-d="1">＋</div></div></div>
+      <div class="vrow"><div class="thumb" style="color:#e0a0a0;"><img src="imgch_female.png" alt="" onerror="this.remove()"><svg class="icon-svg" viewBox="0 0 24 24"><circle cx="12" cy="6" r="3.2"/><path d="M6 21 Q6 13 12 13 Q18 13 18 21"/></svg></div><div class="vinfo"><div class="vno">鮴・侑那</div><span class="badge b-even">偶数示唆</span></div><div class="stepper"><div class="sbtn" data-key="ch_shishimo" data-d="-1">－</div><div class="sval" id="sv-ch_shishimo">0</div><div class="sbtn" data-key="ch_shishimo" data-d="1">＋</div></div></div>
+      <div class="vrow"><div class="thumb" style="color:#8fbfe0;"><img src="imgch_male.png" alt="" onerror="this.remove()"><svg class="icon-svg" viewBox="0 0 24 24"><circle cx="12" cy="6" r="3.2"/><path d="M6 21 Q6 13 12 13 Q18 13 18 21"/></svg></div><div class="vinfo"><div class="vno">生駒</div><span class="badge b-odd">設定3・5示唆</span></div><div class="stepper"><div class="sbtn" data-key="ch_ikoma" data-d="-1">－</div><div class="sval" id="sv-ch_ikoma">0</div><div class="sbtn" data-key="ch_ikoma" data-d="1">＋</div></div></div>
+      <div class="vrow"><div class="thumb" style="color:#8fbfe0;"><img src="imgch_male.png" alt="" onerror="this.remove()"><svg class="icon-svg" viewBox="0 0 24 24"><circle cx="12" cy="6" r="3.2"/><path d="M6 21 Q6 13 12 13 Q18 13 18 21"/></svg></div><div class="vinfo"><div class="vno">来栖</div><span class="badge b-odd">設定3・5示唆</span></div><div class="stepper"><div class="sbtn" data-key="ch_kurusu" data-d="-1">－</div><div class="sval" id="sv-ch_kurusu">0</div><div class="sbtn" data-key="ch_kurusu" data-d="1">＋</div></div></div>
+      <div class="vrow"><div class="thumb" style="color:#8fbfe0;"><img src="imgch_male.png" alt="" onerror="this.remove()"><svg class="icon-svg" viewBox="0 0 24 24"><circle cx="12" cy="6" r="3.2"/><path d="M6 21 Q6 13 12 13 Q18 13 18 21"/></svg></div><div class="vinfo"><div class="vno">景之</div><span class="badge b-odd">設定3・5示唆</span></div><div class="stepper"><div class="sbtn" data-key="ch_kageyuki" data-d="-1">－</div><div class="sval" id="sv-ch_kageyuki">0</div><div class="sbtn" data-key="ch_kageyuki" data-d="1">＋</div></div></div>
+      <div class="vrow"><div class="thumb" style="color:#e0c274;"><img src="imgch_mibu.png" alt="" onerror="this.remove()"><svg class="icon-svg" viewBox="0 0 24 24"><circle cx="12" cy="6" r="3.2"/><path d="M6 21 Q6 13 12 13 Q18 13 18 21"/><path d="M5 5 Q12 -1 19 5" opacity="0.6"/></svg></div><div class="vinfo"><div class="vno">美馬</div><div class="vtxt">低設定では未確認</div><span class="badge b-high">設定4以上示唆</span></div><div class="stepper"><div class="sbtn" data-key="ch_mibu" data-d="-1">－</div><div class="sval" id="sv-ch_mibu">0</div><div class="sbtn" data-key="ch_mibu" data-d="1">＋</div></div></div>
     </div>
     <button class="calcbtn" data-action="calc">計算して結果を見る →</button>
   </div>
@@ -376,9 +405,10 @@ body{padding-bottom:150px;}
   <div id="s-end" class="subpage">
     <div class="card">
       <div class="ctitle">ST終了画面</div>
-      <div class="vrow"><div class="thumb"><img src="imgend_tekkageta.png" alt="" onerror="this.remove()"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M4 18 Q4 12 9 11 L15 9 Q19 8 20 12 L20 16 Q20 18 18 18 Z"/></svg></div><div class="vinfo"><div class="vno">鉄下駄</div><div class="vtxt">実戦値未公表・参考値のみ</div><span class="badge b-ref">判別未使用</span></div><div class="stepper"><div class="sbtn" data-key="end_tekkageta" data-d="-1">－</div><div class="sval" id="sv-end_tekkageta">0</div><div class="sbtn" data-key="end_tekkageta" data-d="1">＋</div></div></div>
+      <div class="vrow"><div class="thumb"><img src="imgend_tekkageta.png" alt="" onerror="this.remove()"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M4 18 Q4 12 9 11 L15 9 Q19 8 20 12 L20 16 Q20 18 18 18 Z"/></svg></div><div class="vinfo"><div class="vno">鉄下駄</div><div class="vtxt">デフォルト画面（設定6で出にくい傾向）</div><span class="badge b-ref">参考（逆相関）</span></div><div class="stepper"><div class="sbtn" data-key="end_tekkageta" data-d="-1">－</div><div class="sval" id="sv-end_tekkageta">0</div><div class="sbtn" data-key="end_tekkageta" data-d="1">＋</div></div></div>
       <div class="vrow"><div class="thumb" style="color:#ba7517;"><img src="imgend_shugo.png" alt="" onerror="this.remove()"><svg class="icon-svg" viewBox="0 0 24 24"><circle cx="7" cy="8" r="2.2"/><circle cx="12" cy="7" r="2.2"/><circle cx="17" cy="8" r="2.2"/><path d="M3 20 Q3 14 7 14 Q9 14 9 17"/><path d="M9 20 Q9 13 12 13 Q15 13 15 20"/><path d="M15 17 Q15 14 17 14 Q21 14 21 20"/></svg></div><div class="vinfo"><div class="vno">集合</div><div class="vtxt">設定6で出やすい</div><span class="badge b-high">高設定示唆</span></div><div class="stepper"><div class="sbtn" data-key="end_shugo" data-d="-1">－</div><div class="sval" id="sv-end_shugo">0</div><div class="sbtn" data-key="end_shugo" data-d="1">＋</div></div></div>
       <div class="vrow"><div class="thumb" style="color:#e04040;"><img src="imgend_mizugi.png" alt="" onerror="this.remove()"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M2 12 Q6 8 10 12 Q14 16 18 12 Q20 10 22 12"/><path d="M2 17 Q6 13 10 17 Q14 21 18 17 Q20 15 22 17"/></svg></div><div class="vinfo"><div class="vno">水着</div><div class="vtxt">設定6のみ確認例あり</div><span class="badge b-kakutei">設定6濃厚</span></div><div class="stepper"><div class="sbtn" data-key="end_mizugi" data-d="-1">－</div><div class="sval" id="sv-end_mizugi">0</div><div class="sbtn" data-key="end_mizugi" data-d="1">＋</div></div></div>
+      <div class="dnote" style="margin:0 14px 12px;">【参考・判別計算には不使用】水着の出現率は総回転数依存（設定6のみ）：〜4000G=0.2%／5000〜7000G=5.0%／7000〜8000G=25.0%。8000G以降のデータは未取得のため、回転数が伸びるほど出現率自体が上がる可能性を踏まえて参考にしてください。</div>
     </div>
     <button class="calcbtn" data-action="calc">計算して結果を見る →</button>
   </div>
@@ -447,7 +477,7 @@ body{padding-bottom:150px;}
     <div class="ctitle">データ分析（実戦メモ集計）</div>
     <div class="chips" id="chips"></div>
   </div>
-  <div class="dnote">データ根拠：スロタイガーnote（2026年6月実戦値）／引き継ぎ指示書。設定1〜6への割付は一部推定を含みます（詳細はソース冒頭コメント参照）。</div>
+  <div class="dnote">データ根拠：スロタイガーnote（2026年6月実戦値）／マイスロ集計結果②③（技術介入時ボイス n=1824〜3795、キャラ紹介 n=468〜1432、アイテムくじ n=268〜701）／引き継ぎ指示書。設定1〜6への割付・来栖の刀とけん玉の否定示唆按分は一部推定を含みます（詳細はソース冒頭コメント参照）。</div>
   <button class="calcbtn" data-action="calc" style="margin-top:10px;">再計算</button>
   <button class="resetbtn" data-action="reset">🔄 ボイス・キャラ等カウンターをリセット</button>
 </div>
@@ -527,8 +557,9 @@ const S={
   item_shobuyumi:0,item_miyama:0,item_kokichi:0,item_chukichi:0,item_daikichi:0,
   item_tsuranuki:0,item_mumeitanju:0,item_jiketsu:0,item_kurusukatana:0,item_mumeikendama:0,
   v3:0,v17:0,v18:0,v19:0,v_none:0,
-  v_female_even:0,v_male_odd:0,v_mumei_shukon:0,v_shobu_omanju:0,v_ikoma_ore:0,v_kurusu_anoyo:0,
-  ch_female:0,ch_male:0,ch_mibu:0,
+  v_mumei_normal:0,v_mumei_strong:0,v_shobu_normal:0,v_shobu_strong:0,
+  v_ikoma_normal:0,v_ikoma_strong:0,v_kurusu_normal:0,v_kurusu_strong:0,
+  ch_mumei:0,ch_shobu:0,ch_shishimo:0,ch_ikoma:0,ch_kurusu:0,ch_kageyuki:0,ch_mibu:0,
   end_tekkageta:0,end_shugo:0,end_mizugi:0,
   tr_do:0,tr_gin:0,tr_kin:0,tr_kirin:0,tr_niji:0,
   renda44:0,renda55:0,renda66:0,renda77:0,
@@ -544,7 +575,7 @@ let MUMEI_PT_LOG=[],IKOMA_PT_LOG=[]; // CZ突入時の到達pt履歴（⑨規定
 let GAMEDATA={totalStart:0,totalNow:0,memo:''}; // 遊技データパネル（総ゲーム数・メモ）
 let UNDO_STACK=[],REDO_STACK=[];
 
-const SAVE_KEY='kabaneri_kaimon_v7';
+const SAVE_KEY='kabaneri_kaimon_v8';
 function saveState(){
   try{localStorage.setItem(SAVE_KEY,JSON.stringify({S,RECORDS,GAMEDATA,MUMEI_PT_LOG,IKOMA_PT_LOG}));}catch(e){}
 }
@@ -759,8 +790,10 @@ document.body.addEventListener('click',function(e){
     if(act.dataset.action==='reset'){
       ['bell','item_shobuyumi','item_miyama','item_kokichi','item_chukichi','item_daikichi',
        'item_tsuranuki','item_mumeitanju','item_jiketsu','item_kurusukatana','item_mumeikendama',
-       'v3','v17','v18','v19','v_none','v_female_even','v_male_odd','v_mumei_shukon','v_shobu_omanju','v_ikoma_ore','v_kurusu_anoyo',
-       'ch_female','ch_male','ch_mibu','end_tekkageta','end_shugo','end_mizugi',
+       'v3','v17','v18','v19','v_none',
+       'v_mumei_normal','v_mumei_strong','v_shobu_normal','v_shobu_strong',
+       'v_ikoma_normal','v_ikoma_strong','v_kurusu_normal','v_kurusu_strong',
+       'ch_mumei','ch_shobu','ch_shishimo','ch_ikoma','ch_kurusu','ch_kageyuki','ch_mibu','end_tekkageta','end_shugo','end_mizugi',
        'tr_do','tr_gin','tr_kin','tr_kirin','tr_niji','renda44','renda55','renda66','renda77','win456','win666'
       ].forEach(k=>{S[k]=0;const el=document.getElementById('sv-'+k);if(el)el.textContent='0';});
       document.getElementById('result-main').classList.remove('show');
@@ -1150,42 +1183,75 @@ function resetEverything(){
 }
 
 // ================================================================================
-//  ベイズ推定テーブル（スロタイガーnote 2026年6月実戦値）
+//  ベイズ推定テーブル（v8：2026年マイスロ集計結果②③反映版）
 //  ※「低設定/設定4/設定5/設定6」等の粗い区分は 1-2-3 / 4 / 5 / 6 に割付（冒頭コメント参照）
+//
+//  【v8での主な変更点】
+//  ・ボイス／キャラ紹介を「男女2分類」から個別キャラ単位（無名・菖蒲・生駒・来栖・景之等）に全面差し替え
+//    （マイスロ集計結果③：技術介入時ボイス n=1824/1675/923/3795、②：キャラ紹介 n=766/713/468/1432）
+//  ・v_mumei_strong / v_shobu_strong / v_ikoma_strong / v_kurusu_strong は、集計データの
+//    「(示唆強)予想」区分の数値を、旧アプリで個別セリフとして扱っていた
+//    無名「シュコンシュコン」／菖蒲「おまんじゅうが食べたいな」／生駒「俺の誇れる俺になるんだあぁ」／
+//    来栖「あの世で稽古を受けるといい」のレアパターンに割り当てている（推定・要検証）。
+//  ・item_kurusukatana（来栖の刀）・item_mumeikendama（無名のけん玉）は「特定設定を否定する」示唆と判明。
+//    ①来栖の刀＝設定2・3を否定 → 低設定バケット内で 設定1:設定2:設定3 を 2:0.5:0.5 の比で再分配
+//    ②無名のけん玉＝設定1・3を否定 → 低設定バケット内で 設定1:設定2:設定3 を 0.5:2:0.5 の比で再分配
+//    （個別設定ごとの実測値が無いための簡易的な按分。平均値としては元の集計値と一致する）
+//  ・end_tekkageta（鉄下駄）は今回はじめて設定別データが得られたため判別計算に使用開始
+//    （ただし他の演出が出なかった時の「残り物」的な数値のため、逆相関の弱い参考情報）
 // ================================================================================
 const VSEL={
-  female_even:       [0.085,0.100,0.0725,0.090,0.070,0.080], // 女性ボイス（偶数示唆・無名+菖蒲系の平均値）
-  mumei_kakutei2:    [0.000,0.005,0.005,0.005,0.005,0.005],
-  male_odd:          [0.070,0.055,0.080,0.055,0.070,0.055],  // 男性ボイス（設定3・5示唆・生駒+来栖系）
-  kageyuki_weak:     [0.100,0.100,0.100,0.130,0.145,0.160],
-  kageyuki_mid:      [0.010,0.010,0.010,0.020,0.020,0.020],
-  kageyuki_strong:   [0.005,0.005,0.005,0.010,0.010,0.010],
-  voice_none:        [0.000,0.000,0.000,0.000,0.005,0.005],
-  ch_female:         [0.523,0.523,0.523,0.563,0.388,0.615],
-  ch_male:           [0.477,0.477,0.477,0.420,0.597,0.360],
-  ch_mibu:           [0.000,0.000,0.000,0.017,0.015,0.024],
-  end_shugo:         [0.025,0.025,0.025,0.040,0.037,0.103],
-  end_mizugi:        [0.000,0.000,0.000,0.000,0.000,0.027],
-  // アイテムくじ（設定1〜6直接値・実戦値＋公式解析からの逆算推定 2026/7時点）
-  item_shobuyumi:    [0.070,0.080,0.090,0.110,0.130,0.145],
-  item_miyama:       [0.002,0.003,0.005,0.007,0.009,0.010],
-  item_kokichi:      [0.000,0.020,0.020,0.020,0.020,0.045],
-  item_chukichi:     [0.000,0.000,0.000,0.005,0.005,0.005],
-  item_daikichi:     [0.000,0.000,0.000,0.000,0.000,0.0075],
-  item_tsuranuki:    [0.310,0.300,0.290,0.230,0.270,0.265],
-  item_mumeitanju:   [0.250,0.240,0.200,0.230,0.230,0.225],
-  item_jiketsu:      [0.160,0.200,0.220,0.230,0.220,0.210],
-  item_kurusukatana: [0.060,0.050,0.040,0.030,0.030,0.025],
-  item_mumeikendama: [0.060,0.060,0.060,0.060,0.060,0.060],
+  // --- ボイス（技術介入時・マイスロ集計結果③、2026年） ---
+  v_mumei_normal:    [0.078,0.078,0.078,0.087,0.088,0.080],
+  v_mumei_strong:    [0.013,0.013,0.013,0.016,0.008,0.030],
+  mumei_kakutei2:    [0.003,0.003,0.003,0.005,0.012,0.002],
+  v_shobu_normal:    [0.336,0.336,0.336,0.334,0.261,0.333],
+  v_shobu_strong:    [0.009,0.009,0.009,0.018,0.008,0.021],
+  v_ikoma_normal:    [0.270,0.270,0.270,0.234,0.270,0.215],
+  v_ikoma_strong:    [0.009,0.009,0.009,0.007,0.023,0.012],
+  v_kurusu_normal:   [0.137,0.137,0.137,0.126,0.139,0.105],
+  v_kurusu_strong:   [0.013,0.013,0.013,0.011,0.018,0.012],
+  kageyuki_weak:     [0.111,0.111,0.111,0.134,0.141,0.162],
+  kageyuki_mid:      [0.014,0.014,0.014,0.019,0.023,0.017],
+  kageyuki_strong:   [0.005,0.005,0.005,0.008,0.008,0.008],
+  voice_none:        [0.000,0.000,0.000,0.000,0.003,0.002],
+  // --- キャラ紹介（マイスロ集計結果②、2026年） ---
+  ch_mumei:          [0.179,0.179,0.179,0.196,0.124,0.197],
+  ch_shobu:          [0.162,0.162,0.162,0.189,0.137,0.195],
+  ch_shishimo:       [0.185,0.185,0.185,0.178,0.143,0.224],
+  ch_ikoma:          [0.140,0.140,0.140,0.146,0.192,0.107],
+  ch_kurusu:         [0.167,0.167,0.167,0.126,0.201,0.117],
+  ch_kageyuki:       [0.167,0.167,0.167,0.144,0.192,0.133],
+  ch_mibu:           [0.000,0.000,0.000,0.020,0.011,0.028],
+  // --- ST終了画面（マイスロ集計結果②、2026年） ---
+  end_tekkageta:     [0.977,0.977,0.977,0.961,0.962,0.855],
+  end_shugo:         [0.023,0.023,0.023,0.039,0.038,0.115],
+  end_mizugi:        [0.000,0.000,0.000,0.000,0.000,0.030],
+  // --- アイテムくじ（マイスロ集計結果②、2026年） ---
+  item_shobuyumi:    [0.051,0.051,0.051,0.101,0.112,0.124],
+  item_miyama:       [0.004,0.004,0.004,0.010,0.019,0.029],
+  item_kokichi:      [0.022,0.022,0.022,0.039,0.037,0.037],
+  item_chukichi:     [0.000,0.000,0.000,0.003,0.019,0.014],
+  item_daikichi:     [0.000,0.000,0.000,0.000,0.000,0.010],
+  item_tsuranuki:    [0.339,0.339,0.339,0.171,0.276,0.238],
+  item_mumeitanju:   [0.327,0.327,0.327,0.285,0.246,0.233],
+  item_jiketsu:      [0.227,0.227,0.227,0.345,0.265,0.231],
+  // 来栖の刀：設定2・3否定予想 → 低設定バケット内を1:2:3=2:0.5:0.5で再分配
+  item_kurusukatana: [0.026,0.0065,0.0065,0.026,0.022,0.039],
+  // 無名のけん玉：設定1・3否定予想 → 低設定バケット内を1:2:3=0.5:2:0.5で再分配
+  item_mumeikendama: [0.008,0.032,0.008,0.021,0.004,0.046],
 };
 function getCat(key){
   const map={
     v3:'mumei_kakutei2',
-    v_female_even:'female_even',v_mumei_shukon:'female_even',v_shobu_omanju:'female_even',
-    v_male_odd:'male_odd',v_ikoma_ore:'male_odd',v_kurusu_anoyo:'male_odd',
+    v_mumei_normal:'v_mumei_normal',v_mumei_strong:'v_mumei_strong',
+    v_shobu_normal:'v_shobu_normal',v_shobu_strong:'v_shobu_strong',
+    v_ikoma_normal:'v_ikoma_normal',v_ikoma_strong:'v_ikoma_strong',
+    v_kurusu_normal:'v_kurusu_normal',v_kurusu_strong:'v_kurusu_strong',
     v17:'kageyuki_weak',v18:'kageyuki_mid',v19:'kageyuki_strong',v_none:'voice_none',
-    ch_female:'ch_female',ch_male:'ch_male',ch_mibu:'ch_mibu',
-    end_shugo:'end_shugo',end_mizugi:'end_mizugi',
+    ch_mumei:'ch_mumei',ch_shobu:'ch_shobu',ch_shishimo:'ch_shishimo',
+    ch_ikoma:'ch_ikoma',ch_kurusu:'ch_kurusu',ch_kageyuki:'ch_kageyuki',ch_mibu:'ch_mibu',
+    end_tekkageta:'end_tekkageta',end_shugo:'end_shugo',end_mizugi:'end_mizugi',
     item_shobuyumi:'item_shobuyumi',item_miyama:'item_miyama',item_kokichi:'item_kokichi',
     item_chukichi:'item_chukichi',item_daikichi:'item_daikichi',
     item_tsuranuki:'item_tsuranuki',item_mumeitanju:'item_mumeitanju',item_jiketsu:'item_jiketsu',
@@ -1193,13 +1259,16 @@ function getCat(key){
   };
   return map[key]||null;
 }
-// no-rotScale カテゴリ（偶奇ボイス・キャラ紹介：サンプル数に関係なく序盤から満額の重み）
-const NO_ROTSCALE_CATS=new Set(['female_even','male_odd','ch_female','ch_male','ch_mibu']);
+// no-rotScale カテゴリ（サンプルが得やすい通常ボイス・キャラ紹介：サンプル数に関係なく序盤から満額の重み）
+const NO_ROTSCALE_CATS=new Set([
+  'v_mumei_normal','v_shobu_normal','v_ikoma_normal','v_kurusu_normal',
+  'ch_mumei','ch_shobu','ch_shishimo','ch_ikoma','ch_kurusu','ch_kageyuki','ch_mibu',
+]);
 // カテゴリ別の重みティア（アイテムくじの精度差を反映）
 const CAT_WEIGHT_TIER={
   item_shobuyumi:0.7, item_kokichi:0.7,           // 高：設定差が明確
   item_miyama:0.4, item_tsuranuki:0.4, item_mumeitanju:0.4, item_jiketsu:0.4, // 中：方向性のみ確認
-  item_kurusukatana:0.08, item_mumeikendama:0.08, // 最小：判別価値ほぼ無し
+  item_kurusukatana:0.35, item_mumeikendama:0.35, // 特定設定否定予想（新情報で判別価値あり判明。ただし「予想」のため中程度）
 };
 // 確定示唆系（VSELの数値も併用。常にフル・rotScaleなし）
 const KAKUTEI_CATS=new Set(['mumei_kakutei2','voice_none','end_mizugi','item_chukichi','item_daikichi']);
@@ -1285,7 +1354,7 @@ function calc(){
     const tierW=CAT_WEIGHT_TIER[cat];
     let w;
     if(isKakutei) w=1.0;
-    else if(cat.startsWith('kageyuki')) w=Math.min(cnt/30,1)*0.5*rotScale; // 重み中・サンプル依存
+    else if(cat.startsWith('kageyuki')||cat.endsWith('_strong')) w=Math.min(cnt/30,1)*0.5*rotScale; // 重み中・サンプル依存（景之・各キャラのレアボイス）
     else if(noRot) w=0.6; // rotScaleなし（偶奇ボイス・キャラ紹介）
     else if(tierW!==undefined) w=Math.min(cnt/15,1)*tierW*rotScale; // アイテムくじの重みティア
     else w=Math.min(cnt/15,1)*0.5*rotScale; // 通常（ST終了画面など）
