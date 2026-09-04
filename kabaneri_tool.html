@@ -11,6 +11,31 @@
 
 <!--
 ================================================================================
+  カバネリ海門決戦 設定判別アプリ（リニューアル版 v8.1）
+================================================================================
+  【v8.1で修正した実戦メモの不具合（実際に使ってみて見つかったもの）】
+  ・通常時総ゲーム数（初当たり確率の分母）が、失敗・ハズレ行のGも無条件で
+    合算していたため過大になっていた。データランプは失敗しても数字が
+    リセットされないため、失敗行のGは必ず次の当選行の()にすでに内包
+    される（＝勝ち行のGだけを合算すれば正しい合計になる）。
+    → aggregateMemo()のtotalGを「result==='win'の行のGだけ合算」に修正。
+  ・履歴の()内の数字が、失敗・ハズレ行では表示されていなかった。
+    → 失敗行にも「その時点の基準値＋自分のG」を表示するよう修正。
+  ・当選した行に、入り口（何周期／どのCZ経由か）のラベルが表示されて
+    いなかった（計算はしていたが表示に反映し忘れていた）。
+    → 当選行にもentryLabelを表示するよう修正。
+  ・()のリセット（区切り線「──ST終了──」）が景之・真景之・裏景之
+    （いわゆる上位ST）の時にしか発生していなかった。通常STに当選した
+    場合もリセット対象に含める必要がある（駿城→ST無し＝駆け抜けの
+    時だけリセットしない）。
+    → isUpperST()をisSTReset()に置き換え、通常STも含めて判定するよう修正。
+  ・CZポイントトラッカー（無名・生駒・銅藍の「CZ突入」ボタン）と、実戦
+    メモウィザードの「入り口→CZ」手動選択が機能重複していたため、
+    実戦メモ側のCZ選択肢を削除。CZの記録開始は必ずCZポイント
+    トラッカー側の「CZ突入」ボタン経由（ポイントが自動で0になり、
+    G数入力画面に直接ジャンプする）に一本化。
+================================================================================
+
   カバネリ海門決戦 設定判別アプリ（リニューアル版 v8）
 ================================================================================
   引き継ぎ指示書に基づき、汎用テンプレートをベースに全面リニューアル（v7）。
@@ -536,8 +561,8 @@ body{padding-bottom:150px;}
   </div>
 
   <div class="gd-row">
-    <div class="gd-label">📄 メモ</div>
-    <textarea class="gd-textarea" id="gd-memo" placeholder="台番号、機種メモなど"></textarea>
+    <div class="gd-label">📊 現在の状況<span class="gd-sub">自動更新</span></div>
+    <div id="live-stats" style="display:flex;flex-direction:column;gap:8px;"></div>
   </div>
 
   <div class="gd-row" style="border-bottom:none;">
@@ -572,7 +597,7 @@ const S={
 };
 let RECORDS=[]; // 実戦メモ履歴
 let MUMEI_PT_LOG=[],IKOMA_PT_LOG=[]; // CZ突入時の到達pt履歴（⑨規定pt分布の尤度化に使用）
-let GAMEDATA={totalStart:0,totalNow:0,memo:''}; // 遊技データパネル（総ゲーム数・メモ）
+let GAMEDATA={totalStart:0,totalNow:0}; // 遊技データパネル（総ゲーム数）
 let UNDO_STACK=[],REDO_STACK=[];
 
 const SAVE_KEY='kabaneri_kaimon_v8';
@@ -592,7 +617,6 @@ function loadState(){
     Object.keys(S).forEach(k=>{const el=document.getElementById('sv-'+k);if(el)el.textContent=S[k];});
     const tsEl=document.getElementById('gd-total-start');if(tsEl)tsEl.value=GAMEDATA.totalStart||'';
     const tnEl=document.getElementById('gd-total-now');if(tnEl)tnEl.value=GAMEDATA.totalNow||'';
-    const memoEl=document.getElementById('gd-memo');if(memoEl)memoEl.value=GAMEDATA.memo||'';
   }catch(e){}
 }
 
@@ -645,11 +669,11 @@ function applyValueAction(key,val){
   if(el)el.textContent=S[key];
   if(key.startsWith('cz_pt_'))refreshPtDisplay(key.replace('cz_pt_',''));
   if(key==='bell'){
-    refreshGameDataPanel();
     const badge=document.getElementById('bb-bell-count');
     if(badge)badge.textContent=S.bell;
   }
-  if(key==='bonusAdj'||key==='stAdj'||key==='czAdj')refreshGameDataPanel();
+  // 「現在の状況」は全カウンター変化に反応して常時更新する
+  refreshGameDataPanel();
   saveState();
 }
 function doUndo(){
@@ -832,10 +856,10 @@ document.body.addEventListener('click',function(e){
 // ================================================================================
 //  実戦メモ：記録ウィザード
 // ================================================================================
-let WIZ={step:'g', g:null, entryType:null, entryDetail:null, result:null, bonusType:null, stEntered:null, stType:null};
+let WIZ={step:'g', g:null, entryType:null, entryDetail:null, result:null, bonusType:null, stEntered:null, stType:null, reachedUpper:null};
 
 function wizReset(){
-  WIZ={step:'g', g:null, entryType:null, entryDetail:null, result:null, bonusType:null, stEntered:null, stType:null};
+  WIZ={step:'g', g:null, entryType:null, entryDetail:null, result:null, bonusType:null, stEntered:null, stType:null, reachedUpper:null};
   renderWizard();
 }
 
@@ -857,9 +881,9 @@ function renderWizard(){
   if(WIZ.step==='entry'){
     prog.textContent='STEP 2 / 入り口選択';
     body.innerHTML=`<div class="wizstep">
-      <div class="wizq">① 入り口を選択</div>
+      <div class="wizq">① 周期を選択</div>
       <div style="font-size:11px;color:#888;margin-bottom:6px;">周期</div>
-      <div class="optgrid" style="margin-bottom:10px;">
+      <div class="optgrid">
         <div class="optbtn" data-wiz="entry-cycle" data-val="1">1周期</div>
         <div class="optbtn" data-wiz="entry-cycle" data-val="2">2周期</div>
         <div class="optbtn" data-wiz="entry-cycle" data-val="3">3周期</div>
@@ -868,12 +892,7 @@ function renderWizard(){
         <div class="optbtn" data-wiz="entry-cycle" data-val="6">6周期</div>
         <div class="optbtn" data-wiz="entry-cycle" data-val="tencho">天井</div>
       </div>
-      <div style="font-size:11px;color:#888;margin-bottom:6px;">CZ</div>
-      <div class="optgrid c2">
-        <div class="optbtn" data-wiz="entry-cz" data-val="mumei">無名</div>
-        <div class="optbtn" data-wiz="entry-cz" data-val="ikoma">生駒</div>
-        <div class="optbtn" data-wiz="entry-cz" data-val="dourin">銅藍</div>
-      </div>
+      <div class="dnote" style="margin:10px 0 0;">CZからの当選記録は「通常時」タブのCZポイントトラッカーにある「◯◯ CZ突入」ボタンから開始してください（ポイントが自動で0になり、この画面に直接ジャンプします）。</div>
     </div>`;
     return;
   }
@@ -924,11 +943,22 @@ function renderWizard(){
     </div>`;
     return;
   }
+  if(WIZ.step==='upperreach'){
+    prog.textContent='STEP 6 / 上位ST到達？';
+    body.innerHTML=`<div class="wizstep">
+      <div class="wizq">通常STでしたが、途中で上位ST（景之／真景之／裏景之ST）まで到達しましたか？</div>
+      <div class="optgrid c2">
+        <div class="optbtn" data-wiz="upperreach" data-val="yes">到達した</div>
+        <div class="optbtn" data-wiz="upperreach" data-val="no">通常STのまま終了</div>
+      </div>
+    </div>`;
+    return;
+  }
   if(WIZ.step==='payout'){
-    prog.textContent='STEP 6 / ST獲得枚数';
+    prog.textContent='STEP 7 / ST最終獲得枚数';
     body.innerHTML=`<div class="wiznum">
-      <div class="wizq">⑤ ST獲得枚数（上位ST時のみ）</div>
-      <input type="number" inputmode="numeric" id="wiz-payout-input" placeholder="例：1200">
+      <div class="wizq">⑤ ST最終獲得枚数</div>
+      <input type="number" inputmode="numeric" id="wiz-payout-input" placeholder="例：456">
       <div class="actrow"><div class="actbtn primary" style="flex:1" onclick="wizSubmitPayout()">記録を保存 →</div></div>
     </div>`;
     return;
@@ -955,7 +985,7 @@ function wizSubmitPayout(){
   finalizeRecord();
 }
 function wizBack(){
-  const order=['g','entry','result','bonus','stenter','sttype','payout'];
+  const order=['g','entry','result','bonus','stenter','sttype','upperreach','payout'];
   const i=order.indexOf(WIZ.step);
   if(i<=0){wizReset();return;}
   // 直前ステップに単純に戻る（分岐は再現しないため一部リセット）
@@ -986,7 +1016,13 @@ function wizHandle(kind,val){
   }
   if(kind==='sttype'){
     WIZ.stType=val;
-    if(val==='normal'){WIZ.stPayout=0;finalizeRecord();return;}
+    if(val==='normal'){WIZ.step='upperreach';renderWizard();return;}
+    // 景之/真景之/裏景之STを直接選んだ場合は、すでに上位ST到達が確定している
+    WIZ.reachedUpper=true;
+    WIZ.step='payout';renderWizard();return;
+  }
+  if(kind==='upperreach'){
+    WIZ.reachedUpper=(val==='yes');
     WIZ.step='payout';renderWizard();return;
   }
 }
@@ -996,6 +1032,10 @@ function finalizeRecord(){
     g:WIZ.g, entryType:WIZ.entryType, entryDetail:WIZ.entryDetail,
     result:WIZ.result, bonusType:WIZ.bonusType||null,
     stType:WIZ.stType||null, stPayout: (WIZ.stPayout||0),
+    // 通常STから途中で上位ST（景之/真景之/裏景之）まで到達したか。
+    // 景之ST等を直接選んだ場合は常にtrue、通常STのままなら回答した値、
+    // ST自体に入っていない（stType===null/'none'）場合はnull。
+    reachedUpper: WIZ.stType ? (WIZ.stType==='none' ? null : !!WIZ.reachedUpper) : null,
     ts:Date.now()
   };
   RECORDS.push(rec);
@@ -1011,7 +1051,9 @@ const CZ_LABEL={mumei:'無名CZ',ikoma:'生駒CZ',dourin:'銅藍CZ'};
 const ST_LABEL={normal:'通常ST',kageyuki:'景之ST',shinkageyuki:'真景之ST',urakageyuki:'裏景之ST',none:'ST入らず'};
 const BONUS_LABEL={episode:'エピソード',shunjo:'駿城'};
 
-function isUpperST(stType){return stType==='kageyuki'||stType==='shinkageyuki'||stType==='urakageyuki';}
+// STに入った（通常/景之/真景之/裏景之いずれか）場合、次の通常時カウントは0にリセットされる。
+// 'none'（駿城スルー＝駆け抜け）とnull（失敗・ハズレでSTまで到達しなかった行）はリセットしない。
+function isSTReset(stType){return !!stType && stType!=='none';}
 
 function updateBottomBar(){
   updateUndoRedoButtons();
@@ -1029,30 +1071,37 @@ function renderHistory(){
   const list=document.getElementById('hist-list');
   if(RECORDS.length===0){list.innerHTML='<div class="hitem" style="color:#555;">まだ記録がありません</div>';return;}
   let cum=0;
-  let html='';
   // 古い順に累計計算 → 新しい順に表示するため配列を作ってから反転
   const rows=[];
   RECORDS.forEach((r,idx)=>{
     const isFail=(r.result==='lose');
-    if(!isFail){cum+=r.g;}
     const entryLabel = r.entryType==='cycle' ? CYCLE_LABEL[r.entryDetail] : CZ_LABEL[r.entryDetail];
+    // 表示するのは常に「その時点の基準値＋このG」。データランプは当たるまでリセットされないため、
+    // 失敗行にも直近の基準値を足した数字を表示する。
+    const display=cum+r.g;
     let line;
+    let stReset=false;
     if(isFail){
-      line=`${r.g}G ${entryLabel} <span class="hres-lose">${r.entryType==='cycle'?'ハズレ':'失敗'}</span>`;
+      line=`${r.g}G(${display}) ${entryLabel} <span class="hres-lose">${r.entryType==='cycle'?'ハズレ':'失敗'}</span>`;
+      // 基準値は更新しない（このGは次の当選行の表示にすでに内包される）
     }else{
       const bonusLabel = r.bonusType ? BONUS_LABEL[r.bonusType] : '';
-      const stLabel = ST_LABEL[r.stType]||'';
+      let stLabel = ST_LABEL[r.stType]||'';
+      if(r.stType==='normal'){
+        stLabel += r.reachedUpper ? '（→上位ST到達）' : '（通常STのまま）';
+      }
       const payoutTxt = (r.stPayout>0) ? ` ${r.stPayout}枚` : '';
-      line=`${r.g}G(${cum}) ${bonusLabel} <span class="hres-win">${stLabel}</span>${payoutTxt}`;
+      line=`${r.g}G(${display}) ${entryLabel} ${bonusLabel} <span class="hres-win">${stLabel}</span>${payoutTxt}`;
+      cum=display; // 当選・成功した行だけ基準値を更新
+      if(isSTReset(r.stType)){stReset=true; cum=0;} // ST突入（通常/景之/真景之/裏景之）で次回0にリセット
     }
-    rows.push({idx,line,upper:!isFail&&isUpperST(r.stType)});
-    if(!isFail&&isUpperST(r.stType)){cum=0;}
+    rows.push({idx,line,stReset});
   });
   // 新しい順に出力（ST終了区切りも含む）
   let out=[];
   rows.forEach((row,i)=>{
     out.push(`<div class="hitem"><span><span class="hno">#${row.idx+1}</span> ${row.line}</span><span class="hdel" data-idx="${row.idx}">削除</span></div>`);
-    if(row.upper) out.push(`<div class="hdiv">────────── ST終了 ──────────</div>`);
+    if(row.stReset) out.push(`<div class="hdiv">────────── ST終了 ──────────</div>`);
   });
   list.innerHTML=out.reverse().join('');
 }
@@ -1071,10 +1120,14 @@ function aggregateMemo(){
     throughEpisode:{0:{ep:0,tot:0},1:{ep:0,tot:0},2:{ep:0,tot:0}},
     payout1200:{low:0,high:0,lowTot:0,highTot:0}, // 参考（設定不明のため実際は使わない）
     bonusGDist:{le200:0,le350:0,tencho:0,total:0},
+    normalSTUpgrade:{reached:0,total:0}, // 通常ST→上位ST到達率
   };
   let through=0;
   RECORDS.forEach(r=>{
-    agg.totalG+=r.g;
+    // 通常時総ゲーム数：勝ち（周期あたり／CZ成功）の行のGだけを合算。
+    // 失敗・ハズレ行のGは、後続の勝ち行のGにすでに内包されているため、
+    // ここで足すと二重カウントになる（データランプはリセットされるまで累積するため）。
+    if(r.result==='win')agg.totalG+=r.g;
     if(r.entryType==='cycle'){
       agg.cycleAttempt[r.entryDetail]=(agg.cycleAttempt[r.entryDetail]||0)+1;
       if(r.result==='win')agg.cycleWin[r.entryDetail]=(agg.cycleWin[r.entryDetail]||0)+1;
@@ -1091,6 +1144,11 @@ function aggregateMemo(){
       if(r.g<=200)agg.bonusGDist.le200++;
       if(r.g<=350)agg.bonusGDist.le350++;
       if(r.entryDetail==='tencho')agg.bonusGDist.tencho++;
+      // 通常ST→上位ST到達率（天井G数がエピソード天井650G/4周期になるかどうかの参考情報）
+      if(r.stType==='normal'){
+        agg.normalSTUpgrade.total++;
+        if(r.reachedUpper)agg.normalSTUpgrade.reached++;
+      }
       // スルー更新
       if(r.bonusType==='shunjo' && r.stType==='none'){through++;}
       else{through=0;}
@@ -1116,10 +1174,9 @@ function openGameData(){
   refreshGameDataPanel();
 }
 function closeGameData(){
-  const ts=document.getElementById('gd-total-start'),tn=document.getElementById('gd-total-now'),m=document.getElementById('gd-memo');
+  const ts=document.getElementById('gd-total-start'),tn=document.getElementById('gd-total-now');
   GAMEDATA.totalStart=parseInt(ts.value)||0;
   GAMEDATA.totalNow=parseInt(tn.value)||0;
-  GAMEDATA.memo=m.value||'';
   saveState();
   document.getElementById('gd-overlay').classList.remove('show');
   document.getElementById('gd-sheet').classList.remove('show');
@@ -1138,6 +1195,44 @@ function refreshGameDataPanel(){
   const rateEl=document.getElementById('gd-bell-rate');
   if(S.bell>0 && totalG>0){rateEl.textContent='出現確率 1/'+(totalG/S.bell).toFixed(1);}
   else{rateEl.textContent='出現確率 ---';}
+  refreshLiveStats(agg,stats,normalG,totalG);
+}
+// 「現在の状況」常時自動表示（遊技データパネルを開くたび・カウンター変化のたびに更新）
+function refreshLiveStats(agg,stats,normalG,totalG){
+  const el=document.getElementById('live-stats');
+  if(!el)return;
+  const bonusCount=stats.bonusAuto+S.bonusAdj;
+  const stCount=stats.stAuto+S.stAdj;
+  const row=(label,value)=>`<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;">
+    <span style="font-size:12px;color:#999;">${label}</span>
+    <span style="font-size:13px;font-weight:700;color:var(--accent2);">${value}</span>
+  </div>`;
+
+  const bonusRate = (normalG>0 && bonusCount>0) ? `1/${(normalG/bonusCount).toFixed(1)}` : '---';
+  const stRate = (normalG>0 && stCount>0) ? `1/${(normalG/stCount).toFixed(1)}` : '---';
+  const bellRate = (totalG>0 && S.bell>0) ? `1/${(totalG/S.bell).toFixed(1)}` : '---';
+
+  // 景之ボイス合計%（技術介入時ボイス全体に占める割合）
+  const voiceTotal = (S.v_mumei_normal||0)+(S.v_mumei_strong||0)+(S.v3||0)
+    +(S.v_shobu_normal||0)+(S.v_shobu_strong||0)
+    +(S.v_ikoma_normal||0)+(S.v_ikoma_strong||0)
+    +(S.v_kurusu_normal||0)+(S.v_kurusu_strong||0)
+    +(S.v17||0)+(S.v18||0)+(S.v19||0)+(S.v_none||0);
+  const kageyukiCount=(S.v17||0)+(S.v18||0)+(S.v19||0);
+  const kageyukiPct = voiceTotal>0 ? `${Math.round(kageyukiCount/voiceTotal*100)}%（${kageyukiCount}/${voiceTotal}）` : '---';
+
+  // キャラ紹介 女男割合（無名/菖蒲/鮴侑那 vs 生駒/来栖/景之。美馬は除く）
+  const femaleCount=(S.ch_mumei||0)+(S.ch_shobu||0)+(S.ch_shishimo||0);
+  const maleCount=(S.ch_ikoma||0)+(S.ch_kurusu||0)+(S.ch_kageyuki||0);
+  const charaTotal=femaleCount+maleCount;
+  const charaRatio = charaTotal>0 ? `女${Math.round(femaleCount/charaTotal*100)}% : 男${Math.round(maleCount/charaTotal*100)}%` : '---';
+
+  el.innerHTML =
+    row('ボーナス初当たり確率', bonusRate) +
+    row('ST初当たり確率', stRate) +
+    row('下段ベル確率', bellRate) +
+    row('景之ボイス合計%', kageyukiPct) +
+    row('キャラ紹介 女男割合', charaRatio);
 }
 function calcFromGameData(){
   closeGameData();
@@ -1159,7 +1254,7 @@ function resetEverything(){
   RECORDS=[];
   MUMEI_PT_LOG=[];
   IKOMA_PT_LOG=[];
-  GAMEDATA={totalStart:0,totalNow:0,memo:''};
+  GAMEDATA={totalStart:0,totalNow:0};
   UNDO_STACK=[];
   REDO_STACK=[];
   // 画面表示を全部更新
@@ -1170,7 +1265,6 @@ function resetEverything(){
   renderPtButtons('mumei');renderPtButtons('ikoma');
   document.getElementById('gd-total-start').value='';
   document.getElementById('gd-total-now').value='';
-  document.getElementById('gd-memo').value='';
   document.getElementById('bb-bell-count').textContent='0';
   document.getElementById('result-main').classList.remove('show');
   document.getElementById('result-chips').classList.remove('show');
@@ -1559,6 +1653,9 @@ function calc(){
     ch+=`<span class="chip">350G以内 ${Math.round(agg.bonusGDist.le350/agg.bonusGDist.total*100)}%</span>`;
     ch+=`<span class="chip">天井到達 ${agg.bonusGDist.tencho}回</span>`;
   }
+  if(agg.normalSTUpgrade.total>0){
+    ch+=`<span class="chip">通常ST→上位ST到達率 ${Math.round(agg.normalSTUpgrade.reached/agg.normalSTUpgrade.total*100)}%（${agg.normalSTUpgrade.reached}/${agg.normalSTUpgrade.total}）</span>`;
+  }
   document.getElementById('chips').innerHTML=ch||'<span class="chip">実戦メモにデータがありません</span>';
 
   document.getElementById('result-main').classList.add('show');
@@ -1579,6 +1676,7 @@ document.getElementById('bb-bell-count').textContent=S.bell;
 renderWizard();
 renderHistory();
 updateBottomBar();
+refreshGameDataPanel();
 </script>
 </body>
 </html>
