@@ -341,6 +341,7 @@ body{padding-bottom:150px;}
       </div>
       <div class="dnote" style="margin:0 14px 12px;">無名・生駒どちらかが規定pt到達し、もう片方も条件を満たした場合に銅藍CZへ格上げ。選んだ方のptはリセットされ、選ばなかった方のptは持ち越されます。</div>
     </div>
+    <button class="resetbtn" onclick="if(confirm('無名・生駒のCZポイントを両方とも0にリセットします。よろしいですか？'))resetBothCzPoints();">🔄 無名・生駒のCZポイントを両方とも0にリセット（設定変更・エラー時など手動用）</button>
   </div>
 
   <div id="n-item" class="subpage">
@@ -593,6 +594,7 @@ const S={
   // CZポイントトラッカー
   cz_pt_mumei:0,cz_pt_ikoma:0,
   cz_koukaku_mumei:0,cz_koukaku_ikoma:0, // 高確中フラグ（0/1）
+  cz_full_mumei:0,cz_full_ikoma:0, // オールスター目（満タン）ボタン経由フラグ（0/1）。このCZ突入は判別ログ対象外、超過分は次回持ち越し
   mumei_normal:0,mumei_hikari:0,ikoma_normal:0,ikoma_hikari:0, // 発光率集計用（非高確中のみ加算）
 };
 let RECORDS=[]; // 実戦メモ履歴
@@ -709,29 +711,46 @@ function bump(key,d){
 // ================================================================================
 //  CZポイントトラッカー（無名/生駒）
 // ================================================================================
+const PT_FULL_VALUE=150; // オールスター目(満タン)ボタンで設定する固定値（バー表示の上限と同じ）
 const PT_BUTTONS_NORMAL=[
   {label:'通常',amt:1,tapType:'normal'},
   {label:'不明',amt:1,tapType:'unknown'},
   {label:'発光',amt:15,tapType:'hikari'},
   {label:'複合',amt:15,tapType:'fukugou'},
-  {label:'オール',amt:30,tapType:'all'},
+  {label:'オール',amt:null,tapType:'all'}, // 満タン固定のため加算量は使わない
 ];
 const PT_BUTTONS_KOUKAKU=[
   {label:'不明',amt:15,tapType:'unknown'},
   {label:'複合',amt:30,tapType:'fukugou'},
-  {label:'オール',amt:60,tapType:'all'},
+  {label:'オール',amt:null,tapType:'all'},
 ];
 function renderPtButtons(who){
   const el=document.getElementById('ptbtns-'+who);
   if(!el)return;
   const list = S['cz_koukaku_'+who] ? PT_BUTTONS_KOUKAKU : PT_BUTTONS_NORMAL;
-  el.innerHTML=list.map(b=>`<div class="ptbtn" onclick="bumpPt('${who}',${b.amt},'${b.tapType}')">${b.label}<br>+${b.amt}</div>`).join('');
+  el.innerHTML=list.map(b=>{
+    if(b.tapType==='all'){
+      return `<div class="ptbtn" onclick="fillPtFull('${who}')">${b.label}<br>満タン</div>`;
+    }
+    return `<div class="ptbtn" onclick="bumpPt('${who}',${b.amt},'${b.tapType}')">${b.label}<br>+${b.amt}</div>`;
+  }).join('');
 }
 function refreshPtDisplay(who){
   const v=document.getElementById('ptval-'+who);
   const bar=document.getElementById('ptbar-'+who);
-  if(v)v.innerHTML=(S['cz_pt_'+who]||0)+'<span style="font-size:12px;color:#666;"> pt</span>';
-  if(bar)bar.style.width=Math.min((S['cz_pt_'+who]||0)/150*100,100)+'%';
+  const pt=S['cz_pt_'+who]||0;
+  if(v){
+    if(S['cz_full_'+who]){
+      const extra=Math.max(pt-PT_FULL_VALUE,0);
+      const extraTxt = extra>0
+        ? ` <span style="font-size:11px;color:var(--accent2);">（+${extra}pt 次回持ち越し予定）</span>`
+        : ` <span style="font-size:10px;color:#888;">（満タン）</span>`;
+      v.innerHTML=`${PT_FULL_VALUE}<span style="font-size:12px;color:#666;"> pt</span>${extraTxt}`;
+    }else{
+      v.innerHTML=pt+'<span style="font-size:12px;color:#666;"> pt</span>';
+    }
+  }
+  if(bar)bar.style.width=Math.min(pt/150*100,100)+'%';
 }
 function toggleKoukaku(who){
   const key='cz_koukaku_'+who;
@@ -755,6 +774,31 @@ function bumpPt(who,amt,tapType){
   pushUndo({type:'value',key,prev,next});
   saveState();
 }
+// オールスター目（満タン）：ポイントを固定値まで一気に埋める。
+// 以降このCZ突入は判別ログに使わず、超過分だけ次回に持ち越す（czEnter側で処理）。
+function fillPtFull(who){
+  const key='cz_pt_'+who;
+  const prev=S[key]||0;
+  const next=Math.max(prev,PT_FULL_VALUE);
+  S[key]=next;
+  S['cz_full_'+who]=1;
+  refreshPtDisplay(who);
+  pushUndo({type:'value',key,prev,next});
+  saveState();
+}
+// 手動リセット（設定変更・エラー時など、アプリ側で自動検知できないタイミング用）。
+// 無名・生駒どちらも0に戻す。判別ログには一切影響しない。
+function resetBothCzPoints(){
+  ['mumei','ikoma'].forEach(who=>{
+    const key='cz_pt_'+who;
+    const prev=S[key]||0;
+    S[key]=0;
+    S['cz_full_'+who]=0;
+    refreshPtDisplay(who);
+    if(prev!==0)pushUndo({type:'value',key,prev,next:0});
+  });
+  saveState();
+}
 function refreshHikariDisplay(who){
   const el=document.getElementById('hikari-'+who);
   if(!el)return;
@@ -766,12 +810,18 @@ function refreshHikariDisplay(who){
 function czEnter(who,viaSource){
   const sourceKey = viaSource ? viaSource : who;
   const pt = S['cz_pt_'+sourceKey]||0;
-  if(sourceKey==='mumei')MUMEI_PT_LOG.push(pt);
-  if(sourceKey==='ikoma')IKOMA_PT_LOG.push(pt);
-  // 選んだ方のptだけリセット（もう片方は持ち越し）
+  const wasFull = !!S['cz_full_'+sourceKey];
+  if(!wasFull){
+    // オールスター目（満タン）経由のCZは判別ログに使わない（人工的な最大値のため）
+    if(sourceKey==='mumei')MUMEI_PT_LOG.push(pt);
+    if(sourceKey==='ikoma')IKOMA_PT_LOG.push(pt);
+  }
+  // 満タン経由の場合は満タン超過分だけ次回に持ち越し。通常時は0にリセット。
   const prevPt=S['cz_pt_'+sourceKey]||0;
-  S['cz_pt_'+sourceKey]=0;
-  pushUndo({type:'value',key:'cz_pt_'+sourceKey,prev:prevPt,next:0});
+  const nextPt = wasFull ? Math.max(prevPt-PT_FULL_VALUE,0) : 0;
+  S['cz_pt_'+sourceKey]=nextPt;
+  S['cz_full_'+sourceKey]=0;
+  pushUndo({type:'value',key:'cz_pt_'+sourceKey,prev:prevPt,next:nextPt});
   refreshPtDisplay(sourceKey);
   saveState();
   // 実戦メモウィザードへジャンプ（入り口=CZ、種別を事前選択）
